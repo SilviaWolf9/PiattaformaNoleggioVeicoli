@@ -41,16 +41,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Managers\VeicoliManager.cs" />
     <Compile Include="Models\ClientiModel.cs" />
+    <Compile Include="Models\DettaglioVeicoloModelView.cs" />
     <Compile Include="Models\MarcheVeicoliModel.cs" />
     <Compile Include="Models\NoleggiModel.cs" />
+    <Compile Include="Models\RicercaVeicoliModelView.cs" />
     <Compile Include="Models\TipoAlimentazioneModel.cs" />
     <Compile Include="Models\TipoStatoModel.cs" />
     <Compile Include="Models\VeicoliModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Managers\" />
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
