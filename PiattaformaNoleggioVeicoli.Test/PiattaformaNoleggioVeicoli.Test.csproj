@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FA7357F6-F07B-466A-906A-016249F400B1}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PiattaformaNoleggioVeicoli.Business</RootNamespace>
-    <AssemblyName>PiattaformaNoleggioVeicoli.Business</AssemblyName>
+    <ProjectGuid>{7E582284-880E-45C1-95F2-8B3A9D3EEBA8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>PiattaformaNoleggioVeicoli.Test</RootNamespace>
+    <AssemblyName>PiattaformaNoleggioVeicoli.Test</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,16 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ClientiModel.cs" />
-    <Compile Include="Models\MarcheVeicoliModel.cs" />
-    <Compile Include="Models\NoleggiModel.cs" />
-    <Compile Include="Models\TipoAlimentazioneModel.cs" />
-    <Compile Include="Models\TipoStatoModel.cs" />
-    <Compile Include="Models\VeicoliModel.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Managers\" />
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
