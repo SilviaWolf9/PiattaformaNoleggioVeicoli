@@ -153,6 +153,10 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     }
                 }
             }
+            if (!IsVeicoloModelValido(veicoloModel))
+            {
+                throw new DataException();
+            }
             return isInserito;
         }
 
@@ -218,7 +222,44 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             return dettaglioVeicoloModelView;
         }
 
+        private bool IsVeicoloModelValido(object veicolo)       // Fa un controllo sull'oggetto veicolo ed evita di spaccarsi in caso VeicoloModel fosse null
+        {
+            if (veicolo == null)
+            {
+                return false;
+            }
+            var verificaVeicolo = (VeicoliModel)veicolo;
+            if (!verificaVeicolo.IdMarca.HasValue)
+            {
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(verificaVeicolo.Modello))
+            {
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(verificaVeicolo.Targa))
+            {
+                return false;
+            }
+            if (!verificaVeicolo.DataImmatricolazione.HasValue)
+            {
+                return false;
+            }
+            if (!verificaVeicolo.IdTipoAlimentazione.HasValue)
+            {
+                return false;
+            }
+            return true;
+        }
 
+        public bool ModificaVeicolo(RicercaVeicoliModelView veicolo)
+        {
+            if (!IsVeicoloModelValido(veicolo))
+            {
+                throw new DataException();
+            }
+
+        }
 
     }
 }
