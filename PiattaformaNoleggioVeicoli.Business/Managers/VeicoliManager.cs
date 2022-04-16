@@ -116,7 +116,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine(",[IsDisponibile]");
             sb.AppendLine(",[IdTipoStato]");
             sb.AppendLine(") VALUES (");
-            sb.AppendLine("@Codice"); //questo campo cosa indica ?????
             sb.AppendLine(",@IdMarca");
             sb.AppendLine(",@Modello");
             sb.AppendLine(",@Targa");
@@ -203,7 +202,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                         sqlDataAdapter.Fill(dataTable);
                         if (dataTable.Rows.Count == 0)
                         {
-                            return null; //no null ma new DettaglioVeicoloModelView();
+                            return new DettaglioVeicoloModelView(); 
                         }
                         DataRow row = dataTable.Rows[0];
                         dettaglioVeicoloModelView.Id = row.Field<int>("Id");
