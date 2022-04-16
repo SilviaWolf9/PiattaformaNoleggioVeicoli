@@ -16,95 +16,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         {
             ConnectionString = Properties.Settings.Default.DBSilvia;
         }
-
-        public List<TipoAlimentazioneModel> GetTipoAlimentazioneList()      // Restituisce una lista di tipi di alimentazione
-        {
-            var TipoAlimentazioneList = new List<TipoAlimentazioneModel>();
-            var sb = new StringBuilder();
-            sb.AppendLine("SELECT");
-            sb.AppendLine("\t[Id]");
-            sb.AppendLine("\t,[Descrizione]");
-            sb.AppendLine("FROM [dbo].[TipoAlimentazione]");
-
-            var dataSet = new DataSet();
-            using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
-            {
-                sqlConnection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString()))
-                {
-                    using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
-                    {
-                        sqlDataAdapter.SelectCommand = sqlCommand;
-                        sqlDataAdapter.SelectCommand.Connection = sqlConnection;
-                        sqlDataAdapter.Fill(dataSet);                                               
-                    }
-                }
-            }
-            if (dataSet.Tables.Count<0)         // controlla che esista almeno una tabella net dataset
-            {
-                return new List<TipoAlimentazioneModel>();
-            }
-            var dataTable = dataSet.Tables[0];
-            if (dataTable == null || dataTable.Rows.Count <= 0)     // controlla che il dataTable sia diverso da null e contenga almeno una riga
-            {
-                return new List<TipoAlimentazioneModel>();
-            }
-            foreach (DataRow dataRow in dataTable.Rows)
-            {
-                var TipoAlimentazione = new TipoAlimentazioneModel();
-                TipoAlimentazione.Id = dataRow.Field<int>("Id");
-                TipoAlimentazione.Descrizione = dataRow.Field<string>("Descrizione");
-                TipoAlimentazioneList.Add(TipoAlimentazione);
-            }
-            return TipoAlimentazioneList;
-        }
-
-        public List<MarcheVeicoliModel> GetMarcheVeicoliList()      // Restituisce una lista di marche dei veicoli
-        {
-            var MarcheVeicoliList = new List<MarcheVeicoliModel>();
-            var sb = new StringBuilder();
-            sb.AppendLine("SELECT");
-            sb.AppendLine("\t[Id]");
-            sb.AppendLine("\t,[Descrizione]");
-            sb.AppendLine("FROM [dbo].[MarcheVeicoli]");
-
-            var dataSet = new DataSet();
-            using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
-            {
-                sqlConnection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString()))
-                {
-                    using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
-                    {
-                        sqlDataAdapter.SelectCommand = sqlCommand;
-                        sqlDataAdapter.SelectCommand.Connection = sqlConnection;
-                        sqlDataAdapter.Fill(dataSet);                        
-                    }
-                }
-            }
-
-            if (dataSet.Tables.Count < 0)       // controlla che esista almeno una tabella net dataset
-            {
-                return new List<MarcheVeicoliModel>();
-            }
-
-            var dataTable = dataSet.Tables[0];
-
-            if (dataTable == null || dataTable.Rows.Count <= 0)     // controlla che il dataTable sia diverso da null e contenga almeno una riga
-            {
-                return new List<MarcheVeicoliModel>();
-            }
-
-            foreach (DataRow dataRow in dataTable.Rows)
-            {
-                var MarcheVeicoli = new MarcheVeicoliModel();
-                MarcheVeicoli.Id = dataRow.Field<int>("Id");
-                MarcheVeicoli.Descrizione = dataRow.Field<string>("Descrizione");
-                MarcheVeicoliList.Add(MarcheVeicoli);
-            }
-            return MarcheVeicoliList;
-        }
-
+        
         public bool InsertVeicolo(Models.VeicoliModel veicoloModel)     // Inserisce veicolo su db
         {
             if (!IsVeicoloModelValido(veicoloModel))
@@ -161,6 +73,207 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 }
             }
             return isInserito;
+        }        
+        
+        public bool ModificaVeicolo(DettaglioVeicoloModelView veicolo)      // Modifica dati Veicolo sul db e utilizza la transaction per evitare che vengano modificati contemporaneamente più id per errore
+        {
+            if (!IsVeicoloModelValido(veicolo))
+            {
+                throw new DataException();
+            }
+            var sb = new StringBuilder();
+            sb.AppendLine("UPDATE[dbo].[Veicoli]");
+            sb.AppendLine("SET");
+            sb.AppendLine("[IdMarca] = @IdMarca,");
+            sb.AppendLine("[Modello] = @Modello,");
+            sb.AppendLine("[Targa] = @Targa,");
+            sb.AppendLine("[DataImmatricolazione] = @DataImmatricolazione,");
+            sb.AppendLine("[IdTipoAlimentazione] = @IdTipoAlimentazione,");
+            sb.AppendLine("[Note] = @Note,");
+            sb.AppendLine("WHERE Id = @Id");
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                sqlConnection.Open();
+                var modificaTransaction = sqlConnection.BeginTransaction();
+                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString(), sqlConnection, modificaTransaction))
+                {
+                    sqlCommand.Parameters.AddWithValue("@Id", veicolo.Id);
+                    sqlCommand.Parameters.AddWithValue("@IdMarca", veicolo.IdMarca);
+                    sqlCommand.Parameters.AddWithValue("@Modello", veicolo.Modello);
+                    sqlCommand.Parameters.AddWithValue("@Targa", veicolo.Targa);
+                    sqlCommand.Parameters.AddWithValue("@DataImmatricolazione", veicolo.DataImmatricolazione);
+                    sqlCommand.Parameters.AddWithValue("@IdTipoAlimentazione", veicolo.IdTipoAlimentazione);
+
+                    if (!string.IsNullOrEmpty(veicolo.Note))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@Note", veicolo.Note);
+                    }
+                    else
+                    {
+                        sqlCommand.Parameters.AddWithValue("@Note", DBNull.Value);
+                    }
+
+                    int nRowModificate = sqlCommand.ExecuteNonQuery();
+                    if (nRowModificate != 1)
+                    {
+                        modificaTransaction.Rollback();
+                        return false;
+                    }
+                    modificaTransaction.Commit();
+                }
+            }
+            return true;
+        }
+        
+        public bool EliminaVeicolo(DettaglioVeicoloModelView veicolo)        // Invece di eliminare fisicamente il veicolo dal db cambia lo stato da attivo a non attivo così al cliente rimane uno storico dei veicoli che ha posseduto
+        {
+            if (!IsVeicoloModelValido(veicolo))
+            {
+                throw new DataException();
+            }
+            var sb = new StringBuilder();
+            sb.AppendLine("UPDATE [dbo].[Veicoli]");
+            sb.AppendLine("SET ");
+            sb.AppendLine("\t [IdTipoStato] = @IdTipoStato");
+            sb.AppendLine("\t WHERE");
+            sb.AppendLine("\t Id=@Id");
+
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                sqlConnection.Open();
+                var disattivaVeicoloTransaction = sqlConnection.BeginTransaction();
+                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString(), sqlConnection, disattivaVeicoloTransaction))
+                {
+                    sqlCommand.Parameters.AddWithValue("@Id", veicolo.Id);
+                    sqlCommand.Parameters.AddWithValue("@IdTipoStato", 12);
+                    int nRowModificate = sqlCommand.ExecuteNonQuery();
+                    if (nRowModificate != 1)
+                    {
+                        disattivaVeicoloTransaction.Rollback();
+                        return false;
+                    }
+                    disattivaVeicoloTransaction.Commit();
+                    return true;
+                }
+            }
+        }
+
+        private bool IsVeicoloModelValido(object veicolo)       // Fa un controllo sull'oggetto veicolo ed evita di spaccarsi in caso VeicoloModel fosse null
+        {
+            if (veicolo == null)
+            {
+                return false;
+            }
+            var verificaVeicolo = (VeicoliModel)veicolo;
+            if (!verificaVeicolo.IdMarca.HasValue)
+            {
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(verificaVeicolo.Modello))
+            {
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(verificaVeicolo.Targa))
+            {
+                return false;
+            }
+            if (!verificaVeicolo.DataImmatricolazione.HasValue)
+            {
+                return false;
+            }
+            if (!verificaVeicolo.IdTipoAlimentazione.HasValue)
+            {
+                return false;
+            }
+            return true;
+        }
+        
+        public List<MarcheVeicoliModel> GetMarcheVeicoliList()      // Restituisce una lista di marche dei veicoli
+        {
+            var MarcheVeicoliList = new List<MarcheVeicoliModel>();
+            var sb = new StringBuilder();
+            sb.AppendLine("SELECT");
+            sb.AppendLine("\t[Id]");
+            sb.AppendLine("\t,[Descrizione]");
+            sb.AppendLine("FROM [dbo].[MarcheVeicoli]");
+
+            var dataSet = new DataSet();
+            using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString()))
+                {
+                    using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                    {
+                        sqlDataAdapter.SelectCommand = sqlCommand;
+                        sqlDataAdapter.SelectCommand.Connection = sqlConnection;
+                        sqlDataAdapter.Fill(dataSet);                        
+                    }
+                }
+            }
+
+            if (dataSet.Tables.Count < 0)       // controlla che esista almeno una tabella net dataset
+            {
+                return new List<MarcheVeicoliModel>();
+            }
+
+            var dataTable = dataSet.Tables[0];
+
+            if (dataTable == null || dataTable.Rows.Count <= 0)     // controlla che il dataTable sia diverso da null e contenga almeno una riga
+            {
+                return new List<MarcheVeicoliModel>();
+            }
+
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                var MarcheVeicoli = new MarcheVeicoliModel();
+                MarcheVeicoli.Id = dataRow.Field<int>("Id");
+                MarcheVeicoli.Descrizione = dataRow.Field<string>("Descrizione");
+                MarcheVeicoliList.Add(MarcheVeicoli);
+            }
+            return MarcheVeicoliList;
+        }
+
+        public List<TipoAlimentazioneModel> GetTipoAlimentazioneList()      // Restituisce una lista di tipi di alimentazione
+        {
+            var TipoAlimentazioneList = new List<TipoAlimentazioneModel>();
+            var sb = new StringBuilder();
+            sb.AppendLine("SELECT");
+            sb.AppendLine("\t[Id]");
+            sb.AppendLine("\t,[Descrizione]");
+            sb.AppendLine("FROM [dbo].[TipoAlimentazione]");
+
+            var dataSet = new DataSet();
+            using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString()))
+                {
+                    using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                    {
+                        sqlDataAdapter.SelectCommand = sqlCommand;
+                        sqlDataAdapter.SelectCommand.Connection = sqlConnection;
+                        sqlDataAdapter.Fill(dataSet);
+                    }
+                }
+            }
+            if (dataSet.Tables.Count < 0)         // controlla che esista almeno una tabella net dataset
+            {
+                return new List<TipoAlimentazioneModel>();
+            }
+            var dataTable = dataSet.Tables[0];
+            if (dataTable == null || dataTable.Rows.Count <= 0)     // controlla che il dataTable sia diverso da null e contenga almeno una riga
+            {
+                return new List<TipoAlimentazioneModel>();
+            }
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                var TipoAlimentazione = new TipoAlimentazioneModel();
+                TipoAlimentazione.Id = dataRow.Field<int>("Id");
+                TipoAlimentazione.Descrizione = dataRow.Field<string>("Descrizione");
+                TipoAlimentazioneList.Add(TipoAlimentazione);
+            }
+            return TipoAlimentazioneList;
         }
 
         public DettaglioVeicoloModelView GetVeicolo(int id)     // Restituisce i dettagli di un determinato veicolo ricercato tramite id
@@ -223,119 +336,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             dettaglioVeicoloModelView.CodiceFiscale = row.Field<string>("CodiceFiscale");
             return dettaglioVeicoloModelView;
         }
-
-        private bool IsVeicoloModelValido(object veicolo)       // Fa un controllo sull'oggetto veicolo ed evita di spaccarsi in caso VeicoloModel fosse null
-        {
-            if (veicolo == null)
-            {
-                return false;
-            }
-            var verificaVeicolo = (VeicoliModel)veicolo;
-            if (!verificaVeicolo.IdMarca.HasValue)
-            {
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(verificaVeicolo.Modello))
-            {
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(verificaVeicolo.Targa))
-            {
-                return false;
-            }
-            if (!verificaVeicolo.DataImmatricolazione.HasValue)
-            {
-                return false;
-            }
-            if (!verificaVeicolo.IdTipoAlimentazione.HasValue)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        public bool ModificaVeicolo(DettaglioVeicoloModelView veicolo)      // Modifica dati Veicolo sul db e utilizza la transaction per evitare che vengano modificati contemporaneamente più id per errore
-        {
-            if (!IsVeicoloModelValido(veicolo))
-            {
-                throw new DataException();
-            }
-            var sb = new StringBuilder();
-            sb.AppendLine("UPDATE[dbo].[Veicoli]");
-            sb.AppendLine("SET");
-            sb.AppendLine("[IdMarca] = @IdMarca,");
-            sb.AppendLine("[Modello] = @Modello,");
-            sb.AppendLine("[Targa] = @Targa,");
-            sb.AppendLine("[DataImmatricolazione] = @DataImmatricolazione,");
-            sb.AppendLine("[IdTipoAlimentazione] = @IdTipoAlimentazione,");
-            sb.AppendLine("[Note] = @Note,");
-            sb.AppendLine("WHERE Id = @Id");
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
-            {
-                sqlConnection.Open();
-                var modificaTransaction = sqlConnection.BeginTransaction();
-                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString(), sqlConnection, modificaTransaction))
-                {
-                    sqlCommand.Parameters.AddWithValue("@Id", veicolo.Id);
-                    sqlCommand.Parameters.AddWithValue("@IdMarca", veicolo.IdMarca);
-                    sqlCommand.Parameters.AddWithValue("@Modello", veicolo.Modello);
-                    sqlCommand.Parameters.AddWithValue("@Targa", veicolo.Targa);
-                    sqlCommand.Parameters.AddWithValue("@DataImmatricolazione", veicolo.DataImmatricolazione);
-                    sqlCommand.Parameters.AddWithValue("@IdTipoAlimentazione", veicolo.IdTipoAlimentazione);
-
-                    if (!string.IsNullOrEmpty(veicolo.Note))
-                    {
-                        sqlCommand.Parameters.AddWithValue("@Note", veicolo.Note);
-                    }
-                    else
-                    {
-                        sqlCommand.Parameters.AddWithValue("@Note", DBNull.Value);
-                    }
-
-                    int nRowModificate = sqlCommand.ExecuteNonQuery();
-                    if (nRowModificate != 1)
-                    {
-                        modificaTransaction.Rollback();
-                        return false;
-                    }
-                    modificaTransaction.Commit();
-                }
-            }
-            return true;
-        }
-
-        public bool EliminaVeicolo(DettaglioVeicoloModelView veicolo)        // Invece di eliminare fisicamente il veicolo dal db cambia lo stato da attivo a non attivo così al cliente rimane uno storico dei veicoli che ha posseduto
-        {
-            if (!IsVeicoloModelValido(veicolo))
-            {
-                throw new DataException();
-            }
-            var sb = new StringBuilder();
-            sb.AppendLine("UPDATE [dbo].[Veicoli]");
-            sb.AppendLine("SET ");
-            sb.AppendLine("\t [IdTipoStato] = @IdTipoStato");
-            sb.AppendLine("\t WHERE");
-            sb.AppendLine("\t Id=@Id");
-
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
-            {
-                sqlConnection.Open();
-                var disattivaVeicoloTransaction = sqlConnection.BeginTransaction();
-                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString(), sqlConnection, disattivaVeicoloTransaction))
-                {
-                    sqlCommand.Parameters.AddWithValue("@Id", veicolo.Id);
-                    sqlCommand.Parameters.AddWithValue("@IdTipoStato", 12);                    
-                    int nRowModificate = sqlCommand.ExecuteNonQuery();
-                    if (nRowModificate != 1)
-                    {
-                        disattivaVeicoloTransaction.Rollback();
-                        return false;
-                    }
-                    disattivaVeicoloTransaction.Commit();
-                    return true;
-                }
-            }
-        }
+                
         public class RicercaVeicoliModel
         {
             public int? IdMarca { get; set; }
@@ -403,10 +404,10 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     {
                         sqlCommand.Parameters.AddWithValue("@Modello", ricercaVeicoliModel.Modello);
                     }
-                    if (ricercaVeicoliModel.IdMarca.HasValue)
+                    if (!string.IsNullOrEmpty(ricercaVeicoliModel.Targa))
                     {
-                        sqlCommand.Parameters.AddWithValue("@IdMarca", ricercaVeicoliModel.IdMarca);
-                    }
+                        sqlCommand.Parameters.AddWithValue("@Targa", ricercaVeicoliModel.Targa);
+                    }                    
                     if (ricercaVeicoliModel.InizioDataImmatricolazione.HasValue)
                     {
                         sqlCommand.Parameters.AddWithValue("@InizioDataImmatricolazione", ricercaVeicoliModel.InizioDataImmatricolazione);
