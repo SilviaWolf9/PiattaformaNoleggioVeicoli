@@ -38,7 +38,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                         sqlDataAdapter.SelectCommand.Connection = sqlConnection;
                         sqlDataAdapter.Fill(dataSet);
 
-                        var dataTable = dataSet.Tables[0];
+                        //queste righe qua sotto le sposterei fuori da tutti gli using
+                        var dataTable = dataSet.Tables[0]; //qua ti si potrebbe spaccare
 
 
                         if (dataTable == null || dataTable.Rows.Count <= 0)
@@ -115,7 +116,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine(",[IsDisponibile]");
             sb.AppendLine(",[IdTipoStato]");
             sb.AppendLine(") VALUES (");
-            sb.AppendLine("@Codice");
+            sb.AppendLine("@Codice"); //questo campo cosa indica ?????
             sb.AppendLine(",@IdMarca");
             sb.AppendLine(",@Modello");
             sb.AppendLine(",@Targa");
@@ -202,7 +203,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                         sqlDataAdapter.Fill(dataTable);
                         if (dataTable.Rows.Count == 0)
                         {
-                            return null;
+                            return null; //no null ma new DettaglioVeicoloModelView();
                         }
                         DataRow row = dataTable.Rows[0];
                         dettaglioVeicoloModelView.Id = row.Field<int>("Id");
