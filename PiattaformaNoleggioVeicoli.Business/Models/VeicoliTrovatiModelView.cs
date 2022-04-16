@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace PiattaformaNoleggioVeicoli.Business.Models
 {
-    public class RicercaVeicoliModelView
+    public class VeicoliTrovatiModelView
     {
+        public int Id { get; set; }
         public string Marca { get; set; }
         public string Modello { get; set; }
         public DateTime DataImmatricolazione { get; set; }

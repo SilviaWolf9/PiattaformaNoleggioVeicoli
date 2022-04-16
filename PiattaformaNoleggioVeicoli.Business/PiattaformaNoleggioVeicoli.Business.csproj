@@ -46,7 +46,7 @@
     <Compile Include="Models\DettaglioVeicoloModelView.cs" />
     <Compile Include="Models\MarcheVeicoliModel.cs" />
     <Compile Include="Models\NoleggiModel.cs" />
-    <Compile Include="Models\RicercaVeicoliModelView.cs" />
+    <Compile Include="Models\VeicoliTrovatiModelView.cs" />
     <Compile Include="Models\TipoAlimentazioneModel.cs" />
     <Compile Include="Models\TipoStatoModel.cs" />
     <Compile Include="Models\VeicoliModel.cs" />
