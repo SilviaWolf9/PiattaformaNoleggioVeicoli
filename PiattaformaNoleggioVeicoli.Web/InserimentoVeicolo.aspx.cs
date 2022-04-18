@@ -1,4 +1,5 @@
 ﻿using PiattaformaNoleggioVeicoli.Business.Managers;
+using PiattaformaNoleggioVeicoli.Business.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,58 @@ namespace PiattaformaNoleggioVeicoli.Web
 
         protected void btnInserisci_Click(object sender, EventArgs e)
         {
+            if (!IsFormValido())
+            {
+                return;
+            }
 
+            var veicoloModel = new VeicoliModel()
+            {
+                IdMarca = int.Parse(ddlMarca.SelectedValue),
+                Modello = txtModello.Text,
+                Targa = txtTarga.Text,
+                DataImmatricolazione = clDataImmatricolazione.SelectedDate,
+                IdTipoAlimentazione = int.Parse(ddlTipoAlimentazione.SelectedValue),
+                Note = txtNote.Text,
+                IsDisponibile = true
+            };
+
+            var veicoliManager = new VeicoliManager();
+
+            bool veicoloInserito = veicoliManager.InsertVeicolo(veicoloModel);
+            if (!veicoloInserito)
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento del veicolo");
+            }
+        }
+
+        private bool IsFormValido()
+        {
+            if (ddlMarca.SelectedIndex == -1)
+            {
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtModello.Text))
+            {
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtTarga.Text))
+            {
+                return false;
+            }
+            if (clDataImmatricolazione.SelectedDate == DateTime.MinValue)
+            {
+                return false;
+            }
+            if (ddlTipoAlimentazione.SelectedIndex == -1)
+            {
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtNote.Text))
+            {
+                return false;
+            }
+            return true;
         }
 
         protected void clDataImmatricolazione_SelectionChanged(object sender, EventArgs e)

@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="InserimentoVeicolo.aspx.cs" Inherits="PiattaformaNoleggioVeicoli.Web.InserimentoVeicolo" %>
 
+<%@ Register Src="~/Controls/InfoControl.ascx" TagPrefix="uc1" TagName="Info" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <uc1:Info runat="server" ID="infoControl" />
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h1 class="panel-title">Inserisci Veicolo</h1>

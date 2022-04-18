@@ -89,7 +89,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("[Targa] = @Targa,");
             sb.AppendLine("[DataImmatricolazione] = @DataImmatricolazione,");
             sb.AppendLine("[IdTipoAlimentazione] = @IdTipoAlimentazione,");
-            sb.AppendLine("[Note] = @Note,");
+            sb.AppendLine("[Note] = @Note");
             sb.AppendLine("WHERE Id = @Id");
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
