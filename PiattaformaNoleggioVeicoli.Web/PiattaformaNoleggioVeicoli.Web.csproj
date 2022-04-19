@@ -112,10 +112,15 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Controls\ClienteControl.ascx" />
     <Content Include="Controls\InfoControl.ascx" />
+    <Content Include="Controls\VeicoloControl.ascx" />
     <Content Include="Default.aspx" />
+    <Content Include="DettaglioCliente.aspx" />
+    <Content Include="DettaglioVeicolo.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="GestioneNoleggio.aspx" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -127,6 +132,8 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="InserimentoVeicolo.aspx" />
+    <Content Include="RicercaCliente.aspx" />
+    <Content Include="RicercaVeicolo.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -178,6 +185,13 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ClienteControl.ascx.cs">
+      <DependentUpon>ClienteControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ClienteControl.ascx.designer.cs">
+      <DependentUpon>ClienteControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\InfoControl.ascx.cs">
       <DependentUpon>InfoControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -185,12 +199,40 @@
     <Compile Include="Controls\InfoControl.ascx.designer.cs">
       <DependentUpon>InfoControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\VeicoloControl.ascx.cs">
+      <DependentUpon>VeicoloControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\VeicoloControl.ascx.designer.cs">
+      <DependentUpon>VeicoloControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DettaglioCliente.aspx.cs">
+      <DependentUpon>DettaglioCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DettaglioCliente.aspx.designer.cs">
+      <DependentUpon>DettaglioCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DettaglioVeicolo.aspx.cs">
+      <DependentUpon>DettaglioVeicolo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DettaglioVeicolo.aspx.designer.cs">
+      <DependentUpon>DettaglioVeicolo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestioneNoleggio.aspx.cs">
+      <DependentUpon>GestioneNoleggio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestioneNoleggio.aspx.designer.cs">
+      <DependentUpon>GestioneNoleggio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -203,6 +245,20 @@
       <DependentUpon>InserimentoVeicolo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RicercaCliente.aspx.cs">
+      <DependentUpon>RicercaCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RicercaCliente.aspx.designer.cs">
+      <DependentUpon>RicercaCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RicercaVeicolo.aspx.cs">
+      <DependentUpon>RicercaVeicolo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RicercaVeicolo.aspx.designer.cs">
+      <DependentUpon>RicercaVeicolo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

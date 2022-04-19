@@ -11,34 +11,25 @@ namespace PiattaformaNoleggioVeicoli.Web
 {
 
 
-    public partial class InserimentoVeicolo
+    public partial class DettaglioCliente
     {
 
         /// <summary>
-        /// Controllo infoControl.
+        /// Controllo clienteControl.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::PiattaformaNoleggioVeicoli.Web.Controls.InfoControl infoControl;
+        protected global::PiattaformaNoleggioVeicoli.Web.Controls.ClienteControl clienteControl;
 
         /// <summary>
-        /// Controllo veicoloControl.
+        /// Controllo btnSalvaModifiche.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::PiattaformaNoleggioVeicoli.Web.Controls.VeicoloControl veicoloControl;
-
-        /// <summary>
-        /// Controllo btnInserisci.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnInserisci;
+        protected global::System.Web.UI.WebControls.Button btnSalvaModifiche;
     }
 }

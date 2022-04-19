@@ -16,7 +16,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         {
             ConnectionString = Properties.Settings.Default.DBSilvia;
         }
-
         public bool InsertCliente(Models.ClientiModel clientiModel)     // Inserisce cliente su db
         {
             if (!IsClienteModelValido(clientiModel))
@@ -127,6 +126,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     sqlCommand.Parameters.AddWithValue("@Nome", cliente.Nome);
                     sqlCommand.Parameters.AddWithValue("@DataNascita", cliente.DataNascita);
                     sqlCommand.Parameters.AddWithValue("@CodiceFiscale", cliente.CodiceFiscale);
+                    sqlCommand.Parameters.AddWithValue("@Patente", cliente.Patente);
                     sqlCommand.Parameters.AddWithValue("@Telefono", cliente.Telefono);
                     sqlCommand.Parameters.AddWithValue("@Email", cliente.Email);
                     sqlCommand.Parameters.AddWithValue("@Indirizzo", cliente.Indirizzo);
@@ -135,7 +135,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     sqlCommand.Parameters.AddWithValue("@Citta", cliente.Citta);
                     sqlCommand.Parameters.AddWithValue("@Comune", cliente.Comune);
                     sqlCommand.Parameters.AddWithValue("@Nazione", cliente.Nazione);
-                    sqlCommand.Parameters.AddWithValue("@Patente", cliente.Patente);
                     if (!string.IsNullOrEmpty(cliente.Note))
                     {
                         sqlCommand.Parameters.AddWithValue("@Note", cliente.Note);
