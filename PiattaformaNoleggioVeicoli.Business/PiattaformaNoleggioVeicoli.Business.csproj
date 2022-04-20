@@ -44,6 +44,7 @@
     <Compile Include="Managers\ClientiManager.cs" />
     <Compile Include="Managers\VeicoliManager.cs" />
     <Compile Include="Models\ClientiModel.cs" />
+    <Compile Include="Models\ClientiTrovatiModelView.cs" />
     <Compile Include="Models\DettaglioVeicoloModelView.cs" />
     <Compile Include="Models\MarcheVeicoliModel.cs" />
     <Compile Include="Models\NoleggiModel.cs" />

@@ -22,7 +22,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             PopolaDDLStatoVeicolo();
         }
         private VeicoliManager _veicoliManager { get; set; }
-        private void PopolaGridView(VeicoliManager.RicercaVeicoliModel ricerca)
+        private void PopolaGridViewVeicolo(VeicoliManager.RicercaVeicoliModel ricerca)
         {
             gvVeicoliTrovati.Visible = true;
             gvVeicoliTrovati.DataSource = _veicoliManager.RicercaVeicoli(ricerca);
@@ -75,7 +75,7 @@ namespace PiattaformaNoleggioVeicoli.Web
                 bool disponibile = Convert.ToBoolean(ddlStatoVeicoloValue);     // converte l'intero in booleano (0 = false, 1 = true)
                 veicoliRicerca.IsDisponibile = disponibile;         // mette il valore booleano nella variabile di ricerca
             }
-            PopolaGridView(veicoliRicerca);
+            PopolaGridViewVeicolo(veicoliRicerca);
             Session["Ricerca"] = veicoliRicerca;
         }        
         protected void btnReset_Click(object sender, EventArgs e)
@@ -99,7 +99,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             var ricerca = (VeicoliManager.RicercaVeicoliModel) Session["Ricerca"];      // fa il cast a ricercaveicolimodel della session
             gvVeicoliTrovati.PageIndex = e.NewPageIndex;
-            PopolaGridView(ricerca);
+            PopolaGridViewVeicolo(ricerca);
         }
 
         protected void gvVeicoliTrovati_SelectedIndexChanged(object sender, EventArgs e)

@@ -22,7 +22,27 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
         }
 
         public VeicoliModel Veicolo { get => _veicolo; set => _veicolo = value; }       // serve per ottenere e settare il valore della variabile statica dichiarata sotto in modo che abbia lo stesso valore in tutta la pagina si poteva fare anche utilizzando una viewstate
-        private static VeicoliModel _veicolo;
+        private static VeicoliModel _veicolo;        
+
+        private void PopolaDDLMarche()
+        {
+            var veicoliManager = new VeicoliManager();
+            ddlMarca.DataSource = veicoliManager.GetMarcheVeicoliList();
+            ddlMarca.DataTextField = "Descrizione";
+            ddlMarca.DataValueField = "Id";
+            ddlMarca.DataBind();
+            ddlMarca.Items.Insert(0, new ListItem("seleziona", "-1"));
+        }
+
+        private void PopolaDDLTipoAlimentazione()
+        {
+            var veicoliManager = new VeicoliManager();
+            ddlTipoAlimentazione.DataSource = veicoliManager.GetTipoAlimentazioneList();
+            ddlTipoAlimentazione.DataTextField = "Descrizione";
+            ddlTipoAlimentazione.DataValueField = "Id";
+            ddlTipoAlimentazione.DataBind();
+            ddlTipoAlimentazione.Items.Insert(0, new ListItem("seleziona", "-1"));
+        }
 
         public void SetVeicolo()        // va a riempire i vari componenti del control in base ai dati della proprietà Veicolo
         {
@@ -54,26 +74,6 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             {
                 rbtDisponibile.Checked = false;
             }
-        }
-
-        private void PopolaDDLMarche()
-        {
-            var veicoliManager = new VeicoliManager();
-            ddlMarca.DataSource = veicoliManager.GetMarcheVeicoliList();
-            ddlMarca.DataTextField = "Descrizione";
-            ddlMarca.DataValueField = "Id";
-            ddlMarca.DataBind();
-            ddlMarca.Items.Insert(0, new ListItem("seleziona", "-1"));
-        }
-
-        private void PopolaDDLTipoAlimentazione()
-        {
-            var veicoliManager = new VeicoliManager();
-            ddlTipoAlimentazione.DataSource = veicoliManager.GetTipoAlimentazioneList();
-            ddlTipoAlimentazione.DataTextField = "Descrizione";
-            ddlTipoAlimentazione.DataValueField = "Id";
-            ddlTipoAlimentazione.DataBind();
-            ddlTipoAlimentazione.Items.Insert(0, new ListItem("seleziona", "-1"));
         }
 
         public VeicoliModel GetDatiVeicolo()        // restituisce i dati del veicolo attuali al chiamante 

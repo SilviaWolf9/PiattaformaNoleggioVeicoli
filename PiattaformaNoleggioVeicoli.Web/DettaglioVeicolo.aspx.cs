@@ -27,6 +27,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             PopolaDettaglioVeicolo(id);
         }
+        private VeicoliManager _veicoliManager { get; set; }
         private void PopolaDettaglioVeicolo(int? id)
         {
             if (!id.HasValue)
@@ -58,8 +59,6 @@ namespace PiattaformaNoleggioVeicoli.Web
                 divCliente.Visible = false;
             }
         }
-        private VeicoliManager _veicoliManager { get; set; }
-
         private bool IsFormValido(VeicoliModel veicolo)     // controlla che il form di inserimento del veicolo sia corretto
         {
             if (!veicolo.IdMarca.HasValue)

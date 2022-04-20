@@ -282,5 +282,89 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             clientiModel.Note = row.Field<string>("Note");
             return clientiModel;
         }
+
+        public class RicercaClientiModel
+        {           
+            public string Cognome { get; set; }
+            public string Nome { get; set; }
+            public string CodiceFiscale { get; set; }           
+        }
+
+        public List<ClientiTrovatiModelView> RicercaClienti(RicercaClientiModel ricercaClientiModel)        // Ricerca clienti tramite i campi Cognome, Nome e CodiceFiscale
+        {
+            var clientiTrovatiList = new List<ClientiTrovatiModelView>();
+            var sb = new StringBuilder();
+            sb.AppendLine("SELECT");
+            sb.AppendLine("\t[Id]");
+            sb.AppendLine("\t,[Cognome]");
+            sb.AppendLine("\t,[Nome]");
+            sb.AppendLine("\t,[CodiceFiscale]");
+            sb.AppendLine("FROM [dbo].[Clienti]");
+            sb.AppendLine("WHERE 1=1");            
+            if (!string.IsNullOrWhiteSpace(ricercaClientiModel.Cognome))
+            {
+                sb.AppendLine("And Cognome like '%'+@Cognome+'%'");
+            }
+            if (!string.IsNullOrWhiteSpace(ricercaClientiModel.Nome))
+            {
+                sb.AppendLine("And Nome like '%'+@Nome+'%'");
+            }
+            if (!string.IsNullOrWhiteSpace(ricercaClientiModel.CodiceFiscale))
+            {
+                sb.AppendLine("And CodiceFiscale like '%'+@CodiceFiscale+'%'");
+            }
+
+            var dataSet = new DataSet();
+            using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString()))
+                {                    
+                    if (!string.IsNullOrEmpty(ricercaClientiModel.Cognome))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@Cognome", ricercaClientiModel.Cognome);
+                    }
+                    if (!string.IsNullOrEmpty(ricercaClientiModel.Nome))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@Nome", ricercaClientiModel.Nome);
+                    }
+                    if (!string.IsNullOrEmpty(ricercaClientiModel.CodiceFiscale))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@CodiceFiscale", ricercaClientiModel.CodiceFiscale);
+                    }
+
+                    using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                    {
+                        sqlDataAdapter.SelectCommand = sqlCommand;
+                        sqlDataAdapter.SelectCommand.Connection = sqlConnection;
+                        sqlDataAdapter.Fill(dataSet);
+                    }
+                }
+            }
+
+            if (dataSet.Tables.Count < 0)       // controlla che esista almeno una tabella net dataset
+            {
+                return new List<ClientiTrovatiModelView>();
+            }
+
+            var dataTable = dataSet.Tables[0];
+
+            if (dataTable == null || dataTable.Rows.Count <= 0)     // controlla che il dataTable sia diverso da null e contenga almeno una riga
+            {
+                return new List<ClientiTrovatiModelView>();
+            }
+
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                var clientiTrovati = new ClientiTrovatiModelView();
+                clientiTrovati.Id = dataRow.Field<int>("Id");
+                clientiTrovati.Cognome = dataRow.Field<string>("Cognome");
+                clientiTrovati.Nome = dataRow.Field<string>("Nome");
+                clientiTrovati.CodiceFiscale = dataRow.Field<string>("CodiceFiscale");
+                clientiTrovatiList.Add(clientiTrovati);
+            }
+            return clientiTrovatiList;
+        }
     }
 }
+
