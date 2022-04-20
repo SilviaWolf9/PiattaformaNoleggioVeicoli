@@ -47,7 +47,8 @@
 
             <div class="form-group col-md-4">
                 <label for="rbtnStatoVeicolo">Stato veicolo:</label>
-                <asp:RadioButton ID="rbtDisponibile" Text="Disponibile" GroupName="statoVeicolo" runat="server" />
+                <asp:DropDownList ID="ddlStatoVeicolo" runat="server" CssClass="form-control">
+                </asp:DropDownList>
             </div>
 
             <div class="form-group col-md-12">
@@ -75,7 +76,7 @@
             <asp:BoundField DataField="DataImmatricolazione" HeaderText="Data Immatricolazione" DataFormatString="{0:dd/MM/yyyy}">
                 <HeaderStyle HorizontalAlign="Center" />
             </asp:BoundField>
-            <asp:BoundField DataField="IsDisponibile" HeaderText="Stato Noleggio">
+            <asp:BoundField DataField="IsDisponibile" HeaderText="Disponibile">
                 <HeaderStyle HorizontalAlign="Center" />
             </asp:BoundField>
         </Columns>

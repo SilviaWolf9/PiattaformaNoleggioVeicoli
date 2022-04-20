@@ -60,13 +60,13 @@ namespace PiattaformaNoleggioVeicoli.Web
         protected global::System.Web.UI.WebControls.Calendar cldFine;
 
         /// <summary>
-        /// Controllo rbtDisponibile.
+        /// Controllo ddlStatoVeicolo.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbtDisponibile;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatoVeicolo;
 
         /// <summary>
         /// Controllo btnRicerca.

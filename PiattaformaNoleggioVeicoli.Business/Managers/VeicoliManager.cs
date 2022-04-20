@@ -75,7 +75,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             return isInserito;
         }        
         
-        public bool ModificaVeicolo(DettaglioVeicoloModelView veicolo)      // Modifica dati Veicolo sul db e utilizza la transaction per evitare che vengano modificati contemporaneamente più id per errore
+        public bool ModificaVeicolo(VeicoliModel veicolo)      // Modifica dati Veicolo sul db e utilizza la transaction per evitare che vengano modificati contemporaneamente più id per errore
         {
             if (!IsVeicoloModelValido(veicolo))
             {
@@ -125,7 +125,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             return true;
         }
         
-        public bool EliminaVeicolo(DettaglioVeicoloModelView veicolo)        // Invece di eliminare fisicamente il veicolo dal db cambia lo stato da attivo a non attivo così al cliente rimane uno storico dei veicoli che ha posseduto
+        public bool EliminaVeicolo(VeicoliModel veicolo)        // Invece di eliminare fisicamente il veicolo dal db cambia lo stato da attivo a non attivo così al cliente rimane uno storico dei veicoli che ha posseduto
         {
             if (!IsVeicoloModelValido(veicolo))
             {
@@ -358,13 +358,12 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("\t,[DataImmatricolazione]");
             sb.AppendLine("\t,[IsDisponibile]");
             sb.AppendLine("FROM [dbo].[Veicoli]");
-            sb.AppendLine("\tINNER JOIN [dbo].[Marche]");
-            sb.AppendLine("\tON [dbo].[Veicoli].[IdMarca] = [dbo].[Marche].[Id]");
-            sb.AppendLine("\tINNER JOIN [dbo].[Noleggio]");
-            sb.AppendLine("\tON [dbo].[Noleggio].[IdVeicolo] = [dbo].[Veicoli].[Id]");
-            sb.AppendLine("\tINNER JOIN [dbo].[Marche]");
+            sb.AppendLine("\tINNER JOIN [dbo].[MarcheVeicoli]");
+            sb.AppendLine("\tON [dbo].[Veicoli].[IdMarca] = [dbo].[MarcheVeicoli].[Id]");
+            sb.AppendLine("\tLEFT JOIN [dbo].[Noleggi]");
+            sb.AppendLine("\tON [dbo].[Noleggi].[IdVeicolo] = [dbo].[Veicoli].[Id]");
             sb.AppendLine("WHERE 1=1");
-            sb.AppendLine("And [IdTipoStato]=1");       // filtra i veicoli prendendo solo quelli attivi
+            sb.AppendLine("\tAnd [IdTipoStato]=1");       // filtra i veicoli prendendo solo quelli attivi
 
 
             if (ricercaVeicoliModel.IdMarca.HasValue)
