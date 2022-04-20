@@ -48,14 +48,14 @@
 
     <div class="form-group" visible="false">
 
-        <label for="txtMarca">Marca</label>
+        <%--<label for="txtMarca">Marca</label>
         <asp:TextBox runat="server" CssClass="form-control" ID="txtMarca" ReadOnly="true"/>
 
         <label for="txtModello">Modello</label>
         <asp:TextBox runat="server" CssClass="form-control" ID="txtModello" ReadOnly="true"></asp:TextBox>
 
         <label for="txtTarga">Targa</label>
-        <asp:TextBox runat="server" CssClass="form-control" ID="txtTarga" ReadOnly="true"></asp:TextBox>
+        <asp:TextBox runat="server" CssClass="form-control" ID="txtTarga" ReadOnly="true"></asp:TextBox>--%>
 
         <label for="txtDataImmatricolazione">Data Immatricolazione</label>
         <asp:TextBox runat="server" CssClass="form-control" ID="txtDataImmatricolazione" ReadOnly="true"></asp:TextBox>        

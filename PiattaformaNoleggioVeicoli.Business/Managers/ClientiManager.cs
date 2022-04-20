@@ -40,7 +40,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine(",[Nazione]");
             sb.AppendLine(",[Note]");
             sb.AppendLine(") VALUES (");
-            sb.AppendLine(",@Cognome");
+            sb.AppendLine("@Cognome");
             sb.AppendLine(",@Nome");
             sb.AppendLine(",@DataNascita");
             sb.AppendLine(",@CodiceFiscale");

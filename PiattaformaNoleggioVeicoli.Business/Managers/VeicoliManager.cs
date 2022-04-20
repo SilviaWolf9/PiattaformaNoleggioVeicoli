@@ -35,7 +35,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine(",[IsDisponibile]");
             sb.AppendLine(",[IdTipoStato]");
             sb.AppendLine(") VALUES (");
-            sb.AppendLine(",@IdMarca");
+            sb.AppendLine("@IdMarca");
             sb.AppendLine(",@Modello");
             sb.AppendLine(",@Targa");
             sb.AppendLine(",@DataImmatricolazione");
@@ -145,7 +145,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 using (SqlCommand sqlCommand = new SqlCommand(sb.ToString(), sqlConnection, disattivaVeicoloTransaction))
                 {
                     sqlCommand.Parameters.AddWithValue("@Id", veicolo.Id);
-                    sqlCommand.Parameters.AddWithValue("@IdTipoStato", 12);
+                    sqlCommand.Parameters.AddWithValue("@IdTipoStato", 2);
                     int nRowModificate = sqlCommand.ExecuteNonQuery();
                     if (nRowModificate != 1)
                     {
@@ -364,6 +364,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("\tON [dbo].[Noleggio].[IdVeicolo] = [dbo].[Veicoli].[Id]");
             sb.AppendLine("\tINNER JOIN [dbo].[Marche]");
             sb.AppendLine("WHERE 1=1");
+            sb.AppendLine("And [IdTipoStato]=1");       // filtra i veicoli prendendo solo quelli attivi
+
 
             if (ricercaVeicoliModel.IdMarca.HasValue)
             {

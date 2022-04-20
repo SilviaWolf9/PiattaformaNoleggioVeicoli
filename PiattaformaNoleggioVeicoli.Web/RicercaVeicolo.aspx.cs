@@ -13,5 +13,25 @@ namespace PiattaformaNoleggioVeicoli.Web
         {
 
         }
+
+        protected void btnRicerca_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void gvVeicoliTrovati_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
+        }
+
+        protected void gvVeicoliTrovati_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

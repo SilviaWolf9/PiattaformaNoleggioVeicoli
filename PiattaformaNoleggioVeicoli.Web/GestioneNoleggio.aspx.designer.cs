@@ -105,33 +105,6 @@ namespace PiattaformaNoleggioVeicoli.Web
         protected global::System.Web.UI.WebControls.Button btnNoleggiaVeicolo;
 
         /// <summary>
-        /// Controllo txtMarca.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMarca;
-
-        /// <summary>
-        /// Controllo txtModello.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtModello;
-
-        /// <summary>
-        /// Controllo txtTarga.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTarga;
-
-        /// <summary>
         /// Controllo txtDataImmatricolazione.
         /// </summary>
         /// <remarks>

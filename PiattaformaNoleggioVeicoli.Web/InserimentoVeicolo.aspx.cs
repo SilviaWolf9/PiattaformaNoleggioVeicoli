@@ -13,7 +13,11 @@ namespace PiattaformaNoleggioVeicoli.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (IsPostBack)
+            {
+                return;
+            }
+            veicoloControl.SetVeicolo();
         }      
 
         protected void btnInserisci_Click(object sender, EventArgs e)
@@ -30,11 +34,16 @@ namespace PiattaformaNoleggioVeicoli.Web
             if (!veicoloInserito)
             {
                 infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento del veicolo");
+                return;
             }
+
+            infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Veicolo inserito correttamente");
+
+            veicoloControl.Veicolo = new VeicoliModel();        // svuota i campi dopo l'inserimento
         }
-        private bool IsFormValido(VeicoliModel veicolo)
+        private bool IsFormValido(VeicoliModel veicolo)     // controlla che il form di inserimento del veicolo sia corretto
         {
-            if (veicolo.IdMarca == -1)
+            if (!veicolo.IdMarca.HasValue)
             {
                 return false;
             }
@@ -46,20 +55,19 @@ namespace PiattaformaNoleggioVeicoli.Web
             {
                 return false;
             }
-            if (veicolo.DataImmatricolazione == DateTime.MinValue)
+            if (!veicolo.DataImmatricolazione.HasValue)
             {
                 return false;
             }
-            if (veicolo.IdTipoAlimentazione == -1)
+            if (veicolo.DataImmatricolazione>DateTime.Now)
             {
                 return false;
             }
-            if (string.IsNullOrWhiteSpace(veicolo.Note))
+            if (!veicolo.IdTipoAlimentazione.HasValue)
             {
                 return false;
-            }
+            }            
             return true;
-        }
-
+        }           
     }
 }

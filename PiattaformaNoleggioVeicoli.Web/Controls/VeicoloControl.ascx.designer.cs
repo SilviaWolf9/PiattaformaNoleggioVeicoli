@@ -42,15 +42,6 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
         protected global::System.Web.UI.WebControls.TextBox txtTarga;
 
         /// <summary>
-        /// Controllo clDataImmatricolazione.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar clDataImmatricolazione;
-
-        /// <summary>
         /// Controllo ddlTipoAlimentazione.
         /// </summary>
         /// <remarks>
@@ -58,6 +49,15 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoAlimentazione;
+
+        /// <summary>
+        /// Controllo clDataImmatricolazione.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar clDataImmatricolazione;
 
         /// <summary>
         /// Controllo txtNote.
@@ -69,21 +69,12 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
         protected global::System.Web.UI.WebControls.TextBox txtNote;
 
         /// <summary>
-        /// Controllo disponibile.
+        /// Controllo rbtDisponibile.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton disponibile;
-
-        /// <summary>
-        /// Controllo noleggiato.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton noleggiato;
+        protected global::System.Web.UI.WebControls.RadioButton rbtDisponibile;
     }
 }
