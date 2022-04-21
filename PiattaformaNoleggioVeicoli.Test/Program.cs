@@ -32,16 +32,17 @@ namespace PiattaformaNoleggioVeicoli.Test
             //    Nazione = "Italia"
             //};
             //clientiManager.InsertCliente(clienteModel);
-            //var clienteModel = clientiManager.GetCliente(1);
-            //var veicoloModel = veicoliManager.GetVeicolo(1);
-            //var noleggioModel = new NoleggiModelView()
-            //{
-            //    IdCliente = clienteModel.Id,
-            //    IdVeicolo = veicoloModel.Id                
-            //};
+            var clienteModel = clientiManager.GetCliente(1);
+            var veicoloModel = veicoliManager.GetVeicolo(1);
+            var noleggioModel = new NoleggiModel()
+            {
+                IdCliente = clienteModel.Id,
+                IdVeicolo = veicoloModel.Id
+            };
             //noleggiManager.InserisciNoleggio(noleggioModel);
-            //noleggioModel.Id = 4;
+            noleggioModel.Id = 4;
             //var noleggio = noleggiManager.TerminaNoleggio(noleggioModel);
+            var noleggio = noleggiManager.GetDatiNoleggio(noleggioModel);
         }
     }
 }

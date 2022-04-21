@@ -175,5 +175,70 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             return isInserito;
         }
+    
+        public NoleggiModelView GetDatiNoleggio(NoleggiModel noleggio)
+        {
+            var noleggiModelView = new NoleggiModelView();
+            var sb = new StringBuilder();
+            sb.AppendLine("SELECT");
+            sb.AppendLine("[Noleggi].[Id]");
+            sb.AppendLine(",[Noleggi].[IdVeicolo]");
+            sb.AppendLine(",[MarcheVeicoli].[Descrizione] as Marca");
+            sb.AppendLine(",[Veicoli].[Modello]");
+            sb.AppendLine(",[Veicoli].[Targa]");
+            sb.AppendLine(",[Veicoli].[IsDisponibile]");
+            sb.AppendLine(",[Noleggi].[DataInizio]");
+            sb.AppendLine(",[Noleggi].[DataFine]");
+            sb.AppendLine(",[Noleggi].[IsInCorso]");
+            sb.AppendLine(",[Noleggi].[IdCliente]");
+            sb.AppendLine(",[Clienti].[Cognome]");
+            sb.AppendLine(",[Clienti].[Nome]"); 
+            sb.AppendLine(",[Clienti].[CodiceFiscale]");
+            sb.AppendLine("FROM [Noleggi]");
+            sb.AppendLine("LEFT JOIN [Veicoli]");
+            sb.AppendLine("ON [Veicoli].[Id] = [Noleggi].[IdVeicolo]");
+            sb.AppendLine("LEFT JOIN [Clienti]");
+            sb.AppendLine("ON [Clienti].[Id] = [Noleggi].[IdCliente]");
+            sb.AppendLine("LEFT JOIN [MarcheVeicoli]");
+            sb.AppendLine("ON [MarcheVeicoli].[Id] = [Veicoli].[IdMarca]");
+            sb.AppendLine("WHERE [Noleggi].[Id] = @Id");
+
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString()))
+                {
+                    sqlCommand.Parameters.AddWithValue("@Id", noleggio.Id);
+
+                    using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                    {
+                        sqlDataAdapter.SelectCommand = sqlCommand;
+                        sqlDataAdapter.SelectCommand.Connection = sqlConnection;
+                        sqlDataAdapter.Fill(dataTable);
+                    }
+                }
+            }
+            if (dataTable.Rows.Count == 0)      // controlla che ci sia almeno una riga
+            {
+                return new NoleggiModelView();
+            }
+            DataRow row = dataTable.Rows[0];
+            noleggiModelView.Id = row.Field<int>("Id");
+            noleggiModelView.IdVeicolo = row.Field<int>("IdVeicolo");
+            noleggiModelView.Marca = row.Field<string>("Marca");
+            noleggiModelView.Modello = row.Field<string>("Modello");
+            noleggiModelView.Targa = row.Field<string>("Targa");
+            noleggiModelView.IsDisponibile = row.Field<bool>("IsDisponibile");
+            noleggiModelView.DataInizio = row.Field<DateTime>("DataInizio");
+            noleggiModelView.DataFine = row.Field<DateTime>("DataFine");
+            noleggiModelView.IsInCorso = row.Field<bool>("IsInCorso");
+            noleggiModelView.IdVeicolo = row.Field<int>("IdCliente");
+            noleggiModelView.Cognome = row.Field<string>("Cognome");
+            noleggiModelView.Nome = row.Field<string>("Nome");
+            noleggiModelView.CodiceFiscale = row.Field<string>("CodiceFiscale");
+            return noleggiModelView; 
+        }
     }
 }

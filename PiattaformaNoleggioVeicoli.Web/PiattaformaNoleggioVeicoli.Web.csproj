@@ -133,6 +133,7 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="InserimentoVeicolo.aspx" />
     <Content Include="RicercaCliente.aspx" />
+    <Content Include="RicercaNoleggio.aspx" />
     <Content Include="RicercaVeicolo.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -251,6 +252,13 @@
     </Compile>
     <Compile Include="RicercaCliente.aspx.designer.cs">
       <DependentUpon>RicercaCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RicercaNoleggio.aspx.cs">
+      <DependentUpon>RicercaNoleggio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RicercaNoleggio.aspx.designer.cs">
+      <DependentUpon>RicercaNoleggio.aspx</DependentUpon>
     </Compile>
     <Compile Include="RicercaVeicolo.aspx.cs">
       <DependentUpon>RicercaVeicolo.aspx</DependentUpon>

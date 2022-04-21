@@ -64,7 +64,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                         sqlCommand.Parameters.AddWithValue("@Note", DBNull.Value);
                     }
                     sqlCommand.Parameters.AddWithValue("@IsDisponibile", veicoloModel.IsDisponibile);
-                    sqlCommand.Parameters.AddWithValue("@IdTipoStato", veicoloModel.IdTipoStato);
+                    sqlCommand.Parameters.AddWithValue("@IdTipoStato", 1);
                     var numRigheInserite = sqlCommand.ExecuteNonQuery();
                     if (numRigheInserite >= 1)
                     {
@@ -362,10 +362,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("\tON [dbo].[Veicoli].[IdMarca] = [dbo].[MarcheVeicoli].[Id]");
             sb.AppendLine("\tLEFT JOIN [dbo].[Noleggi]");
             sb.AppendLine("\tON [dbo].[Noleggi].[IdVeicolo] = [dbo].[Veicoli].[Id]");
-            sb.AppendLine("WHERE 1=1");
-            sb.AppendLine("\tAnd [IdTipoStato]=1");       // filtra i veicoli prendendo solo quelli attivi
-
-
+            sb.AppendLine("WHERE [IdTipoStato]=@IdTipoStato");       // filtra i veicoli prendendo solo quelli attivi
+            
             if (ricercaVeicoliModel.IdMarca.HasValue)
             {
                 sb.AppendLine("And IdMarca = @IdMarca");
@@ -421,6 +419,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     {
                         sqlCommand.Parameters.AddWithValue("@IsDisponibile", ricercaVeicoliModel.IsDisponibile);
                     }
+                    sqlCommand.Parameters.AddWithValue("@IdTipoStato", 1);
 
                     using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                     {
