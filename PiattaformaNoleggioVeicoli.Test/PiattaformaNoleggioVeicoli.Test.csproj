@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PiattaformaNoleggioVeicoli.Business\PiattaformaNoleggioVeicoli.Business.csproj">
+      <Project>{fa7357f6-f07b-466a-906a-016249f400b1}</Project>
+      <Name>PiattaformaNoleggioVeicoli.Business</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

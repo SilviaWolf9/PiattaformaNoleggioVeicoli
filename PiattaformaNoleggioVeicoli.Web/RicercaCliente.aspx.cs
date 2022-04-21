@@ -40,7 +40,7 @@ namespace PiattaformaNoleggioVeicoli.Web
 
         protected void gvClientiTrovati_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var idClientiString = gvClientiTrovati.SelectedDataKey["IdCliente"].ToString();
+            var idClientiString = gvClientiTrovati.SelectedDataKey["Id"].ToString();
             Response.Redirect("DettaglioCliente.aspx?IdCliente=" + idClientiString);
         }
 

@@ -42,12 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Managers\ClientiManager.cs" />
+    <Compile Include="Managers\NoleggiManager.cs" />
     <Compile Include="Managers\VeicoliManager.cs" />
     <Compile Include="Models\ClientiModel.cs" />
     <Compile Include="Models\ClientiTrovatiModelView.cs" />
     <Compile Include="Models\DettaglioVeicoloModelView.cs" />
     <Compile Include="Models\MarcheVeicoliModel.cs" />
     <Compile Include="Models\NoleggiModel.cs" />
+    <Compile Include="Models\NoleggiModelView.cs" />
     <Compile Include="Models\VeicoliTrovatiModelView.cs" />
     <Compile Include="Models\TipoAlimentazioneModel.cs" />
     <Compile Include="Models\TipoStatoModel.cs" />

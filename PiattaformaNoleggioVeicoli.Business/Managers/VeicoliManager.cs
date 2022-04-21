@@ -17,7 +17,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             ConnectionString = Properties.Settings.Default.DBSilvia;
         }
         
-        public bool InsertVeicolo(Models.VeicoliModel veicoloModel)     // Inserisce veicolo su db
+        public bool InsertVeicolo(VeicoliModel veicoloModel)     // Inserisce veicolo su db
         {
             if (!IsVeicoloModelValido(veicoloModel))
             {
@@ -293,9 +293,9 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("\t,[Clienti].[Nome]");
             sb.AppendLine("\t,[Clienti].[CodiceFiscale]");
             sb.AppendLine("\tFROM [dbo].[Veicoli]");
-            sb.AppendLine("\tINNER JOIN [dbo].[Noleggi]");
+            sb.AppendLine("\tLEFT JOIN [dbo].[Noleggi]");
             sb.AppendLine("\tON [dbo].[Noleggi].[IdVeicolo] = [dbo].[Veicoli].[Id]");
-            sb.AppendLine("\tINNER JOIN [dbo].[Clienti]");
+            sb.AppendLine("\tLEFT JOIN [dbo].[Clienti]");
             sb.AppendLine("\tON [dbo].[Noleggi].[IdCliente] = [dbo].[Clienti].[Id]");
             sb.AppendLine("\tWHERE [Veicoli].[Id] = @Id");
             sb.AppendLine("\tAND [Veicoli].[IdTipoStato] = @Attivo");
@@ -308,7 +308,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 using (SqlCommand sqlCommand = new SqlCommand(sb.ToString()))
                 {
                     sqlCommand.Parameters.AddWithValue("@Id", id);
-                    sqlCommand.Parameters.AddWithValue("@Attivo", 13);
+                    sqlCommand.Parameters.AddWithValue("@Attivo", 1);
 
                     using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                     {

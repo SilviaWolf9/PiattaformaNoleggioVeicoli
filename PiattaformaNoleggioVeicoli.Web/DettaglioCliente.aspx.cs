@@ -34,24 +34,7 @@ namespace PiattaformaNoleggioVeicoli.Web
                 return;
             }
             var cliente = _clientiManager.GetCliente(id.Value);
-            clienteControl.Cliente = new ClientiModel()
-            {
-                Id = id.Value,
-                Cognome = cliente.Cognome,
-                Nome = cliente.Nome,
-                DataNascita = cliente.DataNascita,
-                CodiceFiscale = cliente.CodiceFiscale,
-                Patente = cliente.Patente,
-                Telefono = cliente.Telefono,
-                Email = cliente.Email,
-                Indirizzo = cliente.Indirizzo,
-                NumeroCivico = cliente.NumeroCivico,
-                Cap = cliente.Cap,
-                Citta = cliente.Citta,
-                Comune = cliente.Comune,
-                Nazione = cliente.Nazione,
-                Note = cliente.Note
-            };
+            clienteControl.Cliente = cliente;            
             clienteControl.SetCliente();
         }
         private bool IsFormValido(ClientiModel cliente)     // controlla che il form di inserimento del cliente sia corretto

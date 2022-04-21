@@ -40,7 +40,7 @@
 
     </div>
 
-    <asp:GridView runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="gvClientiTrovati_PageIndexChanging" OnSelectedIndexChanged="gvClientiTrovati_SelectedIndexChanged" ID="gvClientiTrovati" CssClass="table table table-bordered table-hover table-striped no-margin" AutoGenerateColumns="False" AutoGenerateSelectButton="True" DataKeyNames="IdCliente" Visible="False">
+    <asp:GridView runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="gvClientiTrovati_PageIndexChanging" OnSelectedIndexChanged="gvClientiTrovati_SelectedIndexChanged" ID="gvClientiTrovati" CssClass="table table table-bordered table-hover table-striped no-margin" AutoGenerateColumns="False" AutoGenerateSelectButton="True" DataKeyNames="Id" Visible="False">
         <Columns>
             <asp:BoundField DataField="Cognome" HeaderText="Cognome">
                 <HeaderStyle HorizontalAlign="Center" />

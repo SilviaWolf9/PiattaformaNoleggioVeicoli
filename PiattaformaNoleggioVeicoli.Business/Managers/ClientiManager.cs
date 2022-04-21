@@ -16,7 +16,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         {
             ConnectionString = Properties.Settings.Default.DBSilvia;
         }
-        public bool InsertCliente(Models.ClientiModel clientiModel)     // Inserisce cliente su db
+        public bool InsertCliente(ClientiModel clientiModel)     // Inserisce cliente su db
         {
             if (!IsClienteModelValido(clientiModel))
             {
@@ -211,10 +211,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Nazione))
-            {
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(verificaCliente.Note))
             {
                 return false;
             }            
