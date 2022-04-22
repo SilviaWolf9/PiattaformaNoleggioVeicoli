@@ -17,7 +17,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             ConnectionString = Properties.Settings.Default.DBSilvia;
         }
 
-        public bool InserisciNoleggio(NoleggiModelView noleggiModel)     // Inserisce noleggio su db
+        public bool InserisciNoleggio(NoleggiModel noleggiModel)     // Inserisce noleggio su db
         {
             if (!IsNoleggioModelValido(noleggiModel))
             {
@@ -70,8 +70,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     }
                     try
                     {
-                        sqlCommand.CommandText = sqlCambiaDisponibilitaVeicolo.ToString();
-                        //sqlCommand.Parameters.AddWithValue("@IdVeicolo", noleggiModel.IdVeicolo);
+                        sqlCommand.CommandText = sqlCambiaDisponibilitaVeicolo.ToString();                        
                         sqlCommand.Parameters.AddWithValue("@Disponibilita", false);
                         var righeAggiornate = sqlCommand.ExecuteNonQuery();
                         if (righeAggiornate!=1)         // evita di aggiornare più righe
@@ -111,9 +110,9 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             return true;
         }
 
-        public bool TerminaNoleggio(NoleggiModelView noleggiModel)     // Inserisce noleggio su db
+        public bool TerminaNoleggio(NoleggiModel noleggiModel)     // Inserisce noleggio su db
         {
-            if (!IsNoleggioModelValido(noleggiModel))
+            if (!IsNoleggioModelValido(noleggiModel) && noleggiModel.Id <= 0)
             {
                 throw new DataException();
             }
@@ -175,8 +174,53 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             return isInserito;
         }
+
+        public NoleggiModel RecuperaNoleggio(VeicoliModel veicolo)      // Recupera l'ultimo noleggio di un determinato veicolo
+        {
+            var noleggio = new NoleggiModel();
+            var sb = new StringBuilder();
+            sb.AppendLine("SELECT TOP(1)");
+            sb.AppendLine("[Id]");
+            sb.AppendLine(",[IdVeicolo]");
+            sb.AppendLine(",[IdCliente]");
+            sb.AppendLine(",[DataInizio]");
+            sb.AppendLine(",[IsInCorso]");
+            sb.AppendLine("FROM [Noleggi]");
+            sb.AppendLine("WHERE [IdVeicolo] = @IdVeicolo");
+            sb.AppendLine("ORDER BY [Id] DESC");
+
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString()))
+                {
+                    sqlCommand.Parameters.AddWithValue("@IdVeicolo", veicolo.Id);                    
+
+                    using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                    {
+                        sqlDataAdapter.SelectCommand = sqlCommand;
+                        sqlDataAdapter.SelectCommand.Connection = sqlConnection;
+                        sqlDataAdapter.Fill(dataTable);
+                    }
+                }
+            }
+            if (dataTable.Rows.Count == 0)      // controlla che ci sia almeno una riga
+            {
+                return new NoleggiModel();
+            }
+            DataRow row = dataTable.Rows[0];
+            noleggio.Id = row.Field<int>("Id");
+            noleggio.IdVeicolo = row.Field<int>("IdVeicolo");
+            noleggio.IdCliente = row.Field<int>("IdClinte");
+            noleggio.DataInizio = row.Field<DateTime>("DataInizio");
+            noleggio.IsInCorso = row.Field<bool>("IsInCorso");       
+
+            return noleggio;
+        }
     
-        public NoleggiModelView GetDatiNoleggio(NoleggiModel noleggio)
+        public NoleggiModelView GetDatiNoleggio(NoleggiModel noleggio)      // Restituisce i dati di un noleggio comprendendo anche i dati del veicolo e del cliente
         {
             var noleggiModelView = new NoleggiModelView();
             var sb = new StringBuilder();

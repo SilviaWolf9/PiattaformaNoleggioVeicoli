@@ -12,16 +12,11 @@ namespace PiattaformaNoleggioVeicoli.Web
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
-
-        protected void no_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
+        }      
 
         protected void si_CheckedChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void btnNoleggiaVeicolo_Click(object sender, EventArgs e)

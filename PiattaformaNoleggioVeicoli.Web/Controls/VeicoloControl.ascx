@@ -27,13 +27,13 @@
         <OtherMonthDayStyle ForeColor="LightGray" />
         <DayStyle BackColor="White" />
         <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="true" />
-        <SelectedDayStyle BackColor="Aquamarine" Font-Bold="true" />
+        <SelectedDayStyle BackColor="DodgerBlue" Font-Bold="true" />
     </asp:Calendar>
 </div>
 
 <div class="form-group col-md-6">
     <label for="txtNote">Note</label>
-    <asp:TextBox runat="server" CssClass="form-control" ID="txtNote" TextMode="MultiLine" Rows="8" Style="resize:none"></asp:TextBox>
+    <asp:TextBox runat="server" CssClass="form-control" ID="txtNote" TextMode="MultiLine" Rows="6" Style="resize:none"></asp:TextBox>
 </div>
 
 <div class="form-group col-md-12">

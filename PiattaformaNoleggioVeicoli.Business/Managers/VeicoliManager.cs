@@ -360,8 +360,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("FROM [dbo].[Veicoli]");
             sb.AppendLine("\tINNER JOIN [dbo].[MarcheVeicoli]");
             sb.AppendLine("\tON [dbo].[Veicoli].[IdMarca] = [dbo].[MarcheVeicoli].[Id]");
-            sb.AppendLine("\tLEFT JOIN [dbo].[Noleggi]");
-            sb.AppendLine("\tON [dbo].[Noleggi].[IdVeicolo] = [dbo].[Veicoli].[Id]");
             sb.AppendLine("WHERE [IdTipoStato]=@IdTipoStato");       // filtra i veicoli prendendo solo quelli attivi
             
             if (ricercaVeicoliModel.IdMarca.HasValue)
@@ -449,7 +447,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 veicoliTrovatiModelView.Marca = dataRow.Field<string>("Marca");
                 veicoliTrovatiModelView.Modello = dataRow.Field<string>("Modello");
                 veicoliTrovatiModelView.DataImmatricolazione = dataRow.Field<DateTime>("DataImmatricolazione");
-                veicoliTrovatiModelView.IsDisponibile = dataRow.Field<bool>("IsDisponibile");
+                bool disponibilita = dataRow.Field<bool>("IsDisponibile");
+                veicoliTrovatiModelView.IsDisponibile = disponibilita ? "Disponibile" : "Noleggiato";       // Serve per vedere "disponibile" o "noleggiato" al posto di true o false
                 veicoliTrovatiList.Add(veicoliTrovatiModelView);
             }
             return veicoliTrovatiList;

@@ -15,49 +15,40 @@ namespace PiattaformaNoleggioVeicoli.Web
     {
 
         /// <summary>
-        /// Controllo txtMarca.
+        /// Controllo lblMarca.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMarca;
+        protected global::System.Web.UI.WebControls.Label lblMarca;
 
         /// <summary>
-        /// Controllo txtModello.
+        /// Controllo lblModello.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtModello;
+        protected global::System.Web.UI.WebControls.Label lblModello;
 
         /// <summary>
-        /// Controllo txtTarga.
+        /// Controllo lblTarga.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTarga;
+        protected global::System.Web.UI.WebControls.Label lblTarga;
 
         /// <summary>
-        /// Controllo no.
+        /// Controllo RadioButtonList1.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton no;
-
-        /// <summary>
-        /// Controllo si.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton si;
+        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonList1;
 
         /// <summary>
         /// Controllo ddlCognome.
@@ -96,6 +87,33 @@ namespace PiattaformaNoleggioVeicoli.Web
         protected global::PiattaformaNoleggioVeicoli.Web.Controls.ClienteControl clienteControl;
 
         /// <summary>
+        /// Controllo lblDataImmatricolazione.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDataImmatricolazione;
+
+        /// <summary>
+        /// Controllo lblTipoAlimentazione.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTipoAlimentazione;
+
+        /// <summary>
+        /// Controllo lblNote.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNote;
+
+        /// <summary>
         /// Controllo btnNoleggiaVeicolo.
         /// </summary>
         /// <remarks>
@@ -103,33 +121,6 @@ namespace PiattaformaNoleggioVeicoli.Web
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnNoleggiaVeicolo;
-
-        /// <summary>
-        /// Controllo txtDataImmatricolazione.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDataImmatricolazione;
-
-        /// <summary>
-        /// Controllo txtTipoAlimentazione.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTipoAlimentazione;
-
-        /// <summary>
-        /// Controllo txtNote.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNote;
 
         /// <summary>
         /// Controllo btnFineNoleggio.

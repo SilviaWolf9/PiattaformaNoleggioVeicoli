@@ -106,6 +106,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="sfondi\sfondo0.jpg" />
+    <Content Include="sfondi\sfondo1.jpg" />
+    <Content Include="sfondi\sfondo2.png" />
+    <Content Include="sfondi\sfondo3.jpg" />
+    <Content Include="sfondi\sfondo4.jpg" />
+    <Content Include="sfondi\sfondo5.jpg" />
+    <Content Include="sfondi\sfondo6.jpg" />
+    <Content Include="sfondi\sfondo7.jpg" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

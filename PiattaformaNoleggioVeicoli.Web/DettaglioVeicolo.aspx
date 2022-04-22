@@ -13,18 +13,20 @@
         </div>
         <div class="panel-body">
             <vc:Veicolo runat="server" ID="veicoloControl" />
-            <div class="form-group" runat="server" id="divCliente" visible="true">
+            
+            <div class="form-group col-md-10" runat="server" id="divCliente" visible="true">
                 <label for="divCliente">Cliente</label><br />
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <asp:Label runat="server" ID="lblCognome" CssClass="form-control"></asp:Label>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <asp:Label runat="server" ID="lblNome" CssClass="form-control"></asp:Label>
                 </div>
                 <div class="form-group col-md-4">
                     <asp:Label runat="server" ID="lblCodiceFiscale" CssClass="form-control"></asp:Label>
                 </div>
             </div>
+
         </div>
         <div class="panel-footer" align="center">
             <asp:Button runat="server" ID="btnGestisciNoleggio" Text="Gestisci Noleggio" CssClass="btn btn-default" OnClick="btnGestisciNoleggio_Click" />

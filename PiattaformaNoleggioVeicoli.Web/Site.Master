@@ -17,7 +17,7 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
-<body>
+<body style="background-image:url(sfondi/sfondo0.jpg)">
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -62,8 +62,6 @@
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
-
-
 
             </asp:ContentPlaceHolder>
             <hr />

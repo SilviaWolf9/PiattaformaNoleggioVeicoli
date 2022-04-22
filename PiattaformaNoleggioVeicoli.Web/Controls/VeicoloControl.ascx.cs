@@ -74,6 +74,11 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             {
                 rbtDisponibile.Checked = false;
             }
+            else
+            {
+                rbtDisponibile.Checked = true;
+
+            }
         }
 
         public VeicoliModel GetDatiVeicolo()        // restituisce i dati del veicolo attuali al chiamante 

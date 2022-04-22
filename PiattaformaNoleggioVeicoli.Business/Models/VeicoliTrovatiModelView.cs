@@ -12,6 +12,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Models
         public string Marca { get; set; }
         public string Modello { get; set; }
         public DateTime DataImmatricolazione { get; set; }
-        public bool IsDisponibile { get; set; }
+        public string IsDisponibile { get; set; }
     }
 }

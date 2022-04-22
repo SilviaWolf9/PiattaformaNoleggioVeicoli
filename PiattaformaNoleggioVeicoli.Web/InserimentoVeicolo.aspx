@@ -14,7 +14,7 @@
             <vc:Veicolo runat="server" ID="veicoloControl" />
         </div>
         <div class="panel-footer" align="center">
-            <asp:Button runat="server" ID="btnInserisci" Text="Inserisci" CssClass="btn btn-default" OnClick="btnInserisci_Click" />
+            <asp:Button runat="server" ID="btnInserisci" Text="Inserisci" CssClass="btn" BackColor="LightBlue" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnInserisci_Click" />
         </div>
     </div>
 </asp:Content>

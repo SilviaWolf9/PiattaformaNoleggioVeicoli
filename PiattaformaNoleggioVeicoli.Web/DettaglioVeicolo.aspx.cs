@@ -23,7 +23,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             int? id = null;
             if (!string.IsNullOrWhiteSpace(Request.QueryString["Id"]))
             {
-                id = int.Parse(Request.QueryString["Id"]);      // serve  recuperare l'id del veicolo
+                id = int.Parse(Request.QueryString["Id"]);      // serve a recuperare l'id del veicolo
             }
             PopolaDettaglioVeicolo(id);
         }
@@ -47,8 +47,8 @@ namespace PiattaformaNoleggioVeicoli.Web
                 IsDisponibile = veicolo.IsDisponibile
             };
             veicoloControl.SetVeicolo();            
-            string nominativo = $"{veicolo.Cognome} {veicolo.Nome}";
-            if (!string.IsNullOrWhiteSpace(nominativo))
+            //string nominativo = $"{veicolo.Cognome} {veicolo.Nome}";
+            if (!veicolo.IsDisponibile)
             {
                 lblCognome.Text = veicolo.Cognome;
                 lblNome.Text = veicolo.Nome;

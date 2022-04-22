@@ -24,14 +24,14 @@
                 <label>Targa</label>
                 <asp:TextBox runat="server" ID="txtTarga" CssClass="form-control"></asp:TextBox>
             </div>
-
+            <br />
             <div class="form-group col-md-4">
                 <label>Inizio Data Immatricolazione</label>
                 <asp:Calendar runat="server" ID="cldInizio" SelectionMode="Day">
                     <OtherMonthDayStyle ForeColor="LightGray"></OtherMonthDayStyle>
                     <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="True" />
                     <DayStyle BackColor="white" />
-                    <SelectedDayStyle BackColor="Aquamarine" Font-Bold="True" />
+                    <SelectedDayStyle BackColor="DodgerBlue" Font-Bold="True" />
                 </asp:Calendar>
             </div>
 
@@ -41,7 +41,7 @@
                     <OtherMonthDayStyle ForeColor="LightGray"></OtherMonthDayStyle>
                     <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="True" />
                     <DayStyle BackColor="white" />
-                    <SelectedDayStyle BackColor="Aquamarine" Font-Bold="True" />
+                    <SelectedDayStyle BackColor="DodgerBlue" Font-Bold="True" />
                 </asp:Calendar>
             </div>
 
@@ -51,19 +51,20 @@
                 </asp:DropDownList>
             </div>
 
-            <div class="form-group col-md-12">
-                <div align="left" class="col-md-6">
-                    <asp:Button runat="server" ID="btnRicerca" CssClass="btn btn-info" OnClick="btnRicerca_Click" Text="Ricerca" />
+            <%--<div class="form-group col-md-12">--%>
+            <br />
+            <div class="panel-footer col-md-12" align="center">
+                <div align="center" class="col-md-6">
+                    <asp:Button runat="server" ID="btnRicerca" CssClass="btn" BackColor="LightBlue" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnRicerca_Click" Text="Ricerca" />
                 </div>
-
-                <div align="left" class="col-md-6">
-                    <asp:Button runat="server" ID="btnReset" CssClass="btn btn-warning" OnClick="btnReset_Click" Text="Reset" />
+                <div align="center" class="col-md-6">
+                    <asp:Button runat="server" ID="btnReset" CssClass="btn" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnReset_Click" Text="Reset" />
                 </div>
             </div>
-
         </div>
-
     </div>
+
+    <%--</div>--%>
 
     <asp:GridView runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="gvVeicoliTrovati_PageIndexChanging" OnSelectedIndexChanged="gvVeicoliTrovati_SelectedIndexChanged" ID="gvVeicoliTrovati" CssClass="table table table-bordered table-hover table-striped no-margin" AutoGenerateColumns="False" AutoGenerateSelectButton="True" DataKeyNames="Id" Visible="False">
         <Columns>
