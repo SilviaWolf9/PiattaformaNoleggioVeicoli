@@ -28,11 +28,11 @@
 
             <div class="form-group col-md-12">
                 <div align="left" class="col-md-6">
-                    <asp:Button runat="server" ID="btnRicerca" CssClass="btn btn-info" OnClick="btnRicerca_Click" Text="Ricerca" />
+                    <asp:Button runat="server" ID="btnRicerca" CssClass="btn" BackColor="LightBlue" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnRicerca_Click" Text="Ricerca" />
                 </div>
 
                 <div align="left" class="col-md-6">
-                    <asp:Button runat="server" ID="btnReset" CssClass="btn btn-warning" OnClick="btnReset_Click" Text="Reset" />
+                    <asp:Button runat="server" ID="btnReset" CssClass="btn" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnReset_Click" Text="Reset" />
                 </div>
             </div>
 

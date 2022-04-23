@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RicercaNoleggio.aspx.cs" Inherits="PiattaformaNoleggioVeicoli.Web.RicercaNoleggio" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <br />
@@ -81,4 +82,13 @@
         </Columns>
     </asp:GridView>--%>
 
+
+            <div class="panel-footer col-md-12" align="center">
+                <div align="center" class="col-md-6">
+                    <asp:Button runat="server" ID="btnRicerca" CssClass="btn" BackColor="LightBlue" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnRicerca_Click" Text="Ricerca" />
+                </div>
+                <div align="center" class="col-md-6">
+                    <asp:Button runat="server" ID="btnReset" CssClass="btn" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnReset_Click" Text="Reset" />
+                </div>
+            </div>
 </asp:Content>
