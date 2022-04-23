@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace PiattaformaNoleggioVeicoli.Business.Models
 {
+    [Serializable]
     public class DettaglioVeicoloModelView
     {
         public int Id { get; set; }
         public int IdMarca { get; set; }
+        public string Marca { get; set; }
         public string Modello { get; set; }
         public string Targa { get; set; }
         public DateTime DataImmatricolazione { get; set; }

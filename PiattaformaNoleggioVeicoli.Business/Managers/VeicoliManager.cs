@@ -283,6 +283,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("SELECT");
             sb.AppendLine("\t[Veicoli].[Id]");
             sb.AppendLine("\t,[IdMarca]");
+            sb.AppendLine("\t,[MarcheVeicoli].[Descrizione] as Marca");
             sb.AppendLine("\t,[Modello]");
             sb.AppendLine("\t,[Targa]");
             sb.AppendLine("\t,[DataImmatricolazione]");
@@ -297,6 +298,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("\tON [dbo].[Noleggi].[IdVeicolo] = [dbo].[Veicoli].[Id]");
             sb.AppendLine("\tLEFT JOIN [dbo].[Clienti]");
             sb.AppendLine("\tON [dbo].[Noleggi].[IdCliente] = [dbo].[Clienti].[Id]");
+            sb.AppendLine("\tINNER JOIN [dbo].[MarcheVeicoli]");
+            sb.AppendLine("\tON [dbo].[Veicoli].[IdMarca] = [dbo].[MarcheVeicoli].[Id]");
             sb.AppendLine("\tWHERE [Veicoli].[Id] = @Id");
             sb.AppendLine("\tAND [Veicoli].[IdTipoStato] = @Attivo");
 
@@ -325,6 +328,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             DataRow row = dataTable.Rows[0];
             dettaglioVeicoloModelView.Id = row.Field<int>("Id");
             dettaglioVeicoloModelView.IdMarca = row.Field<int>("IdMarca");
+            dettaglioVeicoloModelView.Marca = row.Field<string>("Marca");
             dettaglioVeicoloModelView.Modello = row.Field<string>("Modello");
             dettaglioVeicoloModelView.Targa = row.Field<string>("Targa");
             dettaglioVeicoloModelView.DataImmatricolazione = row.Field<DateTime>("DataImmatricolazione");

@@ -26,8 +26,8 @@
     <asp:Calendar runat="server" ID="clDataImmatricolazione" SelectionMode="Day">
         <OtherMonthDayStyle ForeColor="LightGray" />
         <DayStyle BackColor="White" />
-        <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="true" />
-        <SelectedDayStyle BackColor="DodgerBlue" Font-Bold="true" />
+        <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="true" BackColor="LightSeaGreen"/>
+        <SelectedDayStyle BackColor="LightSeaGreen" Font-Bold="true" />
     </asp:Calendar>
 </div>
 

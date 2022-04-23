@@ -42,6 +42,15 @@ namespace PiattaformaNoleggioVeicoli.Web
         protected global::System.Web.UI.WebControls.Label lblTarga;
 
         /// <summary>
+        /// Controllo divVeicoloNonNoleggiato.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divVeicoloNonNoleggiato;
+
+        /// <summary>
         /// Controllo rbtnNuovoCliente.
         /// </summary>
         /// <remarks>
@@ -132,15 +141,6 @@ namespace PiattaformaNoleggioVeicoli.Web
         protected global::System.Web.UI.WebControls.Label lblCodiceFiscale;
 
         /// <summary>
-        /// Controllo btnReset.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReset;
-
-        /// <summary>
         /// Controllo btnNoleggiaVeicolo.
         /// </summary>
         /// <remarks>
@@ -148,6 +148,15 @@ namespace PiattaformaNoleggioVeicoli.Web
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnNoleggiaVeicolo;
+
+        /// <summary>
+        /// Controllo btnReset.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReset;
 
         /// <summary>
         /// Controllo btnFineNoleggio.

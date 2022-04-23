@@ -29,9 +29,9 @@
                 <label>Inizio Data Immatricolazione</label>
                 <asp:Calendar runat="server" ID="cldInizio" SelectionMode="Day">
                     <OtherMonthDayStyle ForeColor="LightGray"></OtherMonthDayStyle>
-                    <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="True" />
+                    <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="True" BackColor="LightSeaGreen"/>
                     <DayStyle BackColor="white" />
-                    <SelectedDayStyle BackColor="DodgerBlue" Font-Bold="True" />
+                    <SelectedDayStyle BackColor="LightSeaGreen" Font-Bold="True" />
                 </asp:Calendar>
             </div>
 
@@ -39,9 +39,9 @@
                 <label>Fine Data Immatricolazione</label>
                 <asp:Calendar runat="server" ID="cldFine" SelectionMode="Day">
                     <OtherMonthDayStyle ForeColor="LightGray"></OtherMonthDayStyle>
-                    <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="True" />
+                    <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="True" BackColor="LightSeaGreen" />
                     <DayStyle BackColor="white" />
-                    <SelectedDayStyle BackColor="DodgerBlue" Font-Bold="True" />
+                    <SelectedDayStyle BackColor="LightSeaGreen" Font-Bold="True" />
                 </asp:Calendar>
             </div>
 

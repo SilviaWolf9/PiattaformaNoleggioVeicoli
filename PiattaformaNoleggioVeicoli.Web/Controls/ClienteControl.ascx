@@ -13,10 +13,10 @@
 <div class="form-group col-md-4">
     <label for="clDataNascita">Data Nascita</label>
     <asp:Calendar runat="server" ID="clDataNascita" SelectionMode="Day">
-        <OtherMonthDayStyle ForeColor="LightGray" />
+        <OtherMonthDayStyle ForeColor="LightGray" />       
         <DayStyle BackColor="White" />
-        <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="true" />
-        <SelectedDayStyle BackColor="DodgerBlue" Font-Bold="true" />
+        <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="true" BackColor="LightSeaGreen" Wrap="true"/>
+        <SelectedDayStyle BackColor="LightSeaGreen" Font-Bold="true" />
     </asp:Calendar>
 </div>
 

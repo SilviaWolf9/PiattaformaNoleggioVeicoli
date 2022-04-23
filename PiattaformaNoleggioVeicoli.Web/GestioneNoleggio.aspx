@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" runat="server" id="divVeicoloNonNoleggiato" visible="false">
                 <p>
                     <label for="rbtnNuovoCliente">Nuovo Cliente?    </label>
                     <asp:RadioButtonList ID="rbtnNuovoCliente" runat="server" AutoPostBack="true" OnSelectedIndexChanged="rbtnNuovoCliente_SelectedIndexChanged">
@@ -41,15 +41,15 @@
             <div class="form-group col-lg-12" runat="server" id="divClienteEsistente" visible="false">
                 <div class="col-md-4">
                     <label for="ddlCognome">Cognome</label>
-                    <asp:DropDownList runat="server" CssClass="form-control" ID="ddlCognome" OnSelectedIndexChanged="ddlCognome_SelectedIndexChanged" />
+                    <asp:DropDownList runat="server" CssClass="form-control" ID="ddlCognome" OnSelectedIndexChanged="ddlCognome_SelectedIndexChanged" AutoPostBack="true" />
                 </div>
                 <div class="col-md-4">
                     <label for="ddlNome">Nome</label>
-                    <asp:DropDownList runat="server" Enabled="false" CssClass="form-control" ID="ddlNome" OnSelectedIndexChanged="ddlNome_SelectedIndexChanged" />
+                    <asp:DropDownList runat="server" Enabled="false" CssClass="form-control" ID="ddlNome" OnSelectedIndexChanged="ddlNome_SelectedIndexChanged" AutoPostBack="true"/>
                 </div>
                 <div class="col-md-4">
                     <label for="ddlCodiceFiscale">Codice Fiscale</label>
-                    <asp:DropDownList runat="server" Enabled="false" CssClass="form-control" ID="ddlCodiceFiscale" OnSelectedIndexChanged="ddlCodiceFiscale_SelectedIndexChanged" />
+                    <asp:DropDownList runat="server" Enabled="false" CssClass="form-control" ID="ddlCodiceFiscale" OnSelectedIndexChanged="ddlCodiceFiscale_SelectedIndexChanged" AutoPostBack="true" />
                 </div>
             </div>
 

@@ -69,6 +69,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             if (Veicolo.DataImmatricolazione.HasValue)
             {
                 clDataImmatricolazione.SelectedDate = Veicolo.DataImmatricolazione.Value;
+                clDataImmatricolazione.VisibleDate = clDataImmatricolazione.SelectedDate;
             }
             if (!Veicolo.IsDisponibile)
             {

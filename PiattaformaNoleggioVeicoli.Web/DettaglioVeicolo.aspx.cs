@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Newtonsoft.Json;
 
 namespace PiattaformaNoleggioVeicoli.Web
 {
@@ -35,6 +36,7 @@ namespace PiattaformaNoleggioVeicoli.Web
                 return;
             }
             var veicolo = _veicoliManager.GetVeicolo(id.Value);
+            ViewState["DettaglioVeicoloModelView"] = veicolo;
             veicoloControl.Veicolo = new VeicoliModel()
             {
                 Id = id.Value,
@@ -46,8 +48,7 @@ namespace PiattaformaNoleggioVeicoli.Web
                 Targa = veicolo.Targa,
                 IsDisponibile = veicolo.IsDisponibile
             };
-            veicoloControl.SetVeicolo();            
-            //string nominativo = $"{veicolo.Cognome} {veicolo.Nome}";
+            veicoloControl.SetVeicolo();                        
             if (!veicolo.IsDisponibile)
             {
                 lblCognome.Text = veicolo.Cognome;
@@ -88,8 +89,15 @@ namespace PiattaformaNoleggioVeicoli.Web
             return true;
         }
         protected void btnGestisciNoleggio_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("GestioneNoleggio.aspx");
+        {            
+            var veicolo = ViewState["DettaglioVeicoloModelView"];
+            if (veicolo == null)
+            {
+                return;
+            }
+            DettaglioVeicoloModelView dettaglioVeicolo = (DettaglioVeicoloModelView) veicolo;
+            var json = JsonConvert.SerializeObject(dettaglioVeicolo);            
+            Response.Redirect("GestioneNoleggio.aspx?veicolo="+Server.UrlEncode(json));
         }
 
         protected void btnSalvaModifiche_Click(object sender, EventArgs e)

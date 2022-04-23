@@ -2,6 +2,7 @@
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    opacity:initial 0.3;
 }
 
 /* Wrapping element */
@@ -9,6 +10,7 @@ body {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    opacity: initial 0.3;
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */

@@ -32,6 +32,10 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             {
                 clDataNascita.SelectedDate = Cliente.DataNascita.Value;
             }
+            else
+            {
+                clDataNascita.SelectedDate = DateTime.MinValue;
+            }
             txtCodiceFiscale.Text = Cliente.CodiceFiscale;
             txtPatente.Text = Cliente.Patente;
             txtTelefono.Text = Cliente.Telefono;

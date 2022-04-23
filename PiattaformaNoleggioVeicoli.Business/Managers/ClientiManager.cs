@@ -16,13 +16,13 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         {
             ConnectionString = Properties.Settings.Default.DBSilvia;
         }
-        public bool InsertCliente(ClientiModel clientiModel)     // Inserisce cliente su db
+        public ClientiModel InsertCliente(ClientiModel cliente)     // Inserisce cliente su db
         {
-            if (!IsClienteModelValido(clientiModel))
+            if (!IsClienteModelValido(cliente))
             {
                 throw new DataException();
             }
-            bool isInserito = false;
+            int? idInserito = null;
             var sb = new StringBuilder();
             sb.AppendLine("INSERT INTO [dbo].[Clienti] (");
             sb.AppendLine("[Cognome]");
@@ -55,41 +55,48 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine(",@Nazione");
             sb.AppendLine(",@Note");
             sb.AppendLine(")");
+            sb.AppendLine("SELECT SCOPE_IDENTITY()");
 
             using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
             {
                 sqlConnection.Open();
                 using (SqlCommand sqlCommand = new SqlCommand(sb.ToString(), sqlConnection))
                 {
-                    sqlCommand.Parameters.AddWithValue("@Cognome", clientiModel.Cognome);
-                    sqlCommand.Parameters.AddWithValue("@Nome", clientiModel.Nome);
-                    sqlCommand.Parameters.AddWithValue("@DataNascita", clientiModel.DataNascita);
-                    sqlCommand.Parameters.AddWithValue("@CodiceFiscale", clientiModel.CodiceFiscale);
-                    sqlCommand.Parameters.AddWithValue("@Patente", clientiModel.Patente);
-                    sqlCommand.Parameters.AddWithValue("@Telefono", clientiModel.Telefono);
-                    sqlCommand.Parameters.AddWithValue("@Email", clientiModel.Email);
-                    sqlCommand.Parameters.AddWithValue("@Indirizzo", clientiModel.Indirizzo);
-                    sqlCommand.Parameters.AddWithValue("@NumeroCivico", clientiModel.NumeroCivico);
-                    sqlCommand.Parameters.AddWithValue("@Cap", clientiModel.Cap);
-                    sqlCommand.Parameters.AddWithValue("@Citta", clientiModel.Citta);
-                    sqlCommand.Parameters.AddWithValue("@Comune", clientiModel.Comune);
-                    sqlCommand.Parameters.AddWithValue("@Nazione", clientiModel.Nazione);
-                    if (!string.IsNullOrEmpty(clientiModel.Note))
+                    sqlCommand.Parameters.AddWithValue("@Cognome", cliente.Cognome);
+                    sqlCommand.Parameters.AddWithValue("@Nome", cliente.Nome);
+                    sqlCommand.Parameters.AddWithValue("@DataNascita", cliente.DataNascita);
+                    sqlCommand.Parameters.AddWithValue("@CodiceFiscale", cliente.CodiceFiscale);
+                    sqlCommand.Parameters.AddWithValue("@Patente", cliente.Patente);
+                    sqlCommand.Parameters.AddWithValue("@Telefono", cliente.Telefono);
+                    sqlCommand.Parameters.AddWithValue("@Email", cliente.Email);
+                    sqlCommand.Parameters.AddWithValue("@Indirizzo", cliente.Indirizzo);
+                    sqlCommand.Parameters.AddWithValue("@NumeroCivico", cliente.NumeroCivico);
+                    sqlCommand.Parameters.AddWithValue("@Cap", cliente.Cap);
+                    sqlCommand.Parameters.AddWithValue("@Citta", cliente.Citta);
+                    sqlCommand.Parameters.AddWithValue("@Comune", cliente.Comune);
+                    sqlCommand.Parameters.AddWithValue("@Nazione", cliente.Nazione);
+                    if (!string.IsNullOrEmpty(cliente.Note))
                     {
-                        sqlCommand.Parameters.AddWithValue("@Note", clientiModel.Note);
+                        sqlCommand.Parameters.AddWithValue("@Note", cliente.Note);
                     }
                     else
                     {
                         sqlCommand.Parameters.AddWithValue("@Note", DBNull.Value);
                     }                    
-                    var numRigheInserite = sqlCommand.ExecuteNonQuery();
-                    if (numRigheInserite >= 1)
+                    object value = sqlCommand.ExecuteScalar();
+                    if (value != null && value != DBNull.Value)
                     {
-                        isInserito = true;
+                        idInserito = Convert.ToInt32(value);
                     }
                 }
             }
-            return isInserito;
+            if (!idInserito.HasValue)
+            {
+                return null;
+            }
+            var clienteInserito = cliente;
+            clienteInserito.Id = idInserito.Value;
+            return clienteInserito;
         }
         public bool ModificaCliente(ClientiModel cliente)      // Modifica dati Cliente sul db e utilizza la transaction per evitare che vengano modificati contemporaneamente più id per errore
         {
@@ -278,14 +285,12 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             clientiModel.Note = row.Field<string>("Note");
             return clientiModel;
         }
-
         public class RicercaClientiModel
         {           
             public string Cognome { get; set; }
             public string Nome { get; set; }
             public string CodiceFiscale { get; set; }           
         }
-
         public List<ClientiTrovatiModelView> RicercaClienti(RicercaClientiModel ricercaClientiModel)        // Ricerca clienti tramite i campi Cognome, Nome e CodiceFiscale
         {
             var clientiTrovatiList = new List<ClientiTrovatiModelView>();
