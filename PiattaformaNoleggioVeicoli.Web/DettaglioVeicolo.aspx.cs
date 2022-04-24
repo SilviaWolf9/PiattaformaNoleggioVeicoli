@@ -33,6 +33,7 @@ namespace PiattaformaNoleggioVeicoli.Web
         {
             if (!id.HasValue)
             {
+                // messaggio errore
                 return;
             }
             var veicolo = _veicoliManager.GetVeicolo(id.Value);
@@ -64,26 +65,32 @@ namespace PiattaformaNoleggioVeicoli.Web
         {
             if (!veicolo.IdMarca.HasValue)
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(veicolo.Modello))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(veicolo.Targa))
             {
+                // messaggio errore
                 return false;
             }
             if (!veicolo.DataImmatricolazione.HasValue)
             {
+                // messaggio errore
                 return false;
             }
             if (veicolo.DataImmatricolazione > DateTime.Now)
             {
+                // messaggio errore
                 return false;
             }
             if (!veicolo.IdTipoAlimentazione.HasValue)
             {
+                // messaggio errore
                 return false;
             }
             return true;
@@ -107,6 +114,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             {
                 return;
             }
+            // messaggio successo
             _veicoliManager.ModificaVeicolo(veicolo);
             Response.Redirect("RicercaVeicolo.aspx");       // dopo la modifica ci rimanda alla pagina di ricerca veicolo
         }
@@ -118,6 +126,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             {
                 return;
             }
+            // messaggio successo
             _veicoliManager.EliminaVeicolo(veicolo);
             Response.Redirect("RicercaVeicolo.aspx");       // dopo l'eliminazione ci rimanda alla pagina di ricerca veicolo
         }

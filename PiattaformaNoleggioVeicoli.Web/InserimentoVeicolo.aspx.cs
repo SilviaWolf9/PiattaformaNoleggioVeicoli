@@ -45,26 +45,32 @@ namespace PiattaformaNoleggioVeicoli.Web
         {
             if (!veicolo.IdMarca.HasValue)
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(veicolo.Modello))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(veicolo.Targa))
             {
+                // messaggio errore
                 return false;
             }
             if (!veicolo.DataImmatricolazione.HasValue)
             {
+                // messaggio errore
                 return false;
             }
             if (veicolo.DataImmatricolazione>DateTime.Now)
             {
+                // messaggio errore
                 return false;
             }
             if (!veicolo.IdTipoAlimentazione.HasValue)
             {
+                // messaggio errore
                 return false;
             }            
             return true;

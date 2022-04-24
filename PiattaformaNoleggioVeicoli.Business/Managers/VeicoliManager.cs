@@ -15,8 +15,10 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         public VeicoliManager()     // Costruttore per richiamare la connection string messa su proprietà
         {
             ConnectionString = Properties.Settings.Default.DBSilvia;
+            //ConnectionString = Properties.Settings.Default.DBAzure;
+            //ConnectionString = Properties.Settings.Default.ARCAConnectionString;
         }
-        
+
         public bool InsertVeicolo(VeicoliModel veicoloModel)     // Inserisce veicolo su db
         {
             if (!IsVeicoloModelValido(veicoloModel))
@@ -72,6 +74,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     }
                 }
             }
+            // messaggio successo
             return isInserito;
         }        
         
@@ -122,6 +125,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     modificaTransaction.Commit();
                 }
             }
+            // messaggio successo
             return true;
         }
         
@@ -153,6 +157,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                         return false;
                     }
                     disattivaVeicoloTransaction.Commit();
+                    //messaggio successo
                     return true;
                 }
             }
@@ -162,11 +167,13 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         {
             if (veicolo == null)
             {
+                // messaggio errore
                 return false;
             }
             var verificaVeicolo = (VeicoliModel)veicolo;
             if (!verificaVeicolo.IdMarca.HasValue)
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaVeicolo.Modello))
@@ -175,6 +182,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             if (string.IsNullOrWhiteSpace(verificaVeicolo.Targa))
             {
+                // messaggio errore
                 return false;
             }
             if (!verificaVeicolo.DataImmatricolazione.HasValue)
@@ -183,6 +191,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             if (!verificaVeicolo.IdTipoAlimentazione.HasValue)
             {
+                // messaggio errore
                 return false;
             }
             return true;
@@ -358,7 +367,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("SELECT");
             sb.AppendLine("\t[Veicoli].[Id]");
             sb.AppendLine("\t,[MarcheVeicoli].[Descrizione] as Marca");
-            sb.AppendLine("\t,[Modello]");
+            sb.AppendLine("\t,[Modello]");            
             sb.AppendLine("\t,[DataImmatricolazione]");
             sb.AppendLine("\t,[IsDisponibile]");
             sb.AppendLine("FROM [dbo].[Veicoli]");
@@ -432,7 +441,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 }
             }
 
-            if (dataSet.Tables.Count < 0)       // controlla che esista almeno una tabella net dataset
+            if (dataSet.Tables.Count < 0)       // controlla che esista almeno una tabella nel dataset
             {
                 return new List<VeicoliTrovatiModelView>();
             }

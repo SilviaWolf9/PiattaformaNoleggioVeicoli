@@ -13,5 +13,8 @@
       <Value Profile="(Default)">Server=stagesilvia.database.windows.net;Initial Catalog=EsameStageSilvia;Persist Security Info=False;User ID=Silvia_Wolf;Password=Joy160512;
 </Value>
     </Setting>
+    <Setting Name="ARCAConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data Source=sqlserverprincipale.database.windows.net;Initial Catalog=ARCA;User ID=utente;Password=Safo2022!</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

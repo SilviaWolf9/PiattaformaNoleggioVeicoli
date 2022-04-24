@@ -26,12 +26,12 @@ namespace PiattaformaNoleggioVeicoli.Web
             DettaglioVeicoloModelView veicolo = null;
             if (Request.QueryString["veicolo"]!=null)
             {
-                //veicolo = (DettaglioVeicoloModelView)Request.QueryString["veicolo"];
                 var dettaglioVeicolo = Server.UrlDecode(Request.QueryString["veicolo"]);
                 veicolo = JsonConvert.DeserializeObject<DettaglioVeicoloModelView>(dettaglioVeicolo);
             }
             if (veicolo==null || veicolo.Id <= 0)
             {
+                // messaggio errore
                 return;
             }
             SetDatiGestioneNoleggio(veicolo);
@@ -86,7 +86,8 @@ namespace PiattaformaNoleggioVeicoli.Web
             bool nuovoCliente = Convert.ToBoolean(selezionatoInt);
             if (nuovoCliente)
             {
-                cliente = clienteControl.GetDatiCliente();
+                var clienteDaInserire = clienteControl.GetDatiCliente();
+                cliente = _clientiManager.InsertCliente(clienteDaInserire);
             }
             else
             {
@@ -95,6 +96,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             if (cliente == null || cliente.Id <= 0)
             {
+                // messaggio errore
                 return;
             }
             var noleggioModel = new NoleggiModel()
@@ -116,6 +118,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             };
             var noleggioModel = _noleggiManager.RecuperaNoleggio(veicoloModel);
             _noleggiManager.TerminaNoleggio(noleggioModel);
+            // messaggio successo
         }
 
         protected void rbtnNuovoCliente_SelectedIndexChanged(object sender, EventArgs e)

@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
@@ -106,6 +109,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="sfondi\calendar-icon_34471 %281%29.png" />
+    <Content Include="sfondi\calendar-icon_34471.png" />
+    <Content Include="sfondi\calendar_office_day_1474 %281%29.png" />
+    <Content Include="sfondi\calendar_office_day_1474.png" />
     <Content Include="sfondi\sfondo0.jpg" />
     <Content Include="sfondi\sfondo1.jpg" />
     <Content Include="sfondi\sfondo2.png" />

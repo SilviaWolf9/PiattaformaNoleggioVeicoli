@@ -58,6 +58,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             if (!string.IsNullOrWhiteSpace(txtTarga.Text))
             {
+                //messaggio dei 3 caratteri
                 veicoliRicerca.Targa = txtTarga.Text;
             }
             if (cldInizio.SelectedDate != DateTime.MinValue)

@@ -15,6 +15,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         public ClientiManager()     // Costruttore per richiamare la connection string messa su proprietà
         {
             ConnectionString = Properties.Settings.Default.DBSilvia;
+            //ConnectionString = Properties.Settings.Default.DBAzure;
+            //ConnectionString = Properties.Settings.Default.ARCAConnectionString;
         }
         public ClientiModel InsertCliente(ClientiModel cliente)     // Inserisce cliente su db
         {
@@ -96,6 +98,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             var clienteInserito = cliente;
             clienteInserito.Id = idInserito.Value;
+            // messaggio successo
             return clienteInserito;
         }
         public bool ModificaCliente(ClientiModel cliente)      // Modifica dati Cliente sul db e utilizza la transaction per evitare che vengano modificati contemporaneamente più id per errore
@@ -160,65 +163,80 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     modificaTransaction.Commit();
                 }
             }
+            // messaggio successo
             return true;
         }
         private bool IsClienteModelValido(object cliente)       // Fa un controllo sull'oggetto cliente ed evita di spaccarsi in caso ClienteModel fosse null
         {
             if (cliente == null)
             {
+                // messaggio errore
                 return false;
             }
             var verificaCliente = (ClientiModel)cliente;            
             if (string.IsNullOrWhiteSpace(verificaCliente.Cognome))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Nome))
             {
+                // messaggio errore
                 return false;
             }
             if (!verificaCliente.DataNascita.HasValue)
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.CodiceFiscale))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Patente))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Telefono))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Email))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Indirizzo))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.NumeroCivico))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Cap))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Citta))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Comune))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Nazione))
             {
+                // messaggio errore
                 return false;
             }            
             return true;

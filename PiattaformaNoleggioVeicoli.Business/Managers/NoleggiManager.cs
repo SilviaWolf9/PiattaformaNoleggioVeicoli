@@ -15,6 +15,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         public NoleggiManager()     // Costruttore per richiamare la connection string messa su proprietà
         {
             ConnectionString = Properties.Settings.Default.DBSilvia;
+            //ConnectionString = Properties.Settings.Default.DBAzure;
+            //ConnectionString = Properties.Settings.Default.ARCAConnectionString;
         }
 
         public bool InserisciNoleggio(NoleggiModel noleggiModel)     // Inserisce noleggio su db
@@ -88,6 +90,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     transaction.Commit();
                 }
             }
+            // messaggio successo
             return isInserito;
         }
 
@@ -95,16 +98,19 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         {
             if (noleggio == null)
             {
+                // messaggio errore
                 return false;
             }
             var verificaNoleggio = (NoleggiModelView)noleggio;
 
             if (!verificaNoleggio.IdVeicolo.HasValue)
             {
+                // messaggio errore
                 return false;
             }
             if (!verificaNoleggio.IdCliente.HasValue)
             {
+                // messaggio errore
                 return false;
             }            
             return true;
@@ -172,6 +178,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     transaction.Commit();
                 }
             }
+            //messaggio successo
             return isInserito;
         }
 

@@ -43,5 +43,15 @@ namespace PiattaformaNoleggioVeicoli.Business.Properties {
                 return ((string)(this["DBAzure"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=sqlserverprincipale.database.windows.net;Initial Catalog=ARCA;User ID" +
+            "=utente;Password=Safo2022!")]
+        public string ARCAConnectionString {
+            get {
+                return ((string)(this["ARCAConnectionString"]));
+            }
+        }
     }
 }

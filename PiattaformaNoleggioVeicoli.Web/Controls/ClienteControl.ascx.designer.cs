@@ -33,13 +33,31 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
         protected global::System.Web.UI.WebControls.TextBox txtNome;
 
         /// <summary>
-        /// Controllo clDataNascita.
+        /// Controllo txtDataNascita.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar clDataNascita;
+        protected global::System.Web.UI.WebControls.TextBox txtDataNascita;
+
+        /// <summary>
+        /// Controllo btnMostraCalendario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnMostraCalendario;
+
+        /// <summary>
+        /// Controllo clndr.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender clndr;
 
         /// <summary>
         /// Controllo txtCodiceFiscale.

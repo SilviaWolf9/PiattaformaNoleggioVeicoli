@@ -30,12 +30,8 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             txtNome.Text = Cliente.Nome;
             if (Cliente.DataNascita.HasValue)
             {
-                clDataNascita.SelectedDate = Cliente.DataNascita.Value;
-            }
-            else
-            {
-                clDataNascita.SelectedDate = DateTime.MinValue;
-            }
+                txtDataNascita.Text = Cliente.DataNascita.Value.ToString("dd/MM/yyyy");
+            }            
             txtCodiceFiscale.Text = Cliente.CodiceFiscale;
             txtPatente.Text = Cliente.Patente;
             txtTelefono.Text = Cliente.Telefono;
@@ -53,9 +49,9 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
         {
             Cliente.Cognome = txtCognome.Text;
             Cliente.Nome = txtNome.Text;
-            if (clDataNascita.SelectedDate != DateTime.MinValue)
+            if (!string.IsNullOrWhiteSpace(txtDataNascita.Text))
             {
-                Cliente.DataNascita = clDataNascita.SelectedDate;
+                Cliente.DataNascita = DateTime.Parse(txtDataNascita.Text);
             }
             Cliente.CodiceFiscale = txtCodiceFiscale.Text;
             Cliente.Patente = txtPatente.Text;

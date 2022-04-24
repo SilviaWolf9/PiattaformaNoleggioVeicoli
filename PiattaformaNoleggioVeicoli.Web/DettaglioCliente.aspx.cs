@@ -31,6 +31,7 @@ namespace PiattaformaNoleggioVeicoli.Web
         {
             if (!id.HasValue)
             {
+                // messaggio errore
                 return;
             }
             var cliente = _clientiManager.GetCliente(id.Value);
@@ -41,58 +42,72 @@ namespace PiattaformaNoleggioVeicoli.Web
         {
             if (string.IsNullOrWhiteSpace(cliente.Cognome))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Nome))
             {
+                // messaggio errore
                 return false;
             }
             if (!cliente.DataNascita.HasValue)
             {
+                // messaggio errore
                 return false;
             }
             if (cliente.DataNascita > DateTime.Now)
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.CodiceFiscale))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Patente))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Telefono))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Email))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Indirizzo))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.NumeroCivico))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Cap))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Citta))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Comune))
             {
+                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Nazione))
             {
+                // messaggio errore
                 return false;
             }
             return true;
@@ -105,6 +120,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             {
                 return;
             }
+            // messaggio successo
             _clientiManager.ModificaCliente(cliente);
             Response.Redirect("RicercaCliente.aspx");
         }
