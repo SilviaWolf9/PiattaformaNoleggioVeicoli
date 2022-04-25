@@ -2,8 +2,13 @@
 
 <%@ Register Src="~/Controls/ClienteControl.ascx" TagPrefix="cc" TagName="Cliente" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<%@ Register Src="~/Controls/VeicoloControl.ascx" TagPrefix="vc" TagName="Veicolo" %>
 
+<%@ Register Src="~/Controls/InfoControl.ascx" TagPrefix="ic" TagName="Info" %>
+
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <ic:Info runat="server" ID="infoControl" />
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Gestione Noleggio</h3>

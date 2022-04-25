@@ -11,7 +11,7 @@ namespace PiattaformaNoleggioVeicoli.Web
 {
 
 
-    public partial class DettaglioCliente
+    public partial class DettaglioNoleggio
     {
 
         /// <summary>
@@ -24,21 +24,12 @@ namespace PiattaformaNoleggioVeicoli.Web
         protected global::PiattaformaNoleggioVeicoli.Web.Controls.InfoControl infoControl;
 
         /// <summary>
-        /// Controllo clienteControl.
+        /// Controllo noleggioControl.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::PiattaformaNoleggioVeicoli.Web.Controls.ClienteControl clienteControl;
-
-        /// <summary>
-        /// Controllo btnSalvaModifiche.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSalvaModifiche;
+        protected global::PiattaformaNoleggioVeicoli.Web.Controls.NoleggioControl noleggioControl;
     }
 }

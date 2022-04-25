@@ -50,6 +50,7 @@
     <Compile Include="Models\MarcheVeicoliModel.cs" />
     <Compile Include="Models\NoleggiModel.cs" />
     <Compile Include="Models\NoleggiModelView.cs" />
+    <Compile Include="Models\NoleggiTrovatiModelView.cs" />
     <Compile Include="Models\VeicoliTrovatiModelView.cs" />
     <Compile Include="Models\TipoAlimentazioneModel.cs" />
     <Compile Include="Models\TipoStatoModel.cs" />

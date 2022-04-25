@@ -109,6 +109,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Controls\NoleggioControl.ascx" />
+    <Content Include="DettaglioNoleggio.aspx" />
     <Content Include="sfondi\calendar-icon_34471 %281%29.png" />
     <Content Include="sfondi\calendar-icon_34471.png" />
     <Content Include="sfondi\calendar_office_day_1474 %281%29.png" />
@@ -215,6 +217,13 @@
     <Compile Include="Controls\InfoControl.ascx.designer.cs">
       <DependentUpon>InfoControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NoleggioControl.ascx.cs">
+      <DependentUpon>NoleggioControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\NoleggioControl.ascx.designer.cs">
+      <DependentUpon>NoleggioControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\VeicoloControl.ascx.cs">
       <DependentUpon>VeicoloControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -235,6 +244,13 @@
     </Compile>
     <Compile Include="DettaglioCliente.aspx.designer.cs">
       <DependentUpon>DettaglioCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DettaglioNoleggio.aspx.cs">
+      <DependentUpon>DettaglioNoleggio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DettaglioNoleggio.aspx.designer.cs">
+      <DependentUpon>DettaglioNoleggio.aspx</DependentUpon>
     </Compile>
     <Compile Include="DettaglioVeicolo.aspx.cs">
       <DependentUpon>DettaglioVeicolo.aspx</DependentUpon>

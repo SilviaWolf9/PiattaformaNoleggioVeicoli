@@ -98,7 +98,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             var clienteInserito = cliente;
             clienteInserito.Id = idInserito.Value;
-            // messaggio successo
             return clienteInserito;
         }
         public bool ModificaCliente(ClientiModel cliente)      // Modifica dati Cliente sul db e utilizza la transaction per evitare che vengano modificati contemporaneamente più id per errore
@@ -332,7 +331,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             {
                 sb.AppendLine("And CodiceFiscale like '%'+@CodiceFiscale+'%'");
             }
-
             var dataSet = new DataSet();
             using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
             {

@@ -19,9 +19,9 @@ namespace PiattaformaNoleggioVeicoli.Web
                 return;
             }
             int? id = null;
-            if (!string.IsNullOrWhiteSpace(Request.QueryString["Id"]))
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["IdCliente"]))
             {
-                id = int.Parse(Request.QueryString["Id"]);      // serve  recuperare l'id del cliente
+                id = int.Parse(Request.QueryString["IdCliente"]);      // serve  recuperare l'id del cliente
             }
             PopolaDettaglioCliente(id);
         }
@@ -31,7 +31,7 @@ namespace PiattaformaNoleggioVeicoli.Web
         {
             if (!id.HasValue)
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante il recupero dei dati del cliente");
                 return;
             }
             var cliente = _clientiManager.GetCliente(id.Value);
@@ -42,72 +42,72 @@ namespace PiattaformaNoleggioVeicoli.Web
         {
             if (string.IsNullOrWhiteSpace(cliente.Cognome))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento del cognome");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Nome))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento del nome");
                 return false;
             }
             if (!cliente.DataNascita.HasValue)
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nella selezione della data di nascita");
                 return false;
             }
             if (cliente.DataNascita > DateTime.Now)
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "A meno che il cliente non sia un signore del tempo, hai sbagliato ad inserire la data di nascita");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.CodiceFiscale))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento del codice fiscale");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Patente))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento dela patente");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Telefono))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento del numero di telefono");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Email))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento della mail");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Indirizzo))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento dell'indirizzo");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.NumeroCivico))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento del numero civico");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Cap))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento del cap");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Citta))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento della città");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Comune))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento del comune");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(cliente.Nazione))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento della nazione");
                 return false;
             }
             return true;
@@ -120,7 +120,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             {
                 return;
             }
-            // messaggio successo
+            infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Modifiche effettuate con successo");
             _clientiManager.ModificaCliente(cliente);
             Response.Redirect("RicercaCliente.aspx");
         }

@@ -15,6 +15,15 @@ namespace PiattaformaNoleggioVeicoli.Web
     {
 
         /// <summary>
+        /// Controllo infoControl.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::PiattaformaNoleggioVeicoli.Web.Controls.InfoControl infoControl;
+
+        /// <summary>
         /// Controllo txtCognome.
         /// </summary>
         /// <remarks>

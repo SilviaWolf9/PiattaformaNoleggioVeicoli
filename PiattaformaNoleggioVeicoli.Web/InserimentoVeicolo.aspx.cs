@@ -45,32 +45,32 @@ namespace PiattaformaNoleggioVeicoli.Web
         {
             if (!veicolo.IdMarca.HasValue)
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante la selezione della marca");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(veicolo.Modello))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento del modello"); 
                 return false;
             }
             if (string.IsNullOrWhiteSpace(veicolo.Targa))
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento della targa"); 
                 return false;
             }
             if (!veicolo.DataImmatricolazione.HasValue)
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante la selezione della data d'immatricolazione"); 
                 return false;
             }
             if (veicolo.DataImmatricolazione>DateTime.Now)
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "A meno che tu non sia un signore del tempo, hai sbagliato ad inserire la data d'immatricolazione"); 
                 return false;
             }
             if (!veicolo.IdTipoAlimentazione.HasValue)
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante la selezione del tipo di alimentazione");
                 return false;
             }            
             return true;

@@ -78,7 +78,6 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             else
             {
                 rbtDisponibile.Checked = true;
-
             }
         }
 

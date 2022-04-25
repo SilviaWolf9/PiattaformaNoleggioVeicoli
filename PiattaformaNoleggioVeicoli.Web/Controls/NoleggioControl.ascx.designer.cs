@@ -11,70 +11,88 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
 {
 
 
-    public partial class VeicoloControl
+    public partial class NoleggioControl
     {
 
         /// <summary>
-        /// Controllo ddlMarca.
+        /// Controllo lblMarca.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::AjaxControlToolkit.ComboBox ddlMarca;
+        protected global::System.Web.UI.WebControls.Label lblMarca;
 
         /// <summary>
-        /// Controllo txtModello.
+        /// Controllo lblModello.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtModello;
+        protected global::System.Web.UI.WebControls.Label lblModello;
 
         /// <summary>
-        /// Controllo txtTarga.
+        /// Controllo lblTarga.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTarga;
+        protected global::System.Web.UI.WebControls.Label lblTarga;
 
         /// <summary>
-        /// Controllo ddlTipoAlimentazione.
+        /// Controllo lblIsInCorso.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoAlimentazione;
+        protected global::System.Web.UI.WebControls.Label lblIsInCorso;
 
         /// <summary>
-        /// Controllo clDataImmatricolazione.
+        /// Controllo lblDataInizio.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar clDataImmatricolazione;
+        protected global::System.Web.UI.WebControls.Label lblDataInizio;
 
         /// <summary>
-        /// Controllo txtNote.
+        /// Controllo lblDataFine.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNote;
+        protected global::System.Web.UI.WebControls.Label lblDataFine;
 
         /// <summary>
-        /// Controllo rbtDisponibile.
+        /// Controllo lblCognome.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbtDisponibile;
+        protected global::System.Web.UI.WebControls.Label lblCognome;
+
+        /// <summary>
+        /// Controllo lblNome.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNome;
+
+        /// <summary>
+        /// Controllo lblCodiceFiscale.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCodiceFiscale;
     }
 }

@@ -2,8 +2,10 @@
 
 <%@ Register Src="~/Controls/ClienteControl.ascx" TagPrefix="cc" TagName="Cliente" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<%@ Register Src="~/Controls/InfoControl.ascx" TagPrefix="ic" TagName="Info" %>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <ic:Info runat="server" ID="infoControl" />
      <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Dettaglio Cliente</h3>
@@ -12,7 +14,7 @@
             <cc:Cliente runat="server" ID="clienteControl" />
         </div>
         <div class="panel-footer" align="center">
-            <asp:Button runat="server" ID="btnSalvaModifiche" Text="Salva modifiche" CssClass="btn btn-default" OnClick="btnSalvaModifiche_Click" />
+            <asp:Button runat="server" ID="btnSalvaModifiche" Text="Salva modifiche" CssClass="btn btn-default" BackColor="LightBlue" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnSalvaModifiche_Click" />
         </div>
     </div>
 

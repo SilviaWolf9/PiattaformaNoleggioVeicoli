@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json;
+using PiattaformaNoleggioVeicoli.Web.Controls;
 
 namespace PiattaformaNoleggioVeicoli.Web
 {
@@ -31,7 +32,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             if (veicolo==null || veicolo.Id <= 0)
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante la selezione del veicolo");
                 return;
             }
             SetDatiGestioneNoleggio(veicolo);
@@ -46,7 +47,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             {
                 divVeicoloNonNoleggiato.Visible = true;
                 divVeicoloNoleggiato.Visible = false;
-                //btnNoleggiaVeicolo.Visible = true;
                 btnFineNoleggio.Visible = false;
             }
             else
@@ -96,7 +96,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             if (cliente == null || cliente.Id <= 0)
             {
-                // messaggio errore
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante il recupero dei dati del cliente");
                 return;
             }
             var noleggioModel = new NoleggiModel()
@@ -106,7 +106,8 @@ namespace PiattaformaNoleggioVeicoli.Web
                 DataInizio = DateTime.Now,
                 IsInCorso = !veicolo.IsDisponibile
             };
-            _noleggiManager.InserisciNoleggio(noleggioModel);           
+            _noleggiManager.InserisciNoleggio(noleggioModel);
+            infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Noleggio registrato con successo");
         }
 
         protected void btnFineNoleggio_Click(object sender, EventArgs e)
@@ -118,7 +119,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             };
             var noleggioModel = _noleggiManager.RecuperaNoleggio(veicoloModel);
             _noleggiManager.TerminaNoleggio(noleggioModel);
-            // messaggio successo
+            infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Noleggio terminato con successo");
         }
 
         protected void rbtnNuovoCliente_SelectedIndexChanged(object sender, EventArgs e)

@@ -108,5 +108,23 @@ namespace PiattaformaNoleggioVeicoli.Web
             var idVeicoloString = gvVeicoliTrovati.SelectedDataKey["Id"].ToString();
             Response.Redirect("DettaglioVeicolo.aspx?Id=" + idVeicoloString);
         }
+
+        protected void txtTarga_TextChanged(object sender, EventArgs e)
+        {
+            var txtTargaDaControllare = (TextBox)sender;
+            if (string.IsNullOrWhiteSpace(txtTargaDaControllare.Text))
+            {
+                btnRicerca.Enabled = true;
+            }
+
+            if (txtTargaDaControllare.Text.Trim().Length > 3)       // dato che non era possibile fare la ricerca a 3 caratteri sul modello poichè ci sono modelli che hanno un solo carattere o 2, ho impostato il controllo a 3 caratteri sulla targa (trim rimuove gli spazi vuoti dalla stringa)
+            {
+                btnRicerca.Enabled = true;
+            }
+            else
+            {
+                btnRicerca.Enabled = false;
+            }
+        }
     }
 }

@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RicercaVeicolo.aspx.cs" Inherits="PiattaformaNoleggioVeicoli.Web.RicercaVeicolo" %>
 
+<%@ Register Src="~/Controls/VeicoloControl.ascx" TagPrefix="vc" TagName="Veicolo" %>
+
+<%@ Register Src="~/Controls/InfoControl.ascx" TagPrefix="ic" TagName="Info" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+        <ic:Info runat="server" ID="infoControl" />
 
     <br />
     <div class="panel panel-default">
@@ -22,13 +27,13 @@
 
             <div class="form-group col-md-4">
                 <label>Targa</label>
-                <asp:TextBox runat="server" ID="txtTarga" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtTarga" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtTarga_TextChanged"></asp:TextBox>
             </div>
             <br />
             <div class="form-group col-md-4">
                 <label>Inizio Data Immatricolazione</label>
                 <asp:Calendar runat="server" ID="cldInizio" SelectionMode="Day">
-                    <OtherMonthDayStyle ForeColor="LightGray"></OtherMonthDayStyle>
+                    <OtherMonthDayStyle ForeColor="LightSeaGreen"></OtherMonthDayStyle>
                     <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="True" BackColor="LightSeaGreen"/>
                     <DayStyle BackColor="white" />
                     <SelectedDayStyle BackColor="LightSeaGreen" Font-Bold="True" />
@@ -38,7 +43,7 @@
             <div class="form-group col-md-4">
                 <label>Fine Data Immatricolazione</label>
                 <asp:Calendar runat="server" ID="cldFine" SelectionMode="Day">
-                    <OtherMonthDayStyle ForeColor="LightGray"></OtherMonthDayStyle>
+                    <OtherMonthDayStyle ForeColor="LightSeaGreen"></OtherMonthDayStyle>
                     <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="True" BackColor="LightSeaGreen" />
                     <DayStyle BackColor="white" />
                     <SelectedDayStyle BackColor="LightSeaGreen" Font-Bold="True" />

@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RicercaCliente.aspx.cs" Inherits="PiattaformaNoleggioVeicoli.Web.RicercaCliente" %>
 
+<%@ Register Src="~/Controls/VeicoloControl.ascx" TagPrefix="vc" TagName="Veicolo" %>
+
+<%@ Register Src="~/Controls/InfoControl.ascx" TagPrefix="ic" TagName="Info" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+        <ic:Info runat="server" ID="infoControl" />
 
     <br />
     <div class="panel panel-default">
