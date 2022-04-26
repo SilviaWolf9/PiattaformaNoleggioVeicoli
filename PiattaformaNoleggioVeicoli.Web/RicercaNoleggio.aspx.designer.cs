@@ -30,7 +30,7 @@ namespace PiattaformaNoleggioVeicoli.Web
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMarca;
+        protected global::AjaxControlToolkit.ComboBox ddlMarca;
 
         /// <summary>
         /// Controllo txtModello.
@@ -105,15 +105,6 @@ namespace PiattaformaNoleggioVeicoli.Web
         protected global::System.Web.UI.WebControls.TextBox txtCodiceFiscale;
 
         /// <summary>
-        /// Controllo gvNoleggiTrovati.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvNoleggiTrovati;
-
-        /// <summary>
         /// Controllo btnRicerca.
         /// </summary>
         /// <remarks>
@@ -130,5 +121,14 @@ namespace PiattaformaNoleggioVeicoli.Web
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnReset;
+
+        /// <summary>
+        /// Controllo gvNoleggiTrovati.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvNoleggiTrovati;
     }
 }

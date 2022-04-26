@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json;
 using PiattaformaNoleggioVeicoli.Web.Controls;
+using static PiattaformaNoleggioVeicoli.Web.Controls.ClienteControl;
 
 namespace PiattaformaNoleggioVeicoli.Web
 {
@@ -124,6 +125,8 @@ namespace PiattaformaNoleggioVeicoli.Web
 
         protected void rbtnNuovoCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
+            btnReset_Click(this, null);
+            
             var selezionato = rbtnNuovoCliente.SelectedValue;
             if (selezionato==null)
             {
@@ -225,13 +228,40 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             else
             {
-                ddlCognome.SelectedIndex = 0;
+                if (ddlCognome.Items.Count > 0)
+                {
+                    ddlCognome.SelectedIndex = 0;
+                }
+                else
+                {
+                    ddlCognome.Items.Clear();
+                }
                 ddlNome.Items.Clear();
                 ddlCodiceFiscale.Items.Clear();
                 ddlCognome.Enabled = true;
                 ddlNome.Enabled = false;
                 ddlCodiceFiscale.Enabled = false;
             }                
+        }
+
+        protected void clienteControl_EsistenzaCodiceFiscale(object sender, CodiceFiscaleUpdatedArgs e)
+        {
+            if (e==null)
+            {
+                return;
+            }
+            if (e.IdCliente==0)
+            {
+                return;
+            }
+            rbtnNuovoCliente.SelectedValue = "0";
+            divVeicoloNoleggiato.Visible = true;
+            clienteControl.Visible = false;
+            var cliente = _clientiManager.GetCliente(e.IdCliente);
+            lblCognome.Text = cliente.Cognome;
+            lblNome.Text = cliente.Nome;
+            lblCodiceFiscale.Text = cliente.CodiceFiscale;
+            btnReset.Visible = false;
         }
     }
 }

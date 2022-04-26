@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Managers\ClientiManager.cs" />
     <Compile Include="Managers\NoleggiManager.cs" />
+    <Compile Include="Managers\SingletonManager.cs" />
     <Compile Include="Managers\VeicoliManager.cs" />
     <Compile Include="Models\ClientiModel.cs" />
     <Compile Include="Models\ClientiTrovatiModelView.cs" />

@@ -6,6 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
+using PiattaformaNoleggioVeicoli.Business.Managers;
 
 namespace PiattaformaNoleggioVeicoli.Web
 {
@@ -16,6 +17,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             // Codice eseguito all'avvio dell'applicazione
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            var instance = SingletonManager.Instance;            
         }
     }
 }

@@ -24,6 +24,10 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             {
                 throw new DataException();
             }
+            if (EsistenzaCodiceFiscale(cliente.CodiceFiscale).HasValue)
+            {
+                return null;
+            }
             int? idInserito = null;
             var sb = new StringBuilder();
             sb.AppendLine("INSERT INTO [dbo].[Clienti] (");
@@ -100,6 +104,34 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             clienteInserito.Id = idInserito.Value;
             return clienteInserito;
         }
+        public int? EsistenzaCodiceFiscale(string codiceFiscale)        // Controlla l'esistenza del codice fiscale
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("SELECT [Id]");
+            sb.AppendLine("FROM [Clienti]");
+            sb.AppendLine("WHERE [CodiceFiscale] = @Cf");
+            var dataTable = new DataTable();
+            using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString(), sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@Cf", codiceFiscale);
+                    using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                    {
+                        sqlDataAdapter.SelectCommand = sqlCommand;
+                        sqlDataAdapter.SelectCommand.Connection = sqlConnection;
+                        sqlDataAdapter.Fill(dataTable);
+                    }
+                }
+            }
+            if (dataTable.Rows.Count == 0)      // controlla che ci sia almeno una riga
+            {
+                return null;
+            }
+            var id = dataTable.Rows[0].Field<int>("Id");
+            return id;
+        }                       
         public bool ModificaCliente(ClientiModel cliente)      // Modifica dati Cliente sul db e utilizza la transaction per evitare che vengano modificati contemporaneamente più id per errore
         {
             if (!IsClienteModelValido(cliente))
@@ -168,74 +200,60 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         private bool IsClienteModelValido(object cliente)       // Fa un controllo sull'oggetto cliente ed evita di spaccarsi in caso ClienteModel fosse null
         {
             if (cliente == null)
-            {
-                // messaggio errore
+            {                
                 return false;
             }
             var verificaCliente = (ClientiModel)cliente;            
             if (string.IsNullOrWhiteSpace(verificaCliente.Cognome))
             {
-                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Nome))
             {
-                // messaggio errore
                 return false;
             }
             if (!verificaCliente.DataNascita.HasValue)
             {
-                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.CodiceFiscale))
             {
-                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Patente))
             {
-                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Telefono))
             {
-                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Email))
             {
-                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Indirizzo))
             {
-                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.NumeroCivico))
             {
-                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Cap))
             {
-                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Citta))
             {
-                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Comune))
             {
-                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaCliente.Nazione))
             {
-                // messaggio errore
                 return false;
             }            
             return true;

@@ -16,6 +16,7 @@ namespace PiattaformaNoleggioVeicoli.Web
 
             if (IsPostBack)
             {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");
                 return;
             }
             PopolaDDLMarche();
@@ -24,32 +25,38 @@ namespace PiattaformaNoleggioVeicoli.Web
         private NoleggiManager _noleggiManager { get; set; }
         private void PopolaGridViewNoleggio(NoleggiManager.RicercaNoleggiModel ricerca)
         {
+            //gvNoleggiTrovati.DataSource = null;
+            var listaNoleggiTrovati = _noleggiManager.RicercaNoleggi(ricerca);
+            if (listaNoleggiTrovati.Count==0)
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Info, "Nessun risultato trovato");                
+            }            
             gvNoleggiTrovati.Visible = true;
-            gvNoleggiTrovati.DataSource = _noleggiManager.RicercaNoleggi(ricerca);
+            gvNoleggiTrovati.DataSource = listaNoleggiTrovati;
             gvNoleggiTrovati.DataBind();
         }
 
         private void PopolaDDLMarche()
         {
-            var veicoliManager = new VeicoliManager();
-            ddlMarca.DataSource = veicoliManager.GetMarcheVeicoliList();
+            var instance = SingletonManager.Instance;
+            ddlMarca.DataSource = instance.ListMarche;
             ddlMarca.DataTextField = "Descrizione";
             ddlMarca.DataValueField = "Id";
             ddlMarca.DataBind();
-            ddlMarca.Items.Insert(0, new ListItem("seleziona", "-1"));
+            //ddlMarca.Items.Insert(0, new ListItem("seleziona", "-1"));
         }
         private void PopolaDDLIsInCorso()
         {
             ddlIsInCorso.Items.Add(new ListItem("seleziona", "-1"));
-            ddlIsInCorso.Items.Add(new ListItem("si", "0"));
-            ddlIsInCorso.Items.Add(new ListItem("no", "1"));
+            ddlIsInCorso.Items.Add(new ListItem("no", "0"));
+            ddlIsInCorso.Items.Add(new ListItem("si", "1"));
         }
 
         protected void btnRicerca_Click(object sender, EventArgs e)
         {
             var noleggiRicerca = new NoleggiManager.RicercaNoleggiModel();
 
-            if (ddlMarca.SelectedValue != "-1")
+            if (ddlMarca.SelectedIndex != -1)
             {
                 noleggiRicerca.IdMarca = int.Parse(ddlMarca.SelectedValue);
             }
@@ -60,7 +67,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             if (!string.IsNullOrWhiteSpace(txtTarga.Text))
             {
-                //messaggio dei 3 caratteri
                 noleggiRicerca.Targa = txtTarga.Text;
             }
             if (cldInizioNoleggio.SelectedDate != DateTime.MinValue)

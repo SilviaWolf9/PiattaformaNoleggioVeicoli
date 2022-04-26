@@ -17,6 +17,9 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
         {
             switch (tipoMessaggio)
             {
+                case TipoMessaggio.NotSet:
+                    paragrafoMessaggio.Attributes["class"] = "";
+                    break;
                 case TipoMessaggio.Info:
                     paragrafoMessaggio.Attributes["class"] = "alert alert-info";
                     break;
@@ -35,7 +38,8 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
 
         public enum TipoMessaggio
         {
-            Info
+            NotSet
+            , Info
             , Success
             , Warning
             , Danger

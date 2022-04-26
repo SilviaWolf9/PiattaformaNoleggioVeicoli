@@ -17,7 +17,7 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
-<body style="background-image:url(sfondi/sfondo0.jpg)">
+<body style="background-image: url(sfondi/sfondo0.jpg)">
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -50,7 +50,7 @@
                     <a class="navbar-brand" runat="server" href="~/">Piattafoma Noleggio Veicoli</a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">                        
+                    <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/InserimentoVeicolo">Inserisci Veicolo</a></li>
                         <li><a runat="server" href="~/RicercaVeicolo">Ricerca Veicolo</a></li>
                         <li><a runat="server" href="~/RicercaCliente">Ricerca Cliente</a></li>
@@ -61,14 +61,15 @@
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
-
             </asp:ContentPlaceHolder>
+
             <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Applicazione ASP.NET</p>
+            <footer class="col-md-12">
+                <p class="col-md-3" align="right" margin="1px" style="font: bolder; font-size: 18px">prodotto da Silvia Moretti</p>
+                <asp:ImageButton class="col-md-1" align="left" ID="btnLinkMio" runat="server" ImageUrl="../sfondi/wolf3.png" href="http://linkedin.com/in/silvia-moretti-797405157"></asp:ImageButton>
+                <p class="col-md-8" align="right">&copy; <%: DateTime.Now.Year %> - Applicazione ASP.NET</p>
             </footer>
         </div>
-
     </form>
 </body>
 </html>

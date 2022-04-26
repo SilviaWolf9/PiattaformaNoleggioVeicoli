@@ -1,4 +1,5 @@
-﻿using PiattaformaNoleggioVeicoli.Business.Models;
+﻿using PiattaformaNoleggioVeicoli.Business.Managers;
+using PiattaformaNoleggioVeicoli.Business.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,11 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
 {
     public partial class ClienteControl : System.Web.UI.UserControl
     {
+        public event EventHandler<CodiceFiscaleUpdatedArgs> EsistenzaCodiceFiscale;     
+        public class CodiceFiscaleUpdatedArgs : EventArgs
+        {
+            public int IdCliente { get; set; }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack)
@@ -65,6 +71,20 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             Cliente.Nazione = txtNazione.Text;
             Cliente.Note = txtNote.Text;
             return Cliente;
+        }
+
+        protected void txtCodiceFiscale_TextChanged(object sender, EventArgs e)
+        {
+            var clientiManager = new ClientiManager();
+            var esistenzaCf = clientiManager.EsistenzaCodiceFiscale(txtCodiceFiscale.Text);
+            if (esistenzaCf.HasValue)
+            {                
+                var codiceFiscaleUpdatedArgs = new CodiceFiscaleUpdatedArgs()
+                {
+                    IdCliente = esistenzaCf.Value
+                };
+                EsistenzaCodiceFiscale(this, codiceFiscaleUpdatedArgs); ;
+            }
         }
     }
 }

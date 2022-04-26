@@ -29,5 +29,7 @@ textarea {
 
     .body-content {
         padding: 0;
+        /*opacity:0.5 !important;*/
     }
+    /*aggiungere stili personalisìzzati*/
 }

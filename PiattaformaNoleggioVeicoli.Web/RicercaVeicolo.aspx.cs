@@ -30,12 +30,12 @@ namespace PiattaformaNoleggioVeicoli.Web
         }
         private void PopolaDDLMarche()
         {
-            var veicoliManager = new VeicoliManager();
-            ddlMarca.DataSource = veicoliManager.GetMarcheVeicoliList();
+            var instance = SingletonManager.Instance;
+            ddlMarca.DataSource = instance.ListMarche;
             ddlMarca.DataTextField = "Descrizione";
             ddlMarca.DataValueField = "Id";
             ddlMarca.DataBind();
-            ddlMarca.Items.Insert(0, new ListItem("seleziona", "-1"));
+            //ddlMarca.Items.Insert(0, new ListItem("seleziona", "-1"));
         }
         private void PopolaDDLStatoVeicolo()
         {
@@ -47,7 +47,7 @@ namespace PiattaformaNoleggioVeicoli.Web
         {
             var veicoliRicerca = new VeicoliManager.RicercaVeicoliModel();
 
-            if (ddlMarca.SelectedValue != "-1")
+            if (ddlMarca.SelectedIndex != -1)
             {
                 veicoliRicerca.IdMarca = int.Parse(ddlMarca.SelectedValue);
             }            
@@ -58,7 +58,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             if (!string.IsNullOrWhiteSpace(txtTarga.Text))
             {
-                //messaggio dei 3 caratteri
                 veicoliRicerca.Targa = txtTarga.Text;
             }
             if (cldInizio.SelectedDate != DateTime.MinValue)
@@ -111,6 +110,7 @@ namespace PiattaformaNoleggioVeicoli.Web
 
         protected void txtTarga_TextChanged(object sender, EventArgs e)
         {
+            infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, String.Empty);
             var txtTargaDaControllare = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(txtTargaDaControllare.Text))
             {
@@ -123,6 +123,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             else
             {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Warning, "Inserisci almeno 3 caratteri");
                 btnRicerca.Enabled = false;
             }
         }

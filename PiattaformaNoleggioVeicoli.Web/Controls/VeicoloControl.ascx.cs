@@ -26,8 +26,8 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
 
         private void PopolaDDLMarche()
         {
-            var veicoliManager = new VeicoliManager();
-            ddlMarca.DataSource = veicoliManager.GetMarcheVeicoliList();
+            var instance = SingletonManager.Instance;
+            ddlMarca.DataSource = instance.ListMarche;
             ddlMarca.DataTextField = "Descrizione";
             ddlMarca.DataValueField = "Id";
             ddlMarca.DataBind();

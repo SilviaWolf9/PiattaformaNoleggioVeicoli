@@ -471,8 +471,11 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     {
                         sqlCommand.Parameters.AddWithValue("@CodiceFiscale", ricerca.CodiceFiscale);
                     }
+                    if (ricerca.IsInCorso.HasValue)
+                    {
+                        sqlCommand.Parameters.AddWithValue("@IsInCorso", ricerca.IsInCorso);
 
-                    sqlCommand.Parameters.AddWithValue("@IdTipoStato", 1);
+                    }
 
                     using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
                     {
@@ -501,6 +504,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 noleggiTrovatiModelView.Id = dataRow.Field<int>("Id");
                 noleggiTrovatiModelView.Marca = dataRow.Field<string>("Marca");
                 noleggiTrovatiModelView.Modello = dataRow.Field<string>("Modello");
+                noleggiTrovatiModelView.Targa = dataRow.Field<string>("Targa");
                 bool inCorso = dataRow.Field<bool>("IsInCorso");
                 noleggiTrovatiModelView.IsInCorso = inCorso ? "si" : "no";       // Serve per vedere "si" o "no" al posto di true o false
                 //noleggiTrovatiModelView.IsInCorso = dataRow.Field<bool?>("IsInCorso");
