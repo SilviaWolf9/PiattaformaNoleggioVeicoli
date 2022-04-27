@@ -16,12 +16,15 @@ namespace PiattaformaNoleggioVeicoli.Web
             
             if (IsPostBack)
             {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");
                 return;
             }
+            instance = SingletonManager.Instance;
             PopolaDDLMarche();
             PopolaDDLStatoVeicolo();
         }
         private VeicoliManager _veicoliManager { get; set; }
+        private static SingletonManager instance;
         private void PopolaGridViewVeicolo(VeicoliManager.RicercaVeicoliModel ricerca)
         {
             gvVeicoliTrovati.Visible = true;
@@ -30,7 +33,6 @@ namespace PiattaformaNoleggioVeicoli.Web
         }
         private void PopolaDDLMarche()
         {
-            var instance = SingletonManager.Instance;
             ddlMarca.DataSource = instance.ListMarche;
             ddlMarca.DataTextField = "Descrizione";
             ddlMarca.DataValueField = "Id";

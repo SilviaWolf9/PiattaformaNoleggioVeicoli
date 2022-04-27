@@ -15,6 +15,7 @@ namespace PiattaformaNoleggioVeicoli.Web
         {
             if (IsPostBack)
             {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");
                 return;
             }
             veicoloControl.SetVeicolo();

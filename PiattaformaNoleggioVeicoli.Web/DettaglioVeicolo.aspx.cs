@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json;
+using AutoMapper;
 
 namespace PiattaformaNoleggioVeicoli.Web
 {
@@ -18,6 +19,7 @@ namespace PiattaformaNoleggioVeicoli.Web
 
             if (IsPostBack)
             {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");
                 return;
             }
 
@@ -26,9 +28,13 @@ namespace PiattaformaNoleggioVeicoli.Web
             {
                 id = int.Parse(Request.QueryString["Id"]);      // serve a recuperare l'id del veicolo
             }
+            instance = SingletonManager.Instance;
+            mapper = instance.Mapper;
             PopolaDettaglioVeicolo(id);
         }
         private VeicoliManager _veicoliManager { get; set; }
+        private static SingletonManager instance;
+        private static IMapper mapper;
         private void PopolaDettaglioVeicolo(int? id)
         {
             if (!id.HasValue)
@@ -38,17 +44,18 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             var veicolo = _veicoliManager.GetVeicolo(id.Value);
             ViewState["DettaglioVeicoloModelView"] = veicolo;
-            veicoloControl.Veicolo = new VeicoliModel()
-            {
-                Id = id.Value,
-                IdMarca = veicolo.IdMarca,
-                IdTipoAlimentazione = veicolo.IdTipoAlimentazione,
-                DataImmatricolazione = veicolo.DataImmatricolazione,
-                Modello = veicolo.Modello,
-                Note = veicolo.Note,
-                Targa = veicolo.Targa,
-                IsDisponibile = veicolo.IsDisponibile
-            };
+            //veicoloControl.Veicolo = new VeicoliModel()
+            //{
+            //    Id = id.Value,
+            //    IdMarca = veicolo.IdMarca,
+            //    IdTipoAlimentazione = veicolo.IdTipoAlimentazione,
+            //    DataImmatricolazione = veicolo.DataImmatricolazione,
+            //    Modello = veicolo.Modello,
+            //    Note = veicolo.Note,
+            //    Targa = veicolo.Targa,
+            //    IsDisponibile = veicolo.IsDisponibile
+            //};
+            veicoloControl.Veicolo = mapper.Map<DettaglioVeicoloModelView, VeicoliModel>(veicolo);
             veicoloControl.SetVeicolo();                        
             if (!veicolo.IsDisponibile)
             {

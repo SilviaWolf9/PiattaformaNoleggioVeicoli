@@ -17,16 +17,16 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             {
                 return;
             }
+            instance = SingletonManager.Instance;
             PopolaDDLMarche();
             PopolaDDLTipoAlimentazione();
         }
 
         public VeicoliModel Veicolo { get => _veicolo; set => _veicolo = value; }       // serve per ottenere e settare il valore della variabile statica dichiarata sotto in modo che abbia lo stesso valore in tutta la pagina si poteva fare anche utilizzando una viewstate
-        private static VeicoliModel _veicolo;        
-
+        private static VeicoliModel _veicolo;
+        private static SingletonManager instance;
         private void PopolaDDLMarche()
-        {
-            var instance = SingletonManager.Instance;
+        {            
             ddlMarca.DataSource = instance.ListMarche;
             ddlMarca.DataTextField = "Descrizione";
             ddlMarca.DataValueField = "Id";
@@ -36,8 +36,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
 
         private void PopolaDDLTipoAlimentazione()
         {
-            var veicoliManager = new VeicoliManager();
-            ddlTipoAlimentazione.DataSource = veicoliManager.GetTipoAlimentazioneList();
+            ddlTipoAlimentazione.DataSource = instance.ListTipoAlimentazione;
             ddlTipoAlimentazione.DataTextField = "Descrizione";
             ddlTipoAlimentazione.DataValueField = "Id";
             ddlTipoAlimentazione.DataBind();

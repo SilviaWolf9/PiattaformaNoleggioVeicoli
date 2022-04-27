@@ -1,4 +1,5 @@
-﻿using PiattaformaNoleggioVeicoli.Business.Models;
+﻿using AutoMapper;
+using PiattaformaNoleggioVeicoli.Business.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,16 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         private List<MarcheVeicoliModel> listMarche;
         private const int MINUTI_AGGIORNAMENTO_LISTA_MARCHE = 10;
         private DateTime LastAggiornamentoListaMarche = DateTime.MinValue;
+        private IMapper mapper;
+
+
+        public IMapper Mapper
+        {
+            get
+            {
+                return mapper;
+            }
+        }
 
         public List<MarcheVeicoliModel> ListMarche
         {
@@ -33,7 +44,18 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         {
             veicoliManager = new VeicoliManager();
             listMarche = veicoliManager.GetMarcheVeicoliList();
+            var configurationAutoMapper = AutoMapperConfigurationManager.GetConfiguration();
+            mapper = configurationAutoMapper.CreateMapper();
+            listTipoAlimentazione = veicoliManager.GetTipoAlimentazioneList();
         }
+
+        private List<TipoAlimentazioneModel> listTipoAlimentazione;
+        public List<TipoAlimentazioneModel> ListTipoAlimentazione
+        {
+            get { return listTipoAlimentazione; }
+        }
+        
+
         public static SingletonManager Instance
         {
             get

@@ -16,6 +16,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             _clientiManager = new ClientiManager();
             if (IsPostBack)
             {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");
                 return;
             }
             int? id = null;
@@ -118,6 +119,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             var cliente = clienteControl.GetDatiCliente();
             if (!IsFormValido(cliente))
             {
+
                 return;
             }
             infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Modifiche effettuate con successo");

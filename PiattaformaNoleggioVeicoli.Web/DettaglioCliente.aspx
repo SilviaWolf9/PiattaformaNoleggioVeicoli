@@ -6,14 +6,14 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <ic:Info runat="server" ID="infoControl" />
-     <div class="panel panel-default" style="opacity:0.7">
-        <div class="panel-heading" style="opacity:1">
+     <div class="panel panel-default" >
+        <div class="panel-heading">
             <h3 class="panel-title">Dettaglio Cliente</h3>
         </div>
         <div class="panel-body">
             <cc:Cliente runat="server" ID="clienteControl" />
         </div>
-        <div class="panel-footer" align="center" style="opacity:1">
+        <div class="panel-footer" align="center">
             <asp:Button runat="server" ID="btnSalvaModifiche" Text="Salva modifiche" CssClass="btn btn-default" BackColor="LightBlue" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnSalvaModifiche_Click" />
         </div>
     </div>

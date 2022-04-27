@@ -2,7 +2,6 @@
 body {
     padding-top: 50px;
     padding-bottom: 20px;
-    opacity:initial 0.3;
 }
 
 /* Wrapping element */
@@ -10,7 +9,6 @@ body {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    opacity: initial 0.3;
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
@@ -28,8 +26,23 @@ textarea {
     }
 
     .body-content {
-        padding: 0;
-        /*opacity:0.5 !important;*/
+        padding: 0;        
     }
     /*aggiungere stili personalisìzzati*/
+    .form-group, .form-control {
+        opacity:1 !important;
+    }
+    .collegamenti {
+        opacity: 1;
+        color: white;
+        text-decoration: none !important
+    }
+    .paginaDefault {
+        opacity:1 !important;
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+    .panel {
+        opacity: 0.7 !important;
+    }
 }

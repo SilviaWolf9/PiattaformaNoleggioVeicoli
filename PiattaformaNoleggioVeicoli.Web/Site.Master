@@ -61,12 +61,18 @@
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
 
+
+
+            </asp:ContentPlaceHolder>
             <hr />
             <footer class="col-md-12">
                 <p class="col-md-3" align="right" margin="1px" style="font: bolder; font-size: 18px">prodotto da Silvia Moretti</p>
-                <asp:ImageButton class="col-md-1" align="left" ID="btnLinkMio" runat="server" ImageUrl="../sfondi/wolf3.png" href="http://linkedin.com/in/silvia-moretti-797405157"></asp:ImageButton>
+                <a style="opacity:1; color:white; text-decoration:none" href="http://linkedin.com/in/silvia-moretti-797405157" CssClass="col-md-1">
+                <img src="../sfondi/wolf3.png" />
+               <%-- <h2>Inserisci veicolo</h2>--%>
+            </a>
+<%--                <asp:ImageButton class="col-md-1" align="left" ID="btnLinkMio" runat="server" ImageUrl="../sfondi/wolf3.png" href="http://linkedin.com/in/silvia-moretti-797405157"></asp:ImageButton>--%>
                 <p class="col-md-8" align="right">&copy; <%: DateTime.Now.Year %> - Applicazione ASP.NET</p>
             </footer>
         </div>
