@@ -44,7 +44,7 @@
                 <label>Data di Inizio Noleggio</label>
                 <asp:Calendar runat="server" ID="cldInizioNoleggio" SelectionMode="Day">
                     <OtherMonthDayStyle ForeColor="LightGray"></OtherMonthDayStyle>
-                    <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="True" />
+                    <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="True" BackColor="LightSeaGreen"/>
                     <DayStyle BackColor="white" />
                     <SelectedDayStyle BackColor="LightSeaGreen" Font-Bold="True" />
                 </asp:Calendar>
@@ -54,7 +54,7 @@
                 <label>Data di Fine Noleggio</label>
                 <asp:Calendar runat="server" ID="cldFineNoleggio" SelectionMode="Day">
                     <OtherMonthDayStyle ForeColor="LightGray"></OtherMonthDayStyle>
-                    <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="True" />
+                    <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="True" BackColor="LightSeaGreen"/>
                     <DayStyle BackColor="white" />
                     <SelectedDayStyle BackColor="LightSeaGreen" Font-Bold="True" />
                 </asp:Calendar>
@@ -71,7 +71,7 @@
                 <label>Codice Fiscale</label>
                 <asp:TextBox runat="server" ID="txtCodiceFiscale" CssClass="form-control"></asp:TextBox>
             </div>
-
+             </div>
 
             <div class="panel-footer col-md-12" align="center">
                 <div align="center" class="col-md-6">
@@ -81,9 +81,10 @@
                     <asp:Button runat="server" ID="btnReset" CssClass="btn" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnReset_Click" Text="Reset" />
                 </div>
             </div>
-        </div>
+       
     </div>
-
+    <br />
+    <br />  
 
     <div class="panel panel-default">
 

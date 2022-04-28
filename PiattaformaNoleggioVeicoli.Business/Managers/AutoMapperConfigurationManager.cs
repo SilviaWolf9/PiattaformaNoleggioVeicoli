@@ -13,6 +13,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         {
             var configuration = new MapperConfiguration(cfg => {
                 cfg.CreateMap<Models.NoleggiModel, Models.NoleggiModelView>().ReverseMap();
+                cfg.CreateMap<Models.NoleggiTrovatiModelView, Models.NoleggiModelView>().ReverseMap();
                 cfg.CreateMap<Models.DettaglioVeicoloModelView, Models.VeicoliModel>().ReverseMap();
                 cfg.CreateMap<Models.VeicoliTrovatiModelView, Models.VeicoliModel>().ReverseMap();
                 cfg.CreateMap<Models.VeicoliTrovatiModelView, Models.DettaglioVeicoloModelView>().ReverseMap();

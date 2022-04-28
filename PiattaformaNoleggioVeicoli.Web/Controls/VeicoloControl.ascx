@@ -17,7 +17,7 @@
 
 <div class="form-group col-md-6">
     <label for="txtTarga">Targa</label>
-    <asp:TextBox runat="server" CssClass="form-control" ID="txtTarga"></asp:TextBox>
+    <asp:TextBox runat="server" CssClass="form-control" ID="txtTarga" AutoPostBack="true" OnTextChanged="txtTarga_TextChanged"></asp:TextBox>
 </div>
 
 <div class="form-group col-md-6">

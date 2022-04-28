@@ -29,18 +29,20 @@
                 <label>Codice Fiscale</label>
                 <asp:TextBox runat="server" ID="txtCodiceFiscale" CssClass="form-control"></asp:TextBox>
             </div>
+        </div>
 
-
-            <div class="panel-footer col-md-12" align="center">
-                <div align="center" class="col-md-6">
-                    <asp:Button runat="server" ID="btnRicerca" CssClass="btn" BackColor="LightBlue" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnRicerca_Click" Text="Ricerca" />
-                </div>
-                <div align="center" class="col-md-6">
-                    <asp:Button runat="server" ID="btnReset" CssClass="btn" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnReset_Click" Text="Reset" />
-                </div>
+        <div class="panel-footer col-md-12" align="center">
+            <div align="center" class="col-md-6">
+                <asp:Button runat="server" ID="btnRicerca" CssClass="btn" BackColor="LightBlue" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnRicerca_Click" Text="Ricerca" />
+            </div>
+            <div align="center" class="col-md-6">
+                <asp:Button runat="server" ID="btnReset" CssClass="btn" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnReset_Click" Text="Reset" />
             </div>
         </div>
+
     </div>
+    <br />
+    <br />  
     <div class="panel panel-default">
 
         <asp:GridView runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="gvClientiTrovati_PageIndexChanging" OnSelectedIndexChanged="gvClientiTrovati_SelectedIndexChanged" ID="gvClientiTrovati" CssClass="table table table-bordered table-hover table-striped no-margin" AutoGenerateColumns="False" AutoGenerateSelectButton="True" DataKeyNames="Id" Visible="False">

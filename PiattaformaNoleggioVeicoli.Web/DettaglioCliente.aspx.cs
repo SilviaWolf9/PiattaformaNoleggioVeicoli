@@ -119,7 +119,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             var cliente = clienteControl.GetDatiCliente();
             if (!IsFormValido(cliente))
             {
-
                 return;
             }
             infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Modifiche effettuate con successo");

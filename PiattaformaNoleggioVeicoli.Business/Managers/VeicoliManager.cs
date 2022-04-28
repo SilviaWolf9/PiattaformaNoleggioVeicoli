@@ -19,13 +19,17 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             //ConnectionString = Properties.Settings.Default.ARCAConnectionString;
         }
 
-        public bool InsertVeicolo(VeicoliModel veicoloModel)     // Inserisce veicolo su db
+        public VeicoliModel InsertVeicolo(VeicoliModel veicoloModel)     // Inserisce veicolo su db
         {
             if (!IsVeicoloModelValido(veicoloModel))
             {
                 throw new DataException();
             }
-            bool isInserito = false;
+            if (EsistenzaTarga(veicoloModel.Targa).HasValue)
+            {
+                return null;
+            }
+            int? idInserito = null;
             var sb = new StringBuilder();
             sb.AppendLine("INSERT INTO [dbo].[Veicoli] (");
             sb.AppendLine("[IdMarca]");
@@ -46,6 +50,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine(",@IsDisponibile");
             sb.AppendLine(",@IdTipoStato");
             sb.AppendLine(")");
+            sb.AppendLine("SELECT SCOPE_IDENTITY()");
 
             using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
             {
@@ -66,18 +71,51 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                         sqlCommand.Parameters.AddWithValue("@Note", DBNull.Value);
                     }
                     sqlCommand.Parameters.AddWithValue("@IsDisponibile", veicoloModel.IsDisponibile);
-                    sqlCommand.Parameters.AddWithValue("@IdTipoStato", 1);
-                    var numRigheInserite = sqlCommand.ExecuteNonQuery();
-                    if (numRigheInserite >= 1)
+                    sqlCommand.Parameters.AddWithValue("@IdTipoStato", 1);                   
+                    object value = sqlCommand.ExecuteScalar();
+                    if (value != null && value != DBNull.Value)
                     {
-                        isInserito = true;
+                        idInserito = Convert.ToInt32(value);
                     }
                 }
             }
-            // messaggio successo
-            return isInserito;
-        }        
-        
+            if (!idInserito.HasValue)
+            {
+                return null;
+            }
+            var veicoloInserito = veicoloModel;
+            veicoloInserito.Id = idInserito.Value;
+            return veicoloInserito;
+        }
+
+        public int? EsistenzaTarga(string targa)        // Controlla l'esistenza della targa
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("SELECT [Id]");
+            sb.AppendLine("FROM [Veicoli]");
+            sb.AppendLine("WHERE [Targa] = @Targa");
+            var dataTable = new DataTable();
+            using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString(), sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@Targa", targa);
+                    using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                    {
+                        sqlDataAdapter.SelectCommand = sqlCommand;
+                        sqlDataAdapter.SelectCommand.Connection = sqlConnection;
+                        sqlDataAdapter.Fill(dataTable);
+                    }
+                }
+            }
+            if (dataTable.Rows.Count == 0)      // controlla che ci sia almeno una riga
+            {
+                return null;
+            }
+            var id = dataTable.Rows[0].Field<int>("Id");
+            return id;
+        }
         public bool ModificaVeicolo(VeicoliModel veicolo)      // Modifica dati Veicolo sul db e utilizza la transaction per evitare che vengano modificati contemporaneamente più id per errore
         {
             if (!IsVeicoloModelValido(veicolo))
@@ -92,7 +130,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("[Targa] = @Targa,");
             sb.AppendLine("[DataImmatricolazione] = @DataImmatricolazione,");
             sb.AppendLine("[IdTipoAlimentazione] = @IdTipoAlimentazione,");
-            sb.AppendLine("[Note] = @Note");
+            sb.AppendLine("[Note] = @Note,");
+            sb.AppendLine("[IsDisponibile] = @IsDisponibile");
             sb.AppendLine("WHERE Id = @Id");
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
@@ -115,6 +154,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     {
                         sqlCommand.Parameters.AddWithValue("@Note", DBNull.Value);
                     }
+                    sqlCommand.Parameters.AddWithValue("@IsDisponibile", veicolo.IsDisponibile);
 
                     int nRowModificate = sqlCommand.ExecuteNonQuery();
                     if (nRowModificate != 1)
@@ -156,8 +196,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                         disattivaVeicoloTransaction.Rollback();
                         return false;
                     }
-                    disattivaVeicoloTransaction.Commit();
-                    //messaggio successo
+                    disattivaVeicoloTransaction.Commit();                    
                     return true;
                 }
             }

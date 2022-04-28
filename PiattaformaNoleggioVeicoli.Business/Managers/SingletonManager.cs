@@ -53,8 +53,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         public List<TipoAlimentazioneModel> ListTipoAlimentazione
         {
             get { return listTipoAlimentazione; }
-        }
-        
+        }       
 
         public static SingletonManager Instance
         {

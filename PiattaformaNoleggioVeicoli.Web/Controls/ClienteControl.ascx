@@ -17,7 +17,7 @@
     <div>
         <asp:TextBox ID="txtDataNascita" ReadOnly="True" runat="server" CssClass="col-md-6" ></asp:TextBox>
         <asp:ImageButton ID="btnMostraCalendario" runat="server" ImageUrl="../sfondi/calendar_office_day_1474.png" CssClass="col-md-2" />
-        <ajax:CalendarExtender ID="clndr" runat="server" PopupButtonID="btnMostraCalendario" TargetControlID="txtDataNascita"></ajax:CalendarExtender>
+        <ajax:CalendarExtender ID="clndr" runat="server" Format="dd/MM/yyyy" PopupButtonID="btnMostraCalendario" TargetControlID="txtDataNascita"></ajax:CalendarExtender>
     </div>
     <%-- <asp:Calendar runat="server" ID="clDataNascita" SelectionMode="Day">
         <OtherMonthDayStyle ForeColor="LightGray" />       

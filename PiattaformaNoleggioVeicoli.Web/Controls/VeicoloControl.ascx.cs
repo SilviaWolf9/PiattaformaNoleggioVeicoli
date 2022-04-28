@@ -11,6 +11,11 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
 {
     public partial class VeicoloControl : System.Web.UI.UserControl
     {
+        public event EventHandler<TargaUpdatedArgs> EsistenzaTarga;
+        public class TargaUpdatedArgs : EventArgs
+        {
+            public int IdVeicolo { get; set; }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack)
@@ -48,6 +53,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             if (Veicolo == null)
             {
                 Veicolo = new VeicoliModel();
+                Veicolo.IsDisponibile = true;
             }
             txtModello.Text = Veicolo.Modello;
             txtTarga.Text = Veicolo.Targa;
@@ -78,6 +84,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             {
                 rbtDisponibile.Checked = true;
             }
+            //rbtDisponibile.Enabled = false;
         }
 
         public VeicoliModel GetDatiVeicolo()        // restituisce i dati del veicolo attuali al chiamante 
@@ -89,7 +96,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             {
                 Veicolo.DataImmatricolazione = clDataImmatricolazione.SelectedDate;
             }                
-            if (ddlMarca.SelectedValue != "-1")
+            if (ddlMarca.SelectedIndex != -1)
             {
                 Veicolo.IdMarca = int.Parse(ddlMarca.SelectedValue);
             }                
@@ -100,6 +107,20 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             Veicolo.IsDisponibile = rbtDisponibile.Checked;
             Veicolo.IdTipoStato = 1;
             return Veicolo;
+        }
+
+        protected void txtTarga_TextChanged(object sender, EventArgs e)
+        {
+            var veicoliManager = new VeicoliManager();
+            var esistenzaTarga = veicoliManager.EsistenzaTarga(txtTarga.Text);
+            if (esistenzaTarga.HasValue)
+            {
+                var targaUpdatedArgs = new TargaUpdatedArgs()
+                {
+                    IdVeicolo = esistenzaTarga.Value
+                };
+                EsistenzaTarga(this, targaUpdatedArgs); ;
+            }
         }
     }
 }

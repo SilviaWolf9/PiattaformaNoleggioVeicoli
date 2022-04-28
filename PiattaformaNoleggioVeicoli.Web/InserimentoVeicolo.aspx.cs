@@ -6,16 +6,22 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static PiattaformaNoleggioVeicoli.Web.Controls.VeicoloControl;
+using AutoMapper;
 
 namespace PiattaformaNoleggioVeicoli.Web
 {
     public partial class InserimentoVeicolo : System.Web.UI.Page
     {
+        private VeicoliManager _veicoliManager { get; set; }
+       
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+            _veicoliManager = new VeicoliManager();
             if (IsPostBack)
             {
-                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");                
                 return;
             }
             veicoloControl.SetVeicolo();
@@ -27,12 +33,10 @@ namespace PiattaformaNoleggioVeicoli.Web
             if (!IsFormValido(veicoloModel))
             {
                 return;
-            }           
+            }             
 
-            var veicoliManager = new VeicoliManager();
-
-            bool veicoloInserito = veicoliManager.InsertVeicolo(veicoloModel);
-            if (!veicoloInserito)
+            VeicoliModel veicoloInserito = _veicoliManager.InsertVeicolo(veicoloModel);
+            if (veicoloInserito == null)
             {
                 infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento del veicolo");
                 return;
@@ -40,7 +44,8 @@ namespace PiattaformaNoleggioVeicoli.Web
 
             infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Veicolo inserito correttamente");
 
-            veicoloControl.Veicolo = new VeicoliModel();        // svuota i campi dopo l'inserimento
+            btnReset_Click(sender, e);          // svuota i campi dopo l'inserimento
+            
         }
         private bool IsFormValido(VeicoliModel veicolo)     // controlla che il form di inserimento del veicolo sia corretto
         {
@@ -75,6 +80,29 @@ namespace PiattaformaNoleggioVeicoli.Web
                 return false;
             }            
             return true;
-        }           
+        }
+
+        protected void veicoloControl_EsistenzaTarga(object sender, TargaUpdatedArgs e)
+        {
+            if (e == null)
+            {
+                return;
+            }
+            if (e.IdVeicolo == 0)
+            {
+                return;
+            }            
+            Response.Redirect("DettaglioVeicolo.aspx?Id=" + e.IdVeicolo);            
+        }
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            veicoloControl.Veicolo = null;        // svuota i campi dopo l'inserimento
+            veicoloControl.SetVeicolo();
+        }
+        protected void Page_Unload(object sender, EventArgs e)
+        {
+            //btnReset_Click(sender, e);
+        }
     }
 }

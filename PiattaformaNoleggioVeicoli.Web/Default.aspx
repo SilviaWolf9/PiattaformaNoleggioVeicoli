@@ -10,29 +10,30 @@
 
     <div class="col-md-12 paginaDefault">
         <div class="col-md-3">
-            <a class="collegamenti" href="~/InserimentoVeicolo">
-                <img class="col-md-12" src="../sfondi/IconaInserisciVeicolo.png" />
-                <h2>Inserisci veicolo</h2>
+            <a class="collegamenti" href="InserimentoVeicolo.aspx">
+                <img class="col-md-12" src="../sfondi/IconaInserisciVeicolo2.png" />
+                <h2 align="center">Inserisci veicolo</h2>
             </a>
         </div>
         <div class="col-md-3">
-            <a class="collegamenti" href="~/RicercaVeicolo">
+            <a class="collegamenti" href="RicercaVeicolo.aspx">
                 <img class="col-md-12" src="../sfondi/IconaRicercaVeicolo.png" />
-                <h2>Cerca veicolo</h2>
+                <h2 align="center">Cerca veicolo</h2>
             </a>
         </div>
         <div class="col-md-3">
-            <a class="collegamenti" href="~/RicercaCliente">
+            <a class="collegamenti" href="RicercaCliente.aspx">
                 <img class="col-md-12" src="../sfondi/IconaRicercaCliente.png" />
-                <h2>Cerca cliente</h2>
+                <h2 align="center">Cerca cliente</h2>
             </a>
         </div>
         <div class="col-md-3">
-            <a class="collegamenti" href="~/RicercaNoleggio">
+            <a class="collegamenti" href="RicercaNoleggio.aspx">
                 <img class="col-md-12" src="../sfondi/IconaRicercaNoleggio.png" />
-                <h2>Cerca noleggio</h2>
+                <h2 align="center">Cerca noleggio</h2>
             </a>
-        </div>        
+        </div>  
     </div>
+
 </asp:Content>
 

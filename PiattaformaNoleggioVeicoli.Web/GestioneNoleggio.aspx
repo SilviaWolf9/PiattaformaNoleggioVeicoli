@@ -78,7 +78,7 @@
 
         <div class="panel-footer col-md-12" align="center">            
             <div align="center" class="col-md-6" >
-                <asp:Button runat="server" ID="btnNoleggiaVeicolo" Text="Noleggia Veicolo" CssClass="btn" BackColor="LightGreen" BorderColor="LightGreen" BorderWidth="2px" OnClick="btnNoleggiaVeicolo_Click" Visible="false" />
+                <asp:Button runat="server" ID="btnNoleggiaVeicolo" Text="Noleggia Veicolo" CssClass="btn" BackColor="LightSeaGreen" BorderColor="LightSeaGreen" BorderWidth="2px" OnClick="btnNoleggiaVeicolo_Click" Visible="false" />
             </div>
             <div align="center" class="col-md-6">
                 <asp:Button runat="server" ID="btnReset" CssClass="btn" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnReset_Click" Text="Reset" Visible="false" />

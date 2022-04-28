@@ -121,11 +121,13 @@
     <Content Include="sfondi\calendar_office_day_1474.png" />
     <Content Include="sfondi\ExecutiveCar_Black_icon-icons.com_54904.png" />
     <Content Include="sfondi\IconaInserisciVeicolo.png" />
+    <Content Include="sfondi\iconaInserisciVeicolo2.png" />
     <Content Include="sfondi\IconaRicercaCliente.png" />
     <Content Include="sfondi\IconaRicercaNoleggio.png" />
     <Content Include="sfondi\IconaRicercaVeicolo.png" />
     <Content Include="sfondi\lente.png" />
     <Content Include="sfondi\lenteAuto.png" />
+    <Content Include="sfondi\logoLupo.png" />
     <Content Include="sfondi\loupe_magnifying_glass_search_lens_icon_185980.png" />
     <Content Include="sfondi\ricercaCliente.png" />
     <Content Include="sfondi\ricercaNoleggio.png" />

@@ -137,5 +137,14 @@ namespace PiattaformaNoleggioVeicoli.Web
             _veicoliManager.EliminaVeicolo(veicolo);
             Response.Redirect("RicercaVeicolo.aspx");       // dopo l'eliminazione ci rimanda alla pagina di ricerca veicolo
         }
+        protected void Page_Unload(object sender, EventArgs e)
+        {
+            //if (IsPostBack)
+            //{
+            //    return;
+            //}
+            //veicoloControl.Veicolo = null;
+            //veicoloControl.SetVeicolo();
+        }
     }
 }
