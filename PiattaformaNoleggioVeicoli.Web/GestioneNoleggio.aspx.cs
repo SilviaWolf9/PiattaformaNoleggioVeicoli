@@ -93,7 +93,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             else
             {
-                var idCliente = int.Parse(ddlCodiceFiscale.SelectedValue);
+                var idCliente = (int)Session["IdClienteSelezionato"];
                 cliente = _clientiManager.GetCliente(idCliente);
             }
             if (cliente == null || cliente.Id <= 0)
@@ -162,7 +162,7 @@ namespace PiattaformaNoleggioVeicoli.Web
 
         protected void ddlCodiceFiscale_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlCodiceFiscale.SelectedIndex == 0)
+            if (ddlCodiceFiscale.SelectedIndex == -1)
             { 
                 return;
             }            
@@ -172,7 +172,7 @@ namespace PiattaformaNoleggioVeicoli.Web
 
         protected void ddlNome_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlNome.SelectedIndex == 0)
+            if (ddlNome.SelectedIndex == -1)
             {
                 return;
             }
@@ -187,12 +187,11 @@ namespace PiattaformaNoleggioVeicoli.Web
             ddlCodiceFiscale.DataValueField = "Id";
             ddlCodiceFiscale.DataTextField = "CodiceFiscale";
             ddlCodiceFiscale.DataBind();
-            ddlCodiceFiscale.Items.Insert(0, new ListItem("seleziona", "-1"));
         }
 
         protected void ddlCognome_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlCognome.SelectedIndex == 0)
+            if (ddlCognome.SelectedIndex == -1)
             {
                 return;
             }
@@ -206,7 +205,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             ddlNome.DataValueField = "Id";
             ddlNome.DataTextField = "Nome";
             ddlNome.DataBind();
-            ddlNome.Items.Insert(0, new ListItem("seleziona", "-1"));
         }
 
         protected void btnReset_Click(object sender, EventArgs e)
@@ -263,6 +261,8 @@ namespace PiattaformaNoleggioVeicoli.Web
             lblNome.Text = cliente.Nome;
             lblCodiceFiscale.Text = cliente.CodiceFiscale;
             btnReset.Visible = false;
+            Session["IdClienteSelezionato"] = e.IdCliente;
+
         }
     }
 }

@@ -23,15 +23,19 @@ textarea {
 @media screen and (min-width: 768px) {
     .jumbotron {
         margin-top: 20px;
+        opacity: 0.7 !important;
     }
 
     .body-content {
         padding: 0;        
     }
     /*aggiungere stili personalisìzzati*/
-    .form-group, .form-control {
+    /*.form-group {
         opacity:1 !important;
     }
+    .form-control {
+        opacity: 1 !important;
+    }*/
     .collegamenti {
         opacity: 1;
         color: white;
@@ -42,8 +46,13 @@ textarea {
         margin-top: 2em;
         margin-bottom: 2em;
     }
-    .panel {
+    .panel-body {
         opacity: 0.7 !important;
+        /*background: transparent !important;*/
+    }
+    .panel-default {
+        opacity: 0.7 !important;
+        /*background: transparent !important;*/
     }
     hr {
         /*
@@ -58,10 +67,19 @@ textarea {
         border-width: 1px !important;
         border-color: white !important;
     }
-    textbox, button, calendar {
-        opacity:1 !important
+    input {
+        opacity: 1 !important
     }
-    panel-heading, panel-footer {
+    select {
+        opacity: 1 !important
+    }
+    textarea {
+        opacity: 1 !important
+    }
+    .panel-heading {
+        opacity: 1 !important
+    }
+    .panel-footer {
         opacity: 1 !important
     }
 }

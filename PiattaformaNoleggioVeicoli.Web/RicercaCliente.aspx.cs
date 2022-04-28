@@ -23,8 +23,13 @@ namespace PiattaformaNoleggioVeicoli.Web
         private ClientiManager _clientiManager { get; set; }
         private void PopolaGridViewCliente(ClientiManager.RicercaClientiModel ricerca)
         {
+            var listaClientiTrovati = _clientiManager.RicercaClienti(ricerca);
+            if (listaClientiTrovati.Count == 0)
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Info, "Nessun risultato trovato");
+            }
             gvClientiTrovati.Visible = true;
-            gvClientiTrovati.DataSource = _clientiManager.RicercaClienti(ricerca);
+            gvClientiTrovati.DataSource = listaClientiTrovati;
             gvClientiTrovati.DataBind();
         }
 

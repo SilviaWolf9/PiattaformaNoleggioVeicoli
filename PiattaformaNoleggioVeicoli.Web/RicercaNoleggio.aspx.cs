@@ -84,6 +84,18 @@ namespace PiattaformaNoleggioVeicoli.Web
                 bool si = Convert.ToBoolean(ddlIsInCorsoValue);     // converte l'intero in booleano (0 = false, 1 = true)
                 noleggiRicerca.IsInCorso = si;         // mette il valore booleano nella variabile di ricerca
             }
+            if (!string.IsNullOrWhiteSpace(txtCognome.Text))
+            {
+                noleggiRicerca.Cognome = txtCognome.Text;
+            }
+            if (!string.IsNullOrWhiteSpace(txtNome.Text))
+            {
+                noleggiRicerca.Nome = txtNome.Text;
+            }
+            if (!string.IsNullOrWhiteSpace(txtCodiceFiscale.Text))
+            {
+                noleggiRicerca.CodiceFiscale = txtCodiceFiscale.Text;
+            }
             PopolaGridViewNoleggio(noleggiRicerca);
             Session["RicercaNoleggi"] = noleggiRicerca;
         }
@@ -129,7 +141,7 @@ namespace PiattaformaNoleggioVeicoli.Web
                 btnRicerca.Enabled = true;
             }
 
-            if (txtTargaDaControllare.Text.Trim().Length > 3)       // dato che non era possibile fare la ricerca a 3 caratteri sul modello poichè ci sono modelli che hanno un solo carattere o 2, ho impostato il controllo a 3 caratteri sulla targa (trim rimuove gli spazi vuoti dalla stringa)
+            if (txtTargaDaControllare.Text.Trim().Length >= 3)       // dato che non era possibile fare la ricerca a 3 caratteri sul modello poichè ci sono modelli che hanno un solo carattere o 2, ho impostato il controllo a 3 caratteri sulla targa (trim rimuove gli spazi vuoti dalla stringa)
             {
                 btnRicerca.Enabled = true;
             }

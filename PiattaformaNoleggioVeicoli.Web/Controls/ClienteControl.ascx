@@ -15,7 +15,7 @@
 <div class="form-group col-md-4" >
     <label for="clDataNascita">Data Nascita</label>
     <div>
-        <asp:TextBox ID="txtDataNascita" ReadOnly="True" runat="server" CssClass="col-md-6" ></asp:TextBox>
+        <asp:TextBox ID="txtDataNascita" AutoPostBack="true" OnTextChanged="txtDataNascita_TextChanged" runat="server" CssClass="col-md-6" ></asp:TextBox>
         <asp:ImageButton ID="btnMostraCalendario" runat="server" ImageUrl="../sfondi/calendar_office_day_1474.png" CssClass="col-md-2" />
         <ajax:CalendarExtender ID="clndr" runat="server" Format="dd/MM/yyyy" PopupButtonID="btnMostraCalendario" TargetControlID="txtDataNascita"></ajax:CalendarExtender>
     </div>
@@ -26,6 +26,7 @@
         <SelectedDayStyle BackColor="LightSeaGreen" Font-Bold="true" />
     </asp:Calendar>--%>
 </div>
+
 <div class="form-group col-md-4" >
 </div>
 <div class="form-group col-md-4" >

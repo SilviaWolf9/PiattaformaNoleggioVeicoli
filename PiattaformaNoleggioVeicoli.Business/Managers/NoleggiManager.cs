@@ -101,7 +101,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 // messaggio errore
                 return false;
             }
-            var verificaNoleggio = (NoleggiModelView)noleggio;
+            var verificaNoleggio = (NoleggiModel)noleggio;
 
             if (!verificaNoleggio.IdVeicolo.HasValue)
             {
@@ -220,7 +220,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             DataRow row = dataTable.Rows[0];
             noleggio.Id = row.Field<int>("Id");
             noleggio.IdVeicolo = row.Field<int>("IdVeicolo");
-            noleggio.IdCliente = row.Field<int>("IdClinte");
+            noleggio.IdCliente = row.Field<int>("IdCliente");
             noleggio.DataInizio = row.Field<DateTime>("DataInizio");
             noleggio.IsInCorso = row.Field<bool>("IsInCorso");
 

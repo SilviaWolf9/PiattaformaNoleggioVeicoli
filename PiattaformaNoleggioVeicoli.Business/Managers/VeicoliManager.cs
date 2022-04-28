@@ -428,11 +428,11 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             if (ricercaVeicoliModel.InizioDataImmatricolazione.HasValue)
             {
-                sb.AppendLine("And InizioDataImmatricolazione >= @InizioDataImmatricolazione");
+                sb.AppendLine("And DataImmatricolazione >= @InizioDataImmatricolazione");
             }
             if (ricercaVeicoliModel.FineDataImmatricolazione.HasValue)
             {
-                sb.AppendLine("And FineDataImmatricolazione <= @FineDataImmatricolazione");
+                sb.AppendLine("And DataImmatricolazione <= @FineDataImmatricolazione");
             }
             if (ricercaVeicoliModel.IsDisponibile.HasValue)
             {

@@ -4,18 +4,20 @@
 
 <%@ Register Src="~/Controls/NoleggioControl.ascx" TagPrefix="nc" TagName="Noleggio" %>
 
-
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
     <ic:Info runat="server" ID="infoControl" />
-
     <div class="panel panel-default">
-        <div class="panel-heading" >
+        <div class="panel-heading">
             <h3 class="panel-title">Dettaglio Noleggio</h3>
         </div>
-        <nc:Noleggio runat="server" ID="noleggioControl" />
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                <div class="panel-body">
+                    <nc:Noleggio runat="server" ID="noleggioControl" />
+                </div>
+                <div class="panel-footer" align="center">
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
-    <div class="panel-footer" align="center">
-    </div>
-
 </asp:Content>

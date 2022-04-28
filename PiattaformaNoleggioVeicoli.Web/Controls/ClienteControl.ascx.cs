@@ -86,5 +86,22 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
                 EsistenzaCodiceFiscale(this, codiceFiscaleUpdatedArgs); ;
             }
         }
+
+        protected void txtDataNascita_TextChanged(object sender, EventArgs e)
+        {
+            if (!DateTime.TryParse(txtDataNascita.Text,out DateTime dataNascita))
+            {
+                //mettere infocontrol errore
+                txtDataNascita.Text = String.Empty;
+                return;
+            }
+            if (dataNascita>DateTime.Now)
+            {
+                //stampa messaggio errore
+                txtDataNascita.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                return;
+            }    
+            txtDataNascita.Text = dataNascita.ToString("dd/MM/yyyy");
+        }
     }
 }

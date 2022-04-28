@@ -27,8 +27,13 @@ namespace PiattaformaNoleggioVeicoli.Web
         private static SingletonManager instance;
         private void PopolaGridViewVeicolo(VeicoliManager.RicercaVeicoliModel ricerca)
         {
+            var listaVeicoliTrovati = _veicoliManager.RicercaVeicoli(ricerca);
+            if (listaVeicoliTrovati.Count == 0)
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Info, "Nessun risultato trovato");
+            }
             gvVeicoliTrovati.Visible = true;
-            gvVeicoliTrovati.DataSource = _veicoliManager.RicercaVeicoli(ricerca);
+            gvVeicoliTrovati.DataSource = listaVeicoliTrovati;
             gvVeicoliTrovati.DataBind();
         }
         private void PopolaDDLMarche()
@@ -119,7 +124,7 @@ namespace PiattaformaNoleggioVeicoli.Web
                 btnRicerca.Enabled = true;
             }
 
-            if (txtTargaDaControllare.Text.Trim().Length > 3)       // dato che non era possibile fare la ricerca a 3 caratteri sul modello poichè ci sono modelli che hanno un solo carattere o 2, ho impostato il controllo a 3 caratteri sulla targa (trim rimuove gli spazi vuoti dalla stringa)
+            if (txtTargaDaControllare.Text.Trim().Length >= 3)       // dato che non era possibile fare la ricerca a 3 caratteri sul modello poichè ci sono modelli che hanno un solo carattere o 2, ho impostato il controllo a 3 caratteri sulla targa (trim rimuove gli spazi vuoti dalla stringa)
             {
                 btnRicerca.Enabled = true;
             }
