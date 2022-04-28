@@ -9,7 +9,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
 {
     public class AutoMapperConfigurationManager
     {
-        public static MapperConfiguration GetConfiguration()
+        public static MapperConfiguration GetConfiguration()        // configurazione dell'auto mapper a(model) da(model)
         {
             var configuration = new MapperConfiguration(cfg => {
                 cfg.CreateMap<Models.NoleggiModel, Models.NoleggiModelView>().ReverseMap();

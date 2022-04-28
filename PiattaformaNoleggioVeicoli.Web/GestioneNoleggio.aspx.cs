@@ -89,11 +89,21 @@ namespace PiattaformaNoleggioVeicoli.Web
             if (nuovoCliente)
             {
                 var clienteDaInserire = clienteControl.GetDatiCliente();
+                if (!IsFormValido(clienteDaInserire))
+                {
+                    return;
+                }
                 cliente = _clientiManager.InsertCliente(clienteDaInserire);
             }
             else
             {
-                var idCliente = (int)Session["IdClienteSelezionato"];
+                
+                var idClienteSelezionato = Session["IdClienteSelezionato"].ToString();
+                if (string.IsNullOrEmpty(idClienteSelezionato))
+                {
+                    return;
+                }
+                var idCliente = int.Parse(idClienteSelezionato);
                 cliente = _clientiManager.GetCliente(idCliente);
             }
             if (cliente == null || cliente.Id <= 0)
@@ -108,8 +118,84 @@ namespace PiattaformaNoleggioVeicoli.Web
                 DataInizio = DateTime.Now,
                 IsInCorso = !veicolo.IsDisponibile
             };
-            _noleggiManager.InserisciNoleggio(noleggioModel);
+            int? idDettaglio = _noleggiManager.InserisciNoleggio(noleggioModel);
             infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Noleggio registrato con successo");
+            Response.Redirect("DettaglioNoleggio.aspx?Id=" + idDettaglio);
+        }
+
+        private bool IsFormValido(ClientiModel clienteDaInserire)
+        {            
+            if (string.IsNullOrWhiteSpace(clienteDaInserire.Cognome))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento del cognome");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(clienteDaInserire.Nome))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento del nome");
+                return false;
+            }
+            if (!clienteDaInserire.DataNascita.HasValue)
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante la selezione della data di nascita");
+                return false;
+            }
+            if (clienteDaInserire.DataNascita > DateTime.Now)
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "A meno che tu non sia un signore del tempo, hai sbagliato ad inserire la data di nascita");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(clienteDaInserire.CodiceFiscale))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento del codice fiscale");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(clienteDaInserire.Patente))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento della patente");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(clienteDaInserire.Telefono))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento del telefono");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(clienteDaInserire.Email))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento della email");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(clienteDaInserire.Indirizzo))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento dell' indirizzo");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(clienteDaInserire.NumeroCivico))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento del numero civico");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(clienteDaInserire.Cap))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento del cap");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(clienteDaInserire.Citta))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento della città");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(clienteDaInserire.Comune))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento del comune");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(clienteDaInserire.Nazione))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento della nazione");
+                return false;
+            }
+            return true;
         }
 
         protected void btnFineNoleggio_Click(object sender, EventArgs e)
@@ -122,6 +208,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             var noleggioModel = _noleggiManager.RecuperaNoleggio(veicoloModel);
             _noleggiManager.TerminaNoleggio(noleggioModel);
             infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Noleggio terminato con successo");
+            Response.Redirect("DettaglioVeicolo.aspx?Id=" + veicolo.Id);
         }
 
         protected void rbtnNuovoCliente_SelectedIndexChanged(object sender, EventArgs e)
@@ -162,7 +249,7 @@ namespace PiattaformaNoleggioVeicoli.Web
 
         protected void ddlCodiceFiscale_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlCodiceFiscale.SelectedIndex == -1)
+            if (ddlCodiceFiscale.SelectedIndex == 0)
             { 
                 return;
             }            
@@ -172,7 +259,7 @@ namespace PiattaformaNoleggioVeicoli.Web
 
         protected void ddlNome_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlNome.SelectedIndex == -1)
+            if (ddlNome.SelectedIndex == 0)
             {
                 return;
             }
@@ -187,11 +274,13 @@ namespace PiattaformaNoleggioVeicoli.Web
             ddlCodiceFiscale.DataValueField = "Id";
             ddlCodiceFiscale.DataTextField = "CodiceFiscale";
             ddlCodiceFiscale.DataBind();
+            ddlCodiceFiscale.Items.Insert(0, new ListItem("seleziona", "-1"));
+
         }
 
         protected void ddlCognome_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlCognome.SelectedIndex == -1)
+            if (ddlCognome.SelectedIndex == 0)
             {
                 return;
             }
@@ -205,6 +294,8 @@ namespace PiattaformaNoleggioVeicoli.Web
             ddlNome.DataValueField = "Id";
             ddlNome.DataTextField = "Nome";
             ddlNome.DataBind();
+            ddlNome.Items.Insert(0, new ListItem("seleziona", "-1"));
+
         }
 
         protected void btnReset_Click(object sender, EventArgs e)

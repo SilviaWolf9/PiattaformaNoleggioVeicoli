@@ -5,13 +5,13 @@
 <%@ Register Src="~/Controls/InfoControl.ascx" TagPrefix="ic" TagName="Info" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <ic:Info runat="server" ID="infoControl" />
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Dettaglio Cliente</h3>
         </div>
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
+                <ic:Info runat="server" ID="infoControl" />
                 <div class="panel-body">
                     <cc:Cliente runat="server" ID="clienteControl" />
                 </div>

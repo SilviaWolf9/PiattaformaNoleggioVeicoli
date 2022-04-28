@@ -19,13 +19,14 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             //ConnectionString = Properties.Settings.Default.ARCAConnectionString;
         }
 
-        public bool InserisciNoleggio(NoleggiModel noleggiModel)     // Inserisce noleggio su db
+        public int? InserisciNoleggio(NoleggiModel noleggiModel)     // Inserisce noleggio su db
         {
             if (!IsNoleggioModelValido(noleggiModel))
             {
                 throw new DataException();
             }
-            bool isInserito = false;
+            //bool isInserito = false;
+            int? idInserito = null;
             var sb = new StringBuilder();
             sb.AppendLine("INSERT INTO [dbo].[Noleggi] (");
             sb.AppendLine("[IdVeicolo]");
@@ -40,6 +41,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine(",@DataFine");
             sb.AppendLine(",@IsInCorso");
             sb.AppendLine(")");
+            sb.AppendLine("SELECT SCOPE_IDENTITY()");
+
             var sqlCambiaDisponibilitaVeicolo = new StringBuilder();
             sqlCambiaDisponibilitaVeicolo.AppendLine("UPDATE [Veicoli] SET");
             sqlCambiaDisponibilitaVeicolo.AppendLine("[IsDisponibile] = @Disponibilita");
@@ -58,12 +61,18 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                         sqlCommand.Parameters.AddWithValue("@DataInizio", DateTime.Now);
                         sqlCommand.Parameters.AddWithValue("@DataFine", DBNull.Value);
                         sqlCommand.Parameters.AddWithValue("@IsInCorso", true);
-                        
-                        var numRigheInserite = sqlCommand.ExecuteNonQuery();
-                        if (numRigheInserite <= 0)
+                        object value = sqlCommand.ExecuteScalar();
+                        if (value == null || value == DBNull.Value)
                         {
-                            transaction.Rollback();                            
+                            transaction.Rollback();
+
                         }
+                        idInserito = Convert.ToInt32(value);
+                        //var numRigheInserite = sqlCommand.ExecuteNonQuery();
+                        //if (numRigheInserite <= 0)
+                        //{
+                        //    transaction.Rollback();
+                        //}
                     }
                     catch (Exception)
                     {
@@ -86,12 +95,11 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
 
                         throw;
                     }
-                    isInserito = true;
+                    //isInserito = true;
                     transaction.Commit();
                 }
             }
-            // messaggio successo
-            return isInserito;
+            return idInserito;
         }
 
         private bool IsNoleggioModelValido(object noleggio)       // Fa un controllo sull'oggetto noleggio ed evita di spaccarsi in caso ClienteModel fosse null
@@ -178,7 +186,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     transaction.Commit();
                 }
             }
-            //messaggio successo
             return isInserito;
         }
 

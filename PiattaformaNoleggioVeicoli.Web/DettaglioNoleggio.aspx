@@ -12,6 +12,7 @@
         </div>
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
+                <ic:Info runat="server" ID="info1" />
                 <div class="panel-body">
                     <nc:Noleggio runat="server" ID="noleggioControl" />
                 </div>

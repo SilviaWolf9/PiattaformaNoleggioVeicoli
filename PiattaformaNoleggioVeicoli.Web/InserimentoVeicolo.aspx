@@ -5,7 +5,6 @@
 <%@ Register Src="~/Controls/VeicoloControl.ascx" TagPrefix="vc" TagName="Veicolo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <ic:Info runat="server" ID="infoControl" />
     <br />
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -13,6 +12,7 @@
         </div>
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
+                <ic:Info runat="server" ID="infoControl" />
                 <div class="panel-body">
                     <vc:Veicolo runat="server" ID="veicoloControl" OnEsistenzaTarga="veicoloControl_EsistenzaTarga" />
                 </div>

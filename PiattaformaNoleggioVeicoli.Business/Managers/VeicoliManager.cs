@@ -206,13 +206,11 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         {
             if (veicolo == null)
             {
-                // messaggio errore
                 return false;
             }
             var verificaVeicolo = (VeicoliModel)veicolo;
             if (!verificaVeicolo.IdMarca.HasValue)
             {
-                // messaggio errore
                 return false;
             }
             if (string.IsNullOrWhiteSpace(verificaVeicolo.Modello))
@@ -221,7 +219,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             if (string.IsNullOrWhiteSpace(verificaVeicolo.Targa))
             {
-                // messaggio errore
                 return false;
             }
             if (!verificaVeicolo.DataImmatricolazione.HasValue)
@@ -230,7 +227,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             if (!verificaVeicolo.IdTipoAlimentazione.HasValue)
             {
-                // messaggio errore
                 return false;
             }
             return true;

@@ -16,6 +16,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         private List<MarcheVeicoliModel> listMarche;
         private const int MINUTI_AGGIORNAMENTO_LISTA_MARCHE = 10;
         private DateTime LastAggiornamentoListaMarche = DateTime.MinValue;
+        private const int MINUTI_AGGIORNAMENTO_LISTA_TIPI_ALIMENTAZIONE = 1440;
+        private DateTime LastAggiornamentoListaTipiAlimentazione = DateTime.MinValue;
         private IMapper mapper;
 
 
@@ -31,7 +33,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         {
             get
             {
-                if (DateTime.Now > LastAggiornamentoListaMarche.AddMinutes(MINUTI_AGGIORNAMENTO_LISTA_MARCHE))
+                if (DateTime.Now > LastAggiornamentoListaMarche.AddMinutes(MINUTI_AGGIORNAMENTO_LISTA_MARCHE))      // mi permette di aggiornare la listaMarche ogni 10 minuti
                 {
                     listMarche = veicoliManager.GetMarcheVeicoliList();
                     LastAggiornamentoListaMarche = DateTime.MinValue;
@@ -52,7 +54,15 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         private List<TipoAlimentazioneModel> listTipoAlimentazione;
         public List<TipoAlimentazioneModel> ListTipoAlimentazione
         {
-            get { return listTipoAlimentazione; }
+            get {
+                if (DateTime.Now > LastAggiornamentoListaTipiAlimentazione.AddMinutes(MINUTI_AGGIORNAMENTO_LISTA_TIPI_ALIMENTAZIONE))       // mi permette di aggiornare la listaTipiAlimentazione ogni 24 ore
+                {
+                    listTipoAlimentazione = veicoliManager.GetTipoAlimentazioneList();
+                    LastAggiornamentoListaTipiAlimentazione = DateTime.MinValue;
+
+                }
+                return listTipoAlimentazione; 
+            }
         }       
 
         public static SingletonManager Instance
