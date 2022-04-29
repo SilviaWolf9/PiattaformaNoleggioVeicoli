@@ -37,23 +37,47 @@ textarea {
         opacity: 1 !important;
     }*/
     .collegamenti {
-        opacity: 1;
+        /*opacity: 1;*/
         color: white;
         text-decoration: none !important
     }
     .paginaDefault {
-        opacity:1 !important;
+        /*opacity:1 !important;*/
         margin-top: 2em;
         margin-bottom: 2em;
     }
+    /*.panel-body {*/
+        /*opacity: 0.7 !important;*/
+        /*background: transparent !important;*/
+
+    /*}*/
+
     .panel-body {
-        opacity: 0.7 !important;
-        /*background: transparent !important;*/
+        background: rgb(255,255,255);
+        background: transparent\9;
+        background: rgba(255,255,255,0.4);
+        filter: opacity(0.4);
+        
     }
+        .panel-body:nth-child(n) {
+            filter: none;
+        }
+
     .panel-default {
-        opacity: 0.7 !important;
-        /*background: transparent !important;*/
+        background: rgb(255,255,255);
+        background: transparent\9;
+        background: rgba(255,255,255,0.4);
+        filter: opacity(0.4);
     }
+
+        .panel-default:nth-child(n) {
+            filter: none;
+        }
+
+    /*.panel-default {*/
+        /*opacity: 0.7;*/
+        /*background: transparent !important;*/
+    /*}*/
     hr {
         /*
         margin-bottom: 0.5em;
@@ -68,18 +92,18 @@ textarea {
         border-color: white !important;
     }
     input {
-        opacity: 1 !important
+        /*opacity: 1 !important*/
     }
     select {
-        opacity: 1 !important
+        /*opacity: 1 !important*/
     }
     textarea {
-        opacity: 1 !important
+        /*opacity: 1 !important*/
     }
     .panel-heading {
-        opacity: 1 !important
+        /*opacity: 1 !important*/
     }
     .panel-footer {
-        opacity: 1 !important
+        /*opacity: 1 !important*/
     }
 }
