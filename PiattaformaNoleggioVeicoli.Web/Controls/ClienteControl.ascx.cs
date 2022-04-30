@@ -23,54 +23,55 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
                 return;
             }
         }
-        public ClientiModel Cliente { get => _cliente; set => _cliente = value; }       // serve per ottenere e settare il valore della variabile statica dichiarata sotto in modo che abbia lo stesso valore in tutta la pagina si poteva fare anche utilizzando una viewstate
-        private static ClientiModel _cliente;
+        //public ClientiModel Cliente { get => _cliente; set => _cliente = value; }       // serve per ottenere e settare il valore della variabile statica dichiarata sotto in modo che abbia lo stesso valore in tutta la pagina si poteva fare anche utilizzando una viewstate
+        //private static ClientiModel _cliente;
 
-        public void SetCliente()        // va a riempire i vari componenti del control in base ai dati della proprietà Cliente
+        public void SetCliente(ClientiModel cliente)        // va a riempire i vari componenti del control in base ai dati della proprietà Cliente
         {
-            if (Cliente == null)
+            if (cliente == null)
             {
-                Cliente = new ClientiModel();
+                cliente = new ClientiModel();
             }
-            txtCognome.Text = Cliente.Cognome;
-            txtNome.Text = Cliente.Nome;
-            if (Cliente.DataNascita.HasValue)
+            txtCognome.Text = cliente.Cognome;
+            txtNome.Text = cliente.Nome;
+            if (cliente.DataNascita.HasValue)
             {
-                txtDataNascita.Text = Cliente.DataNascita.Value.ToString("dd/MM/yyyy");
+                txtDataNascita.Text = cliente.DataNascita.Value.ToString("dd/MM/yyyy");
             }            
-            txtCodiceFiscale.Text = Cliente.CodiceFiscale;
-            txtPatente.Text = Cliente.Patente;
-            txtTelefono.Text = Cliente.Telefono;
-            txtEmail.Text = Cliente.Email;
-            txtIndirizzo.Text = Cliente.Indirizzo;
-            txtNumeroCivico.Text = Cliente.NumeroCivico;
-            txtCap.Text = Cliente.Cap;
-            txtCitta.Text = Cliente.Citta;
-            txtComune.Text = Cliente.Comune;
-            txtNazione.Text = Cliente.Nazione;
-            txtNote.Text = Cliente.Note;            
+            txtCodiceFiscale.Text = cliente.CodiceFiscale;
+            txtPatente.Text = cliente.Patente;
+            txtTelefono.Text = cliente.Telefono;
+            txtEmail.Text = cliente.Email;
+            txtIndirizzo.Text = cliente.Indirizzo;
+            txtNumeroCivico.Text = cliente.NumeroCivico;
+            txtCap.Text = cliente.Cap;
+            txtCitta.Text = cliente.Citta;
+            txtComune.Text = cliente.Comune;
+            txtNazione.Text = cliente.Nazione;
+            txtNote.Text = cliente.Note;            
         }
 
-        public ClientiModel GetDatiCliente()        // restituisce i dati del cliente attuali al chiamante 
+        public ClientiModel GetDatiCliente(ClientiModel cliente)        // restituisce i dati del cliente attuali al chiamante 
         {
-            Cliente.Cognome = txtCognome.Text;
-            Cliente.Nome = txtNome.Text;
+            var clienteModificato = cliente;
+            clienteModificato.Cognome = txtCognome.Text;
+            clienteModificato.Nome = txtNome.Text;
             if (!string.IsNullOrWhiteSpace(txtDataNascita.Text))
             {
-                Cliente.DataNascita = DateTime.Parse(txtDataNascita.Text);
+                clienteModificato.DataNascita = DateTime.Parse(txtDataNascita.Text);
             }
-            Cliente.CodiceFiscale = txtCodiceFiscale.Text;
-            Cliente.Patente = txtPatente.Text;
-            Cliente.Telefono = txtTelefono.Text;
-            Cliente.Email = txtEmail.Text;
-            Cliente.Indirizzo = txtIndirizzo.Text;
-            Cliente.NumeroCivico = txtNumeroCivico.Text;
-            Cliente.Cap = txtCap.Text;
-            Cliente.Citta = txtCitta.Text;
-            Cliente.Comune = txtComune.Text;
-            Cliente.Nazione = txtNazione.Text;
-            Cliente.Note = txtNote.Text;
-            return Cliente;
+            clienteModificato.CodiceFiscale = txtCodiceFiscale.Text;
+            clienteModificato.Patente = txtPatente.Text;
+            clienteModificato.Telefono = txtTelefono.Text;
+            clienteModificato.Email = txtEmail.Text;
+            clienteModificato.Indirizzo = txtIndirizzo.Text;
+            clienteModificato.NumeroCivico = txtNumeroCivico.Text;
+            clienteModificato.Cap = txtCap.Text;
+            clienteModificato.Citta = txtCitta.Text;
+            clienteModificato.Comune = txtComune.Text;
+            clienteModificato.Nazione = txtNazione.Text;
+            clienteModificato.Note = txtNote.Text;
+            return clienteModificato;
         }
 
         protected void txtCodiceFiscale_TextChanged(object sender, EventArgs e)

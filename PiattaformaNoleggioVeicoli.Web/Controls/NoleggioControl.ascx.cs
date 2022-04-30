@@ -17,23 +17,23 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
                 return;
             }            
         }
-        public NoleggiTrovatiModelView Noleggio { get => _noleggio; set => _noleggio = value; }       // serve per ottenere e settare il valore della variabile statica dichiarata sotto in modo che abbia lo stesso valore in tutta la pagina si poteva fare anche utilizzando una viewstate
-        private static NoleggiTrovatiModelView _noleggio;
-        public void SetNoleggio()        // va a riempire i vari componenti del control in base ai dati della proprietà Veicolo
+        //public NoleggiTrovatiModelView Noleggio { get => _noleggio; set => _noleggio = value; }       // serve per ottenere e settare il valore della variabile statica dichiarata sotto in modo che abbia lo stesso valore in tutta la pagina si poteva fare anche utilizzando una viewstate
+        //private static NoleggiTrovatiModelView _noleggio;
+        public void SetNoleggio(NoleggiTrovatiModelView noleggio)        // va a riempire i vari componenti del control in base ai dati della proprietà Veicolo
         {
-            if (Noleggio == null)
+            if (noleggio == null)
             {
-                Noleggio = new NoleggiTrovatiModelView();
+                noleggio = new NoleggiTrovatiModelView();
             }
-            lblMarca.Text = Noleggio.Marca;
-            lblModello.Text = Noleggio.Modello;
-            lblTarga.Text = Noleggio.Targa;
-            lblIsInCorso.Text = Noleggio.IsInCorso;
-            lblDataInizio.Text = Noleggio.DataInizio.ToString();
-            lblDataFine.Text = Noleggio.DataFine.ToString();
-            lblCognome.Text = Noleggio.Cognome;
-            lblNome.Text = Noleggio.Nome;
-            lblCodiceFiscale.Text = Noleggio.CodiceFiscale;       
+            lblMarca.Text = noleggio.Marca;
+            lblModello.Text = noleggio.Modello;
+            lblTarga.Text = noleggio.Targa;
+            lblIsInCorso.Text = noleggio.IsInCorso;
+            lblDataInizio.Text = noleggio.DataInizio.ToString();
+            lblDataFine.Text = noleggio.DataFine.ToString();
+            lblCognome.Text = noleggio.Cognome;
+            lblNome.Text = noleggio.Nome;
+            lblCodiceFiscale.Text = noleggio.CodiceFiscale;       
         }
     }
 }

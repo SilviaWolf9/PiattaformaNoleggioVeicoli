@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Newtonsoft.Json;
 using AutoMapper;
+using PiattaformaNoleggioVeicoli.Web.Controls;
 
 namespace PiattaformaNoleggioVeicoli.Web
 {
@@ -41,7 +42,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             {
                 infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante il recupero dei dati del veicolo");
                 return;
-            }
+            }            
             var veicolo = _veicoliManager.GetVeicolo(id.Value);
             ViewState["DettaglioVeicoloModelView"] = veicolo;
             //veicoloControl.Veicolo = new VeicoliModel()
@@ -55,8 +56,9 @@ namespace PiattaformaNoleggioVeicoli.Web
             //    Targa = veicolo.Targa,
             //    IsDisponibile = veicolo.IsDisponibile
             //};
-            veicoloControl.Veicolo = mapper.Map<DettaglioVeicoloModelView, VeicoliModel>(veicolo);
-            veicoloControl.SetVeicolo();                        
+
+            var veicoliModel = mapper.Map<DettaglioVeicoloModelView, VeicoliModel>(veicolo);
+            veicoloControl.SetVeicolo(veicoliModel);                        
             if (!veicolo.IsDisponibile)
             {
                 lblCognome.Text = veicolo.Cognome;
@@ -116,7 +118,22 @@ namespace PiattaformaNoleggioVeicoli.Web
 
         protected void btnSalvaModifiche_Click(object sender, EventArgs e)
         {
-            var veicolo = veicoloControl.GetDatiVeicolo();
+            if (ViewState["DettaglioVeicoloModelView"] == null)
+            {
+                return;
+            }
+            var veicoloModelView = (DettaglioVeicoloModelView)ViewState["DettaglioVeicoloModelView"];
+            if (veicoloModelView == null)
+            {
+                return;
+            }
+            if (veicoloModelView == new DettaglioVeicoloModelView())
+            {
+                return;
+            }
+
+            var veicoloModel = mapper.Map<DettaglioVeicoloModelView, VeicoliModel>(veicoloModelView);
+            var veicolo = veicoloControl.GetDatiVeicolo(veicoloModel);
             if (!IsFormValido(veicolo))     
             {
                 return;
@@ -126,11 +143,34 @@ namespace PiattaformaNoleggioVeicoli.Web
             Response.Redirect("RicercaVeicolo.aspx");       // dopo la modifica ci rimanda alla pagina di ricerca veicolo
         }
 
+
+
+
         protected void btnEliminaVeicolo_Click(object sender, EventArgs e)
         {
-            var veicolo = veicoloControl.GetDatiVeicolo();
+            if (ViewState["DettaglioVeicoloModelView"] == null)
+            {
+                return;
+            }
+            var veicoloModelView = (DettaglioVeicoloModelView)ViewState["DettaglioVeicoloModelView"];
+            if (veicoloModelView == null)
+            {
+                return;
+            }
+            if (veicoloModelView == new DettaglioVeicoloModelView())
+            {
+                return;
+            }
+
+            var veicoloModel = mapper.Map<DettaglioVeicoloModelView, VeicoliModel>(veicoloModelView);
+            var veicolo = veicoloControl.GetDatiVeicolo(veicoloModel);
             if (!IsFormValido(veicolo))     
             {
+                return;
+            }
+            if (!veicolo.IsDisponibile)
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "ATTENZIONE! Impossibile eliminare un veicolo noleggiato");
                 return;
             }
             infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Veicolo eliminato con successo");

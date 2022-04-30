@@ -27,8 +27,8 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             PopolaDDLTipoAlimentazione();
         }
 
-        public VeicoliModel Veicolo { get => _veicolo; set => _veicolo = value; }       // serve per ottenere e settare il valore della variabile statica dichiarata sotto in modo che abbia lo stesso valore in tutta la pagina si poteva fare anche utilizzando una viewstate
-        private static VeicoliModel _veicolo;
+        //public VeicoliModel Veicolo { get => _veicolo; set => _veicolo = value; }       // serve per ottenere e settare il valore della variabile statica dichiarata sotto in modo che abbia lo stesso valore in tutta la pagina si poteva fare anche utilizzando una viewstate
+        //private static VeicoliModel _veicolo;
         private static SingletonManager instance;
         private void PopolaDDLMarche()
         {            
@@ -48,35 +48,35 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             ddlTipoAlimentazione.Items.Insert(0, new ListItem("seleziona", "-1"));
         }
 
-        public void SetVeicolo()        // va a riempire i vari componenti del control in base ai dati della proprietà Veicolo
+        public void SetVeicolo(VeicoliModel veicolo)        // va a riempire i vari componenti del control in base ai dati della proprietà Veicolo
         {
-            if (Veicolo == null)
+            if (veicolo == null)
             {
-                Veicolo = new VeicoliModel();
-                Veicolo.IsDisponibile = true;
+                veicolo = new VeicoliModel();
+                veicolo.IsDisponibile = true;
             }
-            txtModello.Text = Veicolo.Modello;
-            txtTarga.Text = Veicolo.Targa;
-            txtNote.Text = Veicolo.Note;
-            if (Veicolo.IdMarca.HasValue)
-                ddlMarca.SelectedValue = Veicolo.IdMarca.Value.ToString();
+            txtModello.Text = veicolo.Modello;
+            txtTarga.Text = veicolo.Targa;
+            txtNote.Text = veicolo.Note;
+            if (veicolo.IdMarca.HasValue)
+                ddlMarca.SelectedValue = veicolo.IdMarca.Value.ToString();
             else
             {
                 ddlMarca.SelectedIndex = -1;
             }
-            if (Veicolo.IdTipoAlimentazione.HasValue)
-                ddlTipoAlimentazione.SelectedValue = Veicolo.IdTipoAlimentazione.Value.ToString();
+            if (veicolo.IdTipoAlimentazione.HasValue)
+                ddlTipoAlimentazione.SelectedValue = veicolo.IdTipoAlimentazione.Value.ToString();
             else
             {
                 ddlTipoAlimentazione.SelectedIndex = -1;
             }
 
-            if (Veicolo.DataImmatricolazione.HasValue)
+            if (veicolo.DataImmatricolazione.HasValue)
             {
-                clDataImmatricolazione.SelectedDate = Veicolo.DataImmatricolazione.Value;
+                clDataImmatricolazione.SelectedDate = veicolo.DataImmatricolazione.Value;
                 clDataImmatricolazione.VisibleDate = clDataImmatricolazione.SelectedDate;
             }
-            if (!Veicolo.IsDisponibile)
+            if (!veicolo.IsDisponibile)
             {
                 rbtDisponibile.Checked = false;
             }
@@ -84,29 +84,30 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             {
                 rbtDisponibile.Checked = true;
             }
-            //rbtDisponibile.Enabled = false;
+            rbtDisponibile.Enabled = false;
         }
 
-        public VeicoliModel GetDatiVeicolo()        // restituisce i dati del veicolo attuali al chiamante 
+        public VeicoliModel GetDatiVeicolo(VeicoliModel veicolo)        // restituisce i dati del veicolo attuali al chiamante 
         {
-            Veicolo.Modello = txtModello.Text;
-            Veicolo.Targa = txtTarga.Text;
-            Veicolo.Note = txtNote.Text;
+            var veicoloAggiornato = veicolo;
+            veicoloAggiornato.Modello = txtModello.Text;
+            veicoloAggiornato.Targa = txtTarga.Text;
+            veicoloAggiornato.Note = txtNote.Text;
             if (clDataImmatricolazione.SelectedDate != DateTime.MinValue)
             {
-                Veicolo.DataImmatricolazione = clDataImmatricolazione.SelectedDate;
+                veicoloAggiornato.DataImmatricolazione = clDataImmatricolazione.SelectedDate;
             }                
             if (ddlMarca.SelectedIndex != -1)
             {
-                Veicolo.IdMarca = int.Parse(ddlMarca.SelectedValue);
+                veicoloAggiornato.IdMarca = int.Parse(ddlMarca.SelectedValue);
             }                
             if (ddlTipoAlimentazione.SelectedValue != "-1")
             {
-                Veicolo.IdTipoAlimentazione = int.Parse(ddlTipoAlimentazione.SelectedValue);
-            }                
-            Veicolo.IsDisponibile = rbtDisponibile.Checked;
-            Veicolo.IdTipoStato = 1;
-            return Veicolo;
+                veicoloAggiornato.IdTipoAlimentazione = int.Parse(ddlTipoAlimentazione.SelectedValue);
+            }
+            veicoloAggiornato.IsDisponibile = rbtDisponibile.Checked;
+            veicoloAggiornato.IdTipoStato = 1;
+            return veicoloAggiornato;
         }
 
         protected void txtTarga_TextChanged(object sender, EventArgs e)

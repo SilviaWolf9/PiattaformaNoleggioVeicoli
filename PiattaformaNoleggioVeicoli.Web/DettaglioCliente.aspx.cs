@@ -36,8 +36,9 @@ namespace PiattaformaNoleggioVeicoli.Web
                 return;
             }
             var cliente = _clientiManager.GetCliente(id.Value);
-            clienteControl.Cliente = cliente;            
-            clienteControl.SetCliente();
+            //clienteControl.Cliente = cliente;
+            ViewState["cliente"] = cliente;
+            clienteControl.SetCliente(cliente);
         }
         private bool IsFormValido(ClientiModel cliente)     // controlla che il form di inserimento del cliente sia corretto
         {
@@ -116,13 +117,18 @@ namespace PiattaformaNoleggioVeicoli.Web
 
         protected void btnSalvaModifiche_Click(object sender, EventArgs e)
         {
-            var cliente = clienteControl.GetDatiCliente();
-            if (!IsFormValido(cliente))
+            if (ViewState["cliente"]==null)
+            {
+                return;
+            }
+            var cliente = (ClientiModel)ViewState["cliente"];
+            var clienteAttuale = clienteControl.GetDatiCliente(cliente);
+            if (!IsFormValido(clienteAttuale))
             {
                 return;
             }
             infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Modifiche effettuate con successo");
-            _clientiManager.ModificaCliente(cliente);
+            _clientiManager.ModificaCliente(clienteAttuale);
             Response.Redirect("RicercaCliente.aspx");
         }
     }

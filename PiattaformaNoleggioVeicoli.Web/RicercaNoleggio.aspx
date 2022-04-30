@@ -88,7 +88,7 @@
             <br />
             <br />
             <div class="panel panel-default">
-                <asp:GridView runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="gvNoleggiTrovati_PageIndexChanging" OnSelectedIndexChanged="gvNoleggiTrovati_SelectedIndexChanged" ID="gvNoleggiTrovati" CssClass="table table table-bordered table-hover table-striped no-margin" AutoGenerateColumns="False" AutoGenerateSelectButton="True" DataKeyNames="Id" Visible="False">
+                <asp:GridView runat="server" RowStyle-CssClass="rowGridView" AllowPaging="true" PageSize="10" OnPageIndexChanging="gvNoleggiTrovati_PageIndexChanging" OnSelectedIndexChanged="gvNoleggiTrovati_SelectedIndexChanged" ID="gvNoleggiTrovati" CssClass="table table table-bordered table-hover table-striped no-margin" AutoGenerateColumns="False" AutoGenerateSelectButton="True" DataKeyNames="Id" Visible="False">
                     <Columns>
                         <asp:BoundField DataField="Marca" HeaderText="Marca">
                             <HeaderStyle HorizontalAlign="Center" />

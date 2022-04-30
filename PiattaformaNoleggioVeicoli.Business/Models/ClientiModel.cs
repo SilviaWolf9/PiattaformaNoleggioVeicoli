@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PiattaformaNoleggioVeicoli.Business.Models
 {
+    [Serializable]
     public class ClientiModel
     {
         public int Id { get; set; }

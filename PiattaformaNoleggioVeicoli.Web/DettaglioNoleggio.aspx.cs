@@ -44,9 +44,8 @@ namespace PiattaformaNoleggioVeicoli.Web
                 return;
             }
             var noleggio = _noleggiManager.GetNoleggio(id.Value);
-            ViewState["DettaglioNoleggioModelView"] = noleggio;
-            noleggioControl.Noleggio = noleggio;
-            noleggioControl.SetNoleggio();            
+            ViewState["DettaglioNoleggioModelView"] = noleggio;            
+            noleggioControl.SetNoleggio(noleggio);            
         }
     }
 }

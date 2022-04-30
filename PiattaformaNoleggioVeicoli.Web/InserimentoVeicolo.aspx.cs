@@ -24,12 +24,12 @@ namespace PiattaformaNoleggioVeicoli.Web
                 infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");                
                 return;
             }
-            veicoloControl.SetVeicolo();
+            veicoloControl.SetVeicolo(new VeicoliModel());
         }      
 
         protected void btnInserisci_Click(object sender, EventArgs e)
         {
-            var veicoloModel = veicoloControl.GetDatiVeicolo();
+            var veicoloModel = veicoloControl.GetDatiVeicolo(new VeicoliModel());
             if (!IsFormValido(veicoloModel))
             {
                 return;
@@ -97,8 +97,7 @@ namespace PiattaformaNoleggioVeicoli.Web
 
         protected void btnReset_Click(object sender, EventArgs e)
         {
-            veicoloControl.Veicolo = null;        // svuota i campi dopo l'inserimento
-            veicoloControl.SetVeicolo();
+            veicoloControl.SetVeicolo(new VeicoliModel());      // svuota i campi dopo l'inserimento
         }
         protected void Page_Unload(object sender, EventArgs e)
         {

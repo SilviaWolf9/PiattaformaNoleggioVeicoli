@@ -88,7 +88,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             bool nuovoCliente = Convert.ToBoolean(selezionatoInt);
             if (nuovoCliente)
             {
-                var clienteDaInserire = clienteControl.GetDatiCliente();
+                var clienteDaInserire = clienteControl.GetDatiCliente(new ClientiModel());
                 if (!IsFormValido(clienteDaInserire))
                 {
                     return;
@@ -233,7 +233,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             if (nuovoCliente.Value)
             {
                 clienteControl.Visible = true;
-                clienteControl.SetCliente();
+                clienteControl.SetCliente(new ClientiModel());
                 divClienteEsistente.Visible = false;
             }
             else
@@ -313,8 +313,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             bool nuovoCliente = Convert.ToBoolean(selezionatoInt);
             if (nuovoCliente)
             {
-                clienteControl.Cliente = null;
-                clienteControl.SetCliente();
+                clienteControl.SetCliente(new ClientiModel());
             }
             else
             {

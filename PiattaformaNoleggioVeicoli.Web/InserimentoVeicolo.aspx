@@ -8,14 +8,14 @@
     <br />
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Inserisci Veicolo</h3>
+            <h3 class="panel-title" style="font:900">Inserisci Veicolo</h3>
         </div>
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <ic:Info runat="server" ID="infoControl" />
                 <div class="panel-body">
                     <vc:Veicolo runat="server" ID="veicoloControl" OnEsistenzaTarga="veicoloControl_EsistenzaTarga" />
-                </div>
+                </div>                                                  
                 <div class="panel-footer col-md-12" align="center">
                     <div align="center" class="col-md-6">
                         <asp:Button runat="server" ID="btnInserisci" Text="Inserisci" CssClass="btn" BackColor="LightBlue" BorderColor="LightBlue" BorderWidth="2px" OnClick="btnInserisci_Click" />

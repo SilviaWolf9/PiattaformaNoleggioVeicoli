@@ -165,7 +165,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     modificaTransaction.Commit();
                 }
             }
-            // messaggio successo
             return true;
         }
         
@@ -181,6 +180,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("\t [IdTipoStato] = @IdTipoStato");
             sb.AppendLine("\t WHERE");
             sb.AppendLine("\t Id=@Id");
+            sb.AppendLine("\t AND IsDisponibile = @Disponibile");
+
 
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
@@ -190,6 +191,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 {
                     sqlCommand.Parameters.AddWithValue("@Id", veicolo.Id);
                     sqlCommand.Parameters.AddWithValue("@IdTipoStato", 2);
+                    sqlCommand.Parameters.AddWithValue("@Disponibile", 1);
+
                     int nRowModificate = sqlCommand.ExecuteNonQuery();
                     if (nRowModificate != 1)
                     {

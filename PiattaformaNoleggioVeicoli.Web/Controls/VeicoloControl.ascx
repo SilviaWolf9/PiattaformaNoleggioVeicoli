@@ -3,7 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <div class="form-group col-md-6">
-    <label for="ddlMarca">Marca</label>
+    <label for="ddlMarca">* Marca</label>
     <%--    <asp:DropDownList runat="server" CssClass="form-control" ID="ddlMarca" />--%>
     <div>
         <cc1:ComboBox ID="ddlMarca" runat="server" MaxLength="0" CssClass="text-capitalize" DropDownStyle="DropDownList" AutoCompleteMode="SuggestAppend" AutoPostBack="True" CaseSensitive="False"></cc1:ComboBox>
@@ -11,22 +11,22 @@
 </div>
 
 <div class="form-group col-md-6">
-    <label for="txtModello">Modello</label>
+    <label for="txtModello">* Modello</label>
     <asp:TextBox runat="server" CssClass="form-control" ID="txtModello"></asp:TextBox>
 </div>
 
 <div class="form-group col-md-6">
-    <label for="txtTarga">Targa</label>
+    <label for="txtTarga">* Targa</label>
     <asp:TextBox runat="server" CssClass="form-control" ID="txtTarga" AutoPostBack="true" OnTextChanged="txtTarga_TextChanged"></asp:TextBox>
 </div>
 
 <div class="form-group col-md-6">
-    <label for="ddlTipoAlimentazione">Tipo Alimentazione</label>
+    <label for="ddlTipoAlimentazione">* Tipo Alimentazione</label>
     <asp:DropDownList runat="server" CssClass="form-control" ID="ddlTipoAlimentazione" />
 </div>
 
 <div class="form-group col-md-6">
-    <label for="clDataImmatricolazione">Data Immatricolazione</label>
+    <label for="clDataImmatricolazione">* Data Immatricolazione</label>
     <asp:Calendar runat="server" ID="clDataImmatricolazione" SelectionMode="Day">
         <OtherMonthDayStyle ForeColor="LightGray" />
         <DayStyle BackColor="White" />
@@ -46,5 +46,15 @@
         <asp:RadioButton ID="rbtDisponibile" Text="Disponibile" GroupName="statoVeicolo" runat="server" />
     </p>
 </div>
+
+<div class="form-group col-md-12" align="right">
+    <p>
+        <label>[ i campi contrassegnati con * sono obbligatori ]</label>
+    </p>
+</div>
+
+
+
+
 
 
