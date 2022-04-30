@@ -14,8 +14,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         private string ConnectionString { get; }
         public ClientiManager()     // Costruttore per richiamare la connection string messa su proprietà
         {
-            ConnectionString = Properties.Settings.Default.DBSilvia;
-            //ConnectionString = Properties.Settings.Default.DBAzure;
+            //ConnectionString = Properties.Settings.Default.DBSilvia;
+            ConnectionString = Properties.Settings.Default.DBAzure;
             //ConnectionString = Properties.Settings.Default.ARCAConnectionString;
         }
         public ClientiModel InsertCliente(ClientiModel cliente)     // Inserisce cliente su db

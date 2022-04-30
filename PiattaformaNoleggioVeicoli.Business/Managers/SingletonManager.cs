@@ -22,15 +22,14 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         private const int MINUTI_AGGIORNAMENTO_LISTA_MARCHE_POSSEDUTE = 10;
         private DateTime LastAggiornamentoListaMarchePossedute = DateTime.MinValue;
 
-        public IMapper Mapper
+        public IMapper Mapper       // restituisce l'istanza di automapper
         {
             get
             {
                 return mapper;
             }
         }
-
-        public List<MarcheVeicoliModel> ListMarche
+        public List<MarcheVeicoliModel> ListMarche          // popola la lista delle marche
         {
             get
             {
@@ -42,7 +41,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 return listMarche;
             }
         }
-        public List<MarcheVeicoliModel> ListMarchePossedute
+        public List<MarcheVeicoliModel> ListMarchePossedute         // popola la lista delle marche possedute
         {
             get
             {
@@ -54,7 +53,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 return listMarchePossedute;
             }
         }
-        private SingletonManager()
+        private SingletonManager()          // costruttore privato del singleton che va ad inizializzare tutte le componenti che ci servono
         {
             veicoliManager = new VeicoliManager();
             listMarche = veicoliManager.GetMarcheVeicoliList();
@@ -64,8 +63,8 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             listMarchePossedute = veicoliManager.GetMarcheVeicoliPossedutiList();
         }
 
-        private List<TipoAlimentazioneModel> listTipoAlimentazione;
-        public List<TipoAlimentazioneModel> ListTipoAlimentazione
+        private List<TipoAlimentazioneModel> listTipoAlimentazione;         // elemento privato che contiene gli elementi della lista
+        public List<TipoAlimentazioneModel> ListTipoAlimentazione           // popola la lista dei tipi di alimentazione e restituisce l'elemento pubblico
         {
             get {
                 if (DateTime.Now > LastAggiornamentoListaTipiAlimentazione.AddMinutes(MINUTI_AGGIORNAMENTO_LISTA_TIPI_ALIMENTAZIONE))       // mi permette di aggiornare la listaTipiAlimentazione ogni 24 ore
@@ -77,7 +76,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 return listTipoAlimentazione; 
             }
         } 
-        public static SingletonManager Instance
+        public static SingletonManager Instance             // restituisce l'istanza del singleton
         {
             get
             {
@@ -86,7 +85,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 return instance;
             }
         }
-        public void AggiornamentoListaMarcheVeicoliPosseduti()
+        public void AggiornamentoListaMarcheVeicoliPosseduti()          // aggiorna la lista delle marche di veicoli posseduti
         {
             listMarchePossedute = veicoliManager.GetMarcheVeicoliPossedutiList();
             LastAggiornamentoListaMarchePossedute = DateTime.MinValue;

@@ -11,7 +11,6 @@
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <ic:Info runat="server" ID="infoControl" />
-
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h1 class="panel-title">Ricerca Noleggio</h1>
@@ -22,7 +21,6 @@
                         <div>
                             <cc1:ComboBox ID="ddlMarca" runat="server" MaxLength="0" CssClass="text-capitalize" DropDownStyle="DropDownList" AutoCompleteMode="SuggestAppend" AutoPostBack="True" CaseSensitive="False"></cc1:ComboBox>
                         </div>
-                        <%--<asp:DropDownList runat="server" ID="ddlMarca" CssClass="form-control" />--%>
                     </div>
 
                     <div class="form-group col-md-4">

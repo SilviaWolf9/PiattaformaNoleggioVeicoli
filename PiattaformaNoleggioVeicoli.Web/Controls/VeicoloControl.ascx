@@ -4,7 +4,6 @@
 
 <div class="form-group col-md-6">
     <label for="ddlMarca">* Marca</label>
-    <%--    <asp:DropDownList runat="server" CssClass="form-control" ID="ddlMarca" />--%>
     <div>
         <cc1:ComboBox ID="ddlMarca" runat="server" MaxLength="0" CssClass="text-capitalize" DropDownStyle="DropDownList" AutoCompleteMode="SuggestAppend" AutoPostBack="True" CaseSensitive="False"></cc1:ComboBox>
     </div>

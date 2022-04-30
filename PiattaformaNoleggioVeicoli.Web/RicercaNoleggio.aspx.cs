@@ -35,7 +35,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             gvNoleggiTrovati.DataSource = listaNoleggiTrovati;
             gvNoleggiTrovati.DataBind();
         }
-
         private void PopolaDDLMarche()
         {
             var instance = SingletonManager.Instance;
@@ -51,7 +50,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             ddlIsInCorso.Items.Add(new ListItem("no", "0"));
             ddlIsInCorso.Items.Add(new ListItem("si", "1"));
         }
-
         protected void btnRicerca_Click(object sender, EventArgs e)
         {
             var noleggiRicerca = new NoleggiManager.RicercaNoleggiModel();
@@ -99,7 +97,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             PopolaGridViewNoleggio(noleggiRicerca);
             Session["RicercaNoleggi"] = noleggiRicerca;
         }
-
         protected void btnReset_Click(object sender, EventArgs e)
         {
             ddlMarca.SelectedIndex = -1;
@@ -115,8 +112,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             gvNoleggiTrovati.DataBind();
             gvNoleggiTrovati.Visible = false;
         }
-
-        protected void gvNoleggiTrovati_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void gvNoleggiTrovati_PageIndexChanging(object sender, GridViewPageEventArgs e)           //impaginazione gridview
         {
             if (Session["RicercaNoleggi"] == null)       // se non esiste la sessione che si chiama ricerca non fa nulla
             {
@@ -126,21 +122,18 @@ namespace PiattaformaNoleggioVeicoli.Web
             gvNoleggiTrovati.PageIndex = e.NewPageIndex;
             PopolaGridViewNoleggio(ricerca);
         }
-
         protected void gvNoleggiTrovati_SelectedIndexChanged(object sender, EventArgs e)
         {
             var idNoleggiString = gvNoleggiTrovati.SelectedDataKey["Id"].ToString();
             Response.Redirect("DettaglioNoleggio.aspx?Id=" + idNoleggiString);
         }
-
-        protected void txtTarga_TextChanged(object sender, EventArgs e)
+        protected void txtTarga_TextChanged(object sender, EventArgs e)         // controllo per la ricerca a 3 caratteri della targa
         {
             var txtTargaDaControllare = (TextBox)sender;
             if (string.IsNullOrWhiteSpace(txtTargaDaControllare.Text))
             {
                 btnRicerca.Enabled = true;
             }
-
             if (txtTargaDaControllare.Text.Trim().Length >= 3)       // dato che non era possibile fare la ricerca a 3 caratteri sul modello poichè ci sono modelli che hanno un solo carattere o 2, ho impostato il controllo a 3 caratteri sulla targa (trim rimuove gli spazi vuoti dalla stringa)
             {
                 btnRicerca.Enabled = true;

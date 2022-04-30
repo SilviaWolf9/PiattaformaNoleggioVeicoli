@@ -14,11 +14,10 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         private string ConnectionString { get; }
         public NoleggiManager()     // Costruttore per richiamare la connection string messa su proprietà
         {
-            ConnectionString = Properties.Settings.Default.DBSilvia;
-            //ConnectionString = Properties.Settings.Default.DBAzure;
+            //ConnectionString = Properties.Settings.Default.DBSilvia;
+            ConnectionString = Properties.Settings.Default.DBAzure;
             //ConnectionString = Properties.Settings.Default.ARCAConnectionString;
         }
-
         public int? InserisciNoleggio(NoleggiModel noleggiModel)     // Inserisce noleggio su db
         {
             if (!IsNoleggioModelValido(noleggiModel))
@@ -101,7 +100,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             return idInserito;
         }
-
         private bool IsNoleggioModelValido(object noleggio)       // Fa un controllo sull'oggetto noleggio ed evita di spaccarsi in caso ClienteModel fosse null
         {
             if (noleggio == null)
@@ -123,7 +121,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }            
             return true;
         }
-
         public bool TerminaNoleggio(NoleggiModel noleggiModel)     // Inserisce noleggio su db
         {
             if (!IsNoleggioModelValido(noleggiModel) && noleggiModel.Id <= 0)
@@ -188,7 +185,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             return isInserito;
         }
-
         public NoleggiModel RecuperaNoleggio(VeicoliModel veicolo)      // Recupera l'ultimo noleggio di un determinato veicolo
         {
             var noleggio = new NoleggiModel();
@@ -233,7 +229,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
 
             return noleggio;
         }
-
         public NoleggiTrovatiModelView GetNoleggio(int id)     // Restituisce i dettagli di un determinato noleggio ricercato tramite id
         {
             var dettaglioNoleggio = new NoleggiTrovatiModelView();
@@ -359,7 +354,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             noleggiModelView.CodiceFiscale = row.Field<string>("CodiceFiscale");
             return noleggiModelView; 
         }
-
         public class RicercaNoleggiModel
         {
             public int Id { get; set; }

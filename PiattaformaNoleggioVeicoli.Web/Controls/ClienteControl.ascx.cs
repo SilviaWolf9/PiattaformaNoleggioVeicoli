@@ -23,7 +23,6 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
                 return;
             }
         }
-        
         public void SetCliente(ClientiModel cliente)        // va a riempire i vari componenti del control in base ai dati della proprietà Cliente
         {
             if (cliente == null)
@@ -49,7 +48,6 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             txtNazione.Text = cliente.Nazione;
             txtNote.Text = cliente.Note;            
         }
-
         public ClientiModel GetDatiCliente(ClientiModel cliente)        // restituisce i dati del cliente attuali al chiamante 
         {
             var clienteModificato = cliente;
@@ -73,8 +71,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             clienteModificato.Note = txtNote.Text;
             return clienteModificato;
         }
-
-        protected void txtCodiceFiscale_TextChanged(object sender, EventArgs e)
+        protected void txtCodiceFiscale_TextChanged(object sender, EventArgs e)         // quando scriviamo un codice fiscale, controlla se già esiste nel database e nel caso fosse già esistente carica i dati del cliente 
         {
             var clientiManager = new ClientiManager();
             var esistenzaCf = clientiManager.EsistenzaCodiceFiscale(txtCodiceFiscale.Text);
@@ -87,18 +84,15 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
                 EsistenzaCodiceFiscale(this, codiceFiscaleUpdatedArgs); ;
             }
         }
-
-        protected void txtDataNascita_TextChanged(object sender, EventArgs e)
+        protected void txtDataNascita_TextChanged(object sender, EventArgs e)        // controlla la data di nascita
         {
             if (!DateTime.TryParse(txtDataNascita.Text,out DateTime dataNascita))
             {
-                //mettere infocontrol errore
                 txtDataNascita.Text = String.Empty;
                 return;
             }
             if (dataNascita>DateTime.Now)
             {
-                //stampa messaggio errore
                 txtDataNascita.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 return;
             }    

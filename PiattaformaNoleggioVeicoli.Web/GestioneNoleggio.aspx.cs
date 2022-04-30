@@ -128,8 +128,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Noleggio registrato con successo");
             Response.Redirect("DettaglioNoleggio.aspx?Id=" + idDettaglio);
         }
-
-        private bool IsFormValido(ClientiModel clienteDaInserire)
+        private bool IsFormValido(ClientiModel clienteDaInserire)           // controlla che il form di inserimento del cliente sia corretto 
         {            
             if (string.IsNullOrWhiteSpace(clienteDaInserire.Cognome))
             {
@@ -208,7 +207,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             return true;
         }
-
         protected void btnFineNoleggio_Click(object sender, EventArgs e)
         {
             var veicolo = (DettaglioVeicoloModelView)ViewState["Veicolo"];
@@ -221,7 +219,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Noleggio terminato con successo");
             Response.Redirect("DettaglioVeicolo.aspx?Id=" + veicolo.Id);
         }
-
         protected void rbtnNuovoCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnReset_Click(this, null);
@@ -241,13 +238,13 @@ namespace PiattaformaNoleggioVeicoli.Web
             {
                 return;
             }
-            if (nuovoCliente.Value)
+            if (nuovoCliente.Value)             // in caso fosse un nuovo cliente
             {
                 clienteControl.Visible = true;
                 clienteControl.SetCliente(new ClientiModel());
                 divClienteEsistente.Visible = false;
             }
-            else
+            else           // in caso il cliente fosse già esistente
             {
                 divClienteEsistente.Visible = true;
                 PopolaDDLCognome();
@@ -257,18 +254,26 @@ namespace PiattaformaNoleggioVeicoli.Web
             btnNoleggiaVeicolo.Visible = true;
             btnReset.Visible = true;
         }
-
-        protected void ddlCodiceFiscale_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlCognome_SelectedIndexChanged(object sender, EventArgs e)          // popola la ddl dei cognomi
         {
-            if (ddlCodiceFiscale.SelectedIndex == 0)
-            { 
+            if (ddlCognome.SelectedIndex == 0)
+            {
                 return;
-            }            
-            ddlCodiceFiscale.Enabled = false;
-            Session["IdClienteSelezionato"] = ddlCodiceFiscale.SelectedValue;
-        }
+            }
+            ddlCognome.Enabled = false;
+            ddlNome.Enabled = true;
+            var ricercaClienteModel = new ClientiManager.RicercaClientiModel()
+            {
+                Cognome = ddlCognome.SelectedItem.ToString()
+            };
+            ddlNome.DataSource = _clientiManager.RicercaClienti(ricercaClienteModel);      // richiamo query dei nomi da inserire nella ddl
+            ddlNome.DataValueField = "Id";
+            ddlNome.DataTextField = "Nome";
+            ddlNome.DataBind();
+            ddlNome.Items.Insert(0, new ListItem("seleziona", "-1"));
 
-        protected void ddlNome_SelectedIndexChanged(object sender, EventArgs e)
+        }
+        protected void ddlNome_SelectedIndexChanged(object sender, EventArgs e)         // popola la ddl dei nomi in base al cognome selezionato
         {
             if (ddlNome.SelectedIndex == 0)
             {
@@ -288,28 +293,16 @@ namespace PiattaformaNoleggioVeicoli.Web
             ddlCodiceFiscale.Items.Insert(0, new ListItem("seleziona", "-1"));
 
         }
-
-        protected void ddlCognome_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlCodiceFiscale_SelectedIndexChanged(object sender, EventArgs e)        // popola la ddl dei codici fiscali in base al cognome e al nome selezionati
         {
-            if (ddlCognome.SelectedIndex == 0)
+            if (ddlCodiceFiscale.SelectedIndex == 0)
             {
                 return;
             }
-            ddlCognome.Enabled = false;
-            ddlNome.Enabled = true;
-            var ricercaClienteModel = new ClientiManager.RicercaClientiModel()
-            {
-                Cognome = ddlCognome.SelectedItem.ToString()
-            };
-            ddlNome.DataSource = _clientiManager.RicercaClienti(ricercaClienteModel);      // richiamo query dei nomi da inserire nella ddl
-            ddlNome.DataValueField = "Id";
-            ddlNome.DataTextField = "Nome";
-            ddlNome.DataBind();
-            ddlNome.Items.Insert(0, new ListItem("seleziona", "-1"));
-
+            ddlCodiceFiscale.Enabled = false;
+            Session["IdClienteSelezionato"] = ddlCodiceFiscale.SelectedValue;
         }
-
-        protected void btnReset_Click(object sender, EventArgs e)
+        protected void btnReset_Click(object sender, EventArgs e)           // pulisce tutti i campi
         {
             var selezionato = rbtnNuovoCliente.SelectedValue;
             if (selezionato == null)
@@ -343,8 +336,7 @@ namespace PiattaformaNoleggioVeicoli.Web
                 ddlCodiceFiscale.Enabled = false;
             }                
         }
-
-        protected void clienteControl_EsistenzaCodiceFiscale(object sender, CodiceFiscaleUpdatedArgs e)
+        protected void clienteControl_EsistenzaCodiceFiscale(object sender, CodiceFiscaleUpdatedArgs e)         // quando scriviamo un codice fiscale, controlla se già esiste nel database e nel caso fosse già esistente carica i dati del cliente
         {
             if (e==null)
             {

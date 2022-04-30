@@ -7,13 +7,14 @@
 <%@ Register Src="~/Controls/InfoControl.ascx" TagPrefix="ic" TagName="Info" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Gestione Noleggio</h3>
-        </div>
-        <asp:UpdatePanel runat="server">
-            <ContentTemplate>
-                <ic:Info runat="server" ID="infoControl" />
+    <br />
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
+            <ic:Info runat="server" ID="infoControl" />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Gestione Noleggio</h3>
+                </div>
                 <div class="panel-body">
                     <div class="form-group col-md-12">
                         <div class="col-md-4">
@@ -82,7 +83,7 @@
                         <asp:Button runat="server" ID="btnFineNoleggio" Text="Fine Noleggio" CssClass="btn" BackColor="Crimson" BorderColor="Crimson" BorderWidth="2px" OnClick="btnFineNoleggio_Click" Visible="false" />
                     </div>
                 </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-    </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>

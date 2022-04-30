@@ -21,7 +21,6 @@
                         <div>
                             <cc1:ComboBox ID="ddlMarca" runat="server" MaxLength="0" CssClass="text-capitalize" DropDownStyle="DropDownList" AutoCompleteMode="SuggestAppend" AutoPostBack="True" CaseSensitive="False"></cc1:ComboBox>
                         </div>
-                        <%--<asp:DropDownList runat="server" ID="ddlMarca" CssClass="form-control" />--%>
                     </div>
 
                     <div class="form-group col-md-4">

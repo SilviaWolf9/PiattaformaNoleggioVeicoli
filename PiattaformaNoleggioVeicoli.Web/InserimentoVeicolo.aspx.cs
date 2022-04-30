@@ -25,8 +25,7 @@ namespace PiattaformaNoleggioVeicoli.Web
                 return;
             }
             veicoloControl.SetVeicolo(new VeicoliModel() { IsDisponibile=true });
-        }      
-
+        }   
         protected void btnInserisci_Click(object sender, EventArgs e)
         {
             var veicoloModel = veicoloControl.GetDatiVeicolo(new VeicoliModel() { IsDisponibile = true });
@@ -78,8 +77,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             }            
             return true;
         }
-
-        protected void veicoloControl_EsistenzaTarga(object sender, TargaUpdatedArgs e)
+        protected void veicoloControl_EsistenzaTarga(object sender, TargaUpdatedArgs e)         // all'inserimento della targa va a controllare se è già presente nel db e in caso fosse presente carica i dati del veicolo
         {
             if (e == null)
             {
@@ -91,14 +89,9 @@ namespace PiattaformaNoleggioVeicoli.Web
             }            
             Response.Redirect("DettaglioVeicolo.aspx?Id=" + e.IdVeicolo);            
         }
-
         protected void btnReset_Click(object sender, EventArgs e)
         {
             veicoloControl.SetVeicolo(new VeicoliModel());      // svuota i campi dopo l'inserimento
-        }
-        protected void Page_Unload(object sender, EventArgs e)
-        {
-            //btnReset_Click(sender, e);
-        }
+        }        
     }
 }

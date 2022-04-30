@@ -23,11 +23,10 @@ namespace PiattaformaNoleggioVeicoli.Web
                 infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");
                 return;
             }
-
             int? id = null;
             if (!string.IsNullOrWhiteSpace(Request.QueryString["Id"]))
             {
-                id = int.Parse(Request.QueryString["Id"]);      // serve a recuperare l'id del veicolo
+                id = int.Parse(Request.QueryString["Id"]);      // serve a recuperare l'id del noleggio
             }
             instance = SingletonManager.Instance;
             mapper = instance.Mapper;
@@ -36,7 +35,6 @@ namespace PiattaformaNoleggioVeicoli.Web
         private NoleggiManager _noleggiManager { get; set; }
         private static SingletonManager instance;
         private static IMapper mapper;
-
         private void PopolaDettaglioNoleggio(int? id)
         {
             if (!id.HasValue)

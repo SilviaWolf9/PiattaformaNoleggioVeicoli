@@ -13,7 +13,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
         {
 
         }
-        public void SetMessage(TipoMessaggio tipoMessaggio, string messaggio)
+        public void SetMessage(TipoMessaggio tipoMessaggio, string messaggio)           // setta il tipo di messaggio
         {
             switch (tipoMessaggio)
             {

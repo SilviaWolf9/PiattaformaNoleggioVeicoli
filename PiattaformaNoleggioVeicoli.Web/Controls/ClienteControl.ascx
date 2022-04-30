@@ -19,12 +19,6 @@
         <asp:ImageButton ID="btnMostraCalendario" runat="server" ImageUrl="../sfondi/calendar_office_day_1474.png" CssClass="col-md-2" />
         <ajax:CalendarExtender ID="clndr" runat="server" Format="dd/MM/yyyy" PopupButtonID="btnMostraCalendario" TargetControlID="txtDataNascita"></ajax:CalendarExtender>
     </div>
-    <%-- <asp:Calendar runat="server" ID="clDataNascita" SelectionMode="Day">
-        <OtherMonthDayStyle ForeColor="LightGray" />       
-        <DayStyle BackColor="White" />
-        <TitleStyle CssClass="text-capitalize" Font-Size="15px" Font-Bold="true" BackColor="LightSeaGreen" Wrap="true"/>
-        <SelectedDayStyle BackColor="LightSeaGreen" Font-Bold="true" />
-    </asp:Calendar>--%>
 </div>
 
 <div class="form-group col-md-4" >
@@ -94,4 +88,3 @@
         <label>[ i campi contrassegnati con * sono obbligatori ]</label>
     </p>
 </div>
-

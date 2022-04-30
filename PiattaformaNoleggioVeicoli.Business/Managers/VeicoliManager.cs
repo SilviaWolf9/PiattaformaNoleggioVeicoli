@@ -14,11 +14,10 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         private string ConnectionString { get; }
         public VeicoliManager()     // Costruttore per richiamare la connection string messa su proprietà
         {
-            ConnectionString = Properties.Settings.Default.DBSilvia;
-            //ConnectionString = Properties.Settings.Default.DBAzure;
+            //ConnectionString = Properties.Settings.Default.DBSilvia;
+            ConnectionString = Properties.Settings.Default.DBAzure;
             //ConnectionString = Properties.Settings.Default.ARCAConnectionString;
         }
-
         public VeicoliModel InsertVeicolo(VeicoliModel veicoloModel)     // Inserisce veicolo su db
         {
             if (!IsVeicoloModelValido(veicoloModel))
@@ -87,7 +86,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             veicoloInserito.Id = idInserito.Value;
             return veicoloInserito;
         }
-
         public int? EsistenzaTarga(string targa)        // Controlla l'esistenza della targa
         {
             var sb = new StringBuilder();
@@ -167,7 +165,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             return true;
         }
-        
         public bool EliminaVeicolo(VeicoliModel veicolo)        // Invece di eliminare fisicamente il veicolo dal db cambia lo stato da attivo a non attivo così al cliente rimane uno storico dei veicoli che ha posseduto
         {
             if (!IsVeicoloModelValido(veicolo))
@@ -204,7 +201,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 }
             }
         }
-
         private bool IsVeicoloModelValido(object veicolo)       // Fa un controllo sull'oggetto veicolo ed evita di spaccarsi in caso VeicoloModel fosse null
         {
             if (veicolo == null)
@@ -234,7 +230,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             return true;
         }
-        
         public List<MarcheVeicoliModel> GetMarcheVeicoliList()      // Restituisce una lista di marche dei veicoli
         {
             var MarcheVeicoliList = new List<MarcheVeicoliModel>();
@@ -280,7 +275,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             return MarcheVeicoliList;
         }
-
         public List<MarcheVeicoliModel> GetMarcheVeicoliPossedutiList()      // Restituisce una lista di marche dei veicoli
         {
             var MarcheVeicoliList = new List<MarcheVeicoliModel>();
@@ -371,7 +365,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             return TipoAlimentazioneList;
         }
-
         public DettaglioVeicoloModelView GetVeicolo(int id)     // Restituisce i dettagli di un determinato veicolo ricercato tramite id
         {
             var dettaglioVeicoloModelView = new DettaglioVeicoloModelView();
@@ -436,7 +429,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             dettaglioVeicoloModelView.CodiceFiscale = row.Field<string>("CodiceFiscale");
             return dettaglioVeicoloModelView;
         }
-                
         public class RicercaVeicoliModel
         {
             public int? IdMarca { get; set; }
@@ -446,7 +438,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             public DateTime? FineDataImmatricolazione { get; set; }
             public bool? IsDisponibile { get; set; }
         }
-
         public List<VeicoliTrovatiModelView> RicercaVeicoli(RicercaVeicoliModel ricercaVeicoliModel)        // Ricerca Veicoli tramite i campi Marca, Modello, Targa, Periodo Immatricolazione e disponibilità
         {
             var veicoliTrovatiList = new List<VeicoliTrovatiModelView>();

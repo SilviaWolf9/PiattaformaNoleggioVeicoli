@@ -23,7 +23,6 @@ namespace PiattaformaNoleggioVeicoli.Web
                 infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");
                 return;
             }
-
             int? id = null;
             if (!string.IsNullOrWhiteSpace(Request.QueryString["Id"]))
             {
@@ -115,7 +114,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             var json = JsonConvert.SerializeObject(dettaglioVeicolo);            
             Response.Redirect("GestioneNoleggio.aspx?veicolo="+Server.UrlEncode(json));
         }
-
         protected void btnSalvaModifiche_Click(object sender, EventArgs e)
         {
             if (ViewState["DettaglioVeicoloModelView"] == null)
@@ -131,7 +129,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             {
                 return;
             }
-
             var veicoloModel = mapper.Map<DettaglioVeicoloModelView, VeicoliModel>(veicoloModelView);
             var veicolo = veicoloControl.GetDatiVeicolo(veicoloModel);
             if (!IsFormValido(veicolo))     
@@ -142,7 +139,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             _veicoliManager.ModificaVeicolo(veicolo);
             Response.Redirect("RicercaVeicolo.aspx");       // dopo la modifica ci rimanda alla pagina di ricerca veicolo
         }
-
         protected void btnEliminaVeicolo_Click(object sender, EventArgs e)
         {
             if (ViewState["DettaglioVeicoloModelView"] == null)
@@ -158,7 +154,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             {
                 return;
             }
-
             var veicoloModel = mapper.Map<DettaglioVeicoloModelView, VeicoliModel>(veicoloModelView);
             var veicolo = veicoloControl.GetDatiVeicolo(veicoloModel);
             if (!IsFormValido(veicolo))     
@@ -173,15 +168,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Veicolo eliminato con successo");
             _veicoliManager.EliminaVeicolo(veicolo);
             Response.Redirect("RicercaVeicolo.aspx");       // dopo l'eliminazione ci rimanda alla pagina di ricerca veicolo
-        }
-        protected void Page_Unload(object sender, EventArgs e)
-        {
-            //if (IsPostBack)
-            //{
-            //    return;
-            //}
-            //veicoloControl.Veicolo = null;
-            //veicoloControl.SetVeicolo();
-        }
+        }        
     }
 }

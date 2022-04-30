@@ -16,9 +16,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             {
                 return;
             }            
-        }
-        //public NoleggiTrovatiModelView Noleggio { get => _noleggio; set => _noleggio = value; }       // serve per ottenere e settare il valore della variabile statica dichiarata sotto in modo che abbia lo stesso valore in tutta la pagina si poteva fare anche utilizzando una viewstate
-        //private static NoleggiTrovatiModelView _noleggio;
+        }        
         public void SetNoleggio(NoleggiTrovatiModelView noleggio)        // va a riempire i vari componenti del control in base ai dati della proprietà Veicolo
         {
             if (noleggio == null)

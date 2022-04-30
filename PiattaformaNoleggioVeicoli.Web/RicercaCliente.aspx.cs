@@ -32,8 +32,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             gvClientiTrovati.DataSource = listaClientiTrovati;
             gvClientiTrovati.DataBind();
         }
-
-        protected void gvClientiTrovati_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void gvClientiTrovati_PageIndexChanging(object sender, GridViewPageEventArgs e)       // impaginazione gridview
         {
             if (Session["RicercaClienti"] == null)       // se non esiste la sessione che si chiama ricercaClienti non fa nulla
             {
@@ -43,13 +42,11 @@ namespace PiattaformaNoleggioVeicoli.Web
             gvClientiTrovati.PageIndex = e.NewPageIndex;
             PopolaGridViewCliente(ricercaClienti);
         }
-
         protected void gvClientiTrovati_SelectedIndexChanged(object sender, EventArgs e)
         {
             var idClientiString = gvClientiTrovati.SelectedDataKey["Id"].ToString();
             Response.Redirect("DettaglioCliente.aspx?IdCliente=" + idClientiString);
         }
-
         protected void btnReset_Click(object sender, EventArgs e)
         {            
             txtCognome.Text = "";
@@ -59,7 +56,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             gvClientiTrovati.DataBind();
             gvClientiTrovati.Visible = false;
         }
-
         protected void btnRicerca_Click(object sender, EventArgs e)
         {
             var clientiRicerca = new ClientiManager.RicercaClientiModel();

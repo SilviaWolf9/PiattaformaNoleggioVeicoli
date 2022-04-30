@@ -26,9 +26,6 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             PopolaDDLMarche();
             PopolaDDLTipoAlimentazione();
         }
-
-        //public VeicoliModel Veicolo { get => _veicolo; set => _veicolo = value; }       // serve per ottenere e settare il valore della variabile statica dichiarata sotto in modo che abbia lo stesso valore in tutta la pagina si poteva fare anche utilizzando una viewstate
-        //private static VeicoliModel _veicolo;
         private static SingletonManager instance;
         private void PopolaDDLMarche()
         {            
@@ -86,7 +83,6 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             }
             rbtDisponibilita.Enabled = false;
         }
-
         public VeicoliModel GetDatiVeicolo(VeicoliModel veicolo)        // restituisce i dati del veicolo attuali al chiamante 
         {
             var veicoloAggiornato = veicolo;
@@ -110,8 +106,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             veicoloAggiornato.IdTipoStato = 1;
             return veicoloAggiornato;
         }
-
-        protected void txtTarga_TextChanged(object sender, EventArgs e)
+        protected void txtTarga_TextChanged(object sender, EventArgs e)         // all'inserimento della targa va a controllare se è già presente nel db e in caso fosse presente carica i dati del veicolo
         {
             var veicoliManager = new VeicoliManager();
             var esistenzaTarga = veicoliManager.EsistenzaTarga(txtTarga.Text);

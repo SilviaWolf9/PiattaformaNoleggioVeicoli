@@ -5,14 +5,14 @@
 <%@ Register Src="~/Controls/VeicoloControl.ascx" TagPrefix="vc" TagName="Veicolo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Dettaglio Veicolo</h3>
-        </div>
-        <asp:UpdatePanel runat="server">
-            <ContentTemplate>
-                <ic:Info runat="server" ID="infoControl" />
+    <br />
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
+            <ic:Info runat="server" ID="infoControl" />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Dettaglio Veicolo</h3>
+                </div>
                 <div class="panel-body">
                     <vc:Veicolo runat="server" ID="veicoloControl" />
                     <div class="form-group col-md-10" runat="server" id="divCliente" visible="true">
@@ -33,7 +33,7 @@
                     <asp:Button runat="server" ID="btnSalvaModifiche" Text="Salva modifiche" CssClass="btn btn-default" OnClick="btnSalvaModifiche_Click" />
                     <asp:Button runat="server" ID="btnEliminaVeicolo" Text="Elimina veicolo" CssClass="btn btn-default" OnClick="btnEliminaVeicolo_Click" />
                 </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-    </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>

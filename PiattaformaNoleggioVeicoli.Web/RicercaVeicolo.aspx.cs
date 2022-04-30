@@ -97,8 +97,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             gvVeicoliTrovati.DataBind();
             gvVeicoliTrovati.Visible = false;
         }
-
-        protected void gvVeicoliTrovati_PageIndexChanging(object sender, GridViewPageEventArgs e)       // evento di impaginazione
+        protected void gvVeicoliTrovati_PageIndexChanging(object sender, GridViewPageEventArgs e)       // impaginazione della gridview
         {
             if (Session["Ricerca"]==null)       // se non esiste la sessione che si chiama ricerca non fa nulla
             {
@@ -108,14 +107,12 @@ namespace PiattaformaNoleggioVeicoli.Web
             gvVeicoliTrovati.PageIndex = e.NewPageIndex;
             PopolaGridViewVeicolo(ricerca);
         }
-
         protected void gvVeicoliTrovati_SelectedIndexChanged(object sender, EventArgs e)
         {
             var idVeicoloString = gvVeicoliTrovati.SelectedDataKey["Id"].ToString();
             Response.Redirect("DettaglioVeicolo.aspx?Id=" + idVeicoloString);
         }
-
-        protected void txtTarga_TextChanged(object sender, EventArgs e)
+        protected void txtTarga_TextChanged(object sender, EventArgs e)         // controllo per la ricerca a 3 caratteri della targa
         {
             infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, String.Empty);
             var txtTargaDaControllare = (TextBox)sender;

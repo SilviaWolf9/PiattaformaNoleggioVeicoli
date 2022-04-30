@@ -22,12 +22,11 @@ namespace PiattaformaNoleggioVeicoli.Web
             int? id = null;
             if (!string.IsNullOrWhiteSpace(Request.QueryString["IdCliente"]))
             {
-                id = int.Parse(Request.QueryString["IdCliente"]);      // serve  recuperare l'id del cliente
+                id = int.Parse(Request.QueryString["IdCliente"]);      // serve recuperare l'id del cliente
             }
             PopolaDettaglioCliente(id);
         }
         private ClientiManager _clientiManager { get; set; }
-
         private void PopolaDettaglioCliente(int? id)
         {
             if (!id.HasValue)
@@ -36,11 +35,10 @@ namespace PiattaformaNoleggioVeicoli.Web
                 return;
             }
             var cliente = _clientiManager.GetCliente(id.Value);
-            //clienteControl.Cliente = cliente;
             ViewState["cliente"] = cliente;
             clienteControl.SetCliente(cliente);
         }
-        private bool IsFormValido(ClientiModel cliente)     // controlla che il form di inserimento del cliente sia corretto
+        private bool IsFormValido(ClientiModel cliente)         // controlla che il form di inserimento del cliente sia corretto
         {
             if (string.IsNullOrWhiteSpace(cliente.Cognome))
             {
@@ -119,7 +117,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             return true;
         }
-
         protected void btnSalvaModifiche_Click(object sender, EventArgs e)
         {
             if (ViewState["cliente"]==null)
