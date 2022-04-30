@@ -17,6 +17,7 @@
                     <nc:Noleggio runat="server" ID="noleggioControl" />
                 </div>
                 <div class="panel-footer" align="center">
+                    <asp:Button runat="server" ID="btnGestisciNoleggio" Visible="false" Text="Gestisci Noleggio" CssClass="btn btn-default" OnClick="btnGestisciNoleggio_Click" />
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>

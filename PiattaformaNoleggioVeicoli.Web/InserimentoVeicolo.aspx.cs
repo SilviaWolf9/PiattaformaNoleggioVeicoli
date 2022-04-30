@@ -14,38 +14,35 @@ namespace PiattaformaNoleggioVeicoli.Web
     public partial class InserimentoVeicolo : System.Web.UI.Page
     {
         private VeicoliManager _veicoliManager { get; set; }
-       
+        private SingletonManager instance { get; set; }       
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            instance = SingletonManager.Instance;
             _veicoliManager = new VeicoliManager();
             if (IsPostBack)
             {
                 infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");                
                 return;
             }
-            veicoloControl.SetVeicolo(new VeicoliModel());
+            veicoloControl.SetVeicolo(new VeicoliModel() { IsDisponibile=true });
         }      
 
         protected void btnInserisci_Click(object sender, EventArgs e)
         {
-            var veicoloModel = veicoloControl.GetDatiVeicolo(new VeicoliModel());
+            var veicoloModel = veicoloControl.GetDatiVeicolo(new VeicoliModel() { IsDisponibile = true });
             if (!IsFormValido(veicoloModel))
             {
                 return;
-            }             
-
+            }      
             VeicoliModel veicoloInserito = _veicoliManager.InsertVeicolo(veicoloModel);
             if (veicoloInserito == null)
             {
                 infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento del veicolo");
                 return;
             }
-
             infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Veicolo inserito correttamente");
-
-            btnReset_Click(sender, e);          // svuota i campi dopo l'inserimento
-            
+            instance.AggiornamentoListaMarcheVeicoliPosseduti();
+            btnReset_Click(sender, e);          // svuota i campi dopo l'inserimento            
         }
         private bool IsFormValido(VeicoliModel veicolo)     // controlla che il form di inserimento del veicolo sia corretto
         {

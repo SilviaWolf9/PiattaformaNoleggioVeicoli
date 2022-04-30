@@ -74,10 +74,6 @@ textarea {
             filter: none;
         }
 
-    /*.panel-default {*/
-        /*opacity: 0.7;*/
-        /*background: transparent !important;*/
-    /*}*/
     hr {
         /*
         margin-bottom: 0.5em;
@@ -90,22 +86,7 @@ textarea {
         border-style: solid !important;
         border-width: 1px !important;
         border-color: white !important;
-    }
-    input {
-        /*opacity: 1 !important*/
-    }
-    select {
-        /*opacity: 1 !important*/
-    }
-    textarea {
-        /*opacity: 1 !important*/
-    }
-    .panel-heading {
-        /*opacity: 1 !important*/
-    }
-    .panel-footer {
-        /*opacity: 1 !important*/
-    }
+    }    
     .rowGridView {
         /*background-color: white !important;*/
         background: rgb(255,255,255);
@@ -113,5 +94,5 @@ textarea {
         background: rgba(255,255,255,0.7);
         filter: opacity(0.7);
         text-align: center !important;
-    }
+    }    
 }

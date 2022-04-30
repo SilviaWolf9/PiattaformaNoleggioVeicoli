@@ -23,9 +23,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
                 return;
             }
         }
-        //public ClientiModel Cliente { get => _cliente; set => _cliente = value; }       // serve per ottenere e settare il valore della variabile statica dichiarata sotto in modo che abbia lo stesso valore in tutta la pagina si poteva fare anche utilizzando una viewstate
-        //private static ClientiModel _cliente;
-
+        
         public void SetCliente(ClientiModel cliente)        // va a riempire i vari componenti del control in base ai dati della proprietà Cliente
         {
             if (cliente == null)
@@ -47,6 +45,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             txtCap.Text = cliente.Cap;
             txtCitta.Text = cliente.Citta;
             txtComune.Text = cliente.Comune;
+            txtProvincia.Text = cliente.Provincia;
             txtNazione.Text = cliente.Nazione;
             txtNote.Text = cliente.Note;            
         }
@@ -69,6 +68,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             clienteModificato.Cap = txtCap.Text;
             clienteModificato.Citta = txtCitta.Text;
             clienteModificato.Comune = txtComune.Text;
+            clienteModificato.Provincia = txtProvincia.Text;
             clienteModificato.Nazione = txtNazione.Text;
             clienteModificato.Note = txtNote.Text;
             return clienteModificato;

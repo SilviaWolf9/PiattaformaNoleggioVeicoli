@@ -240,6 +240,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             var sb = new StringBuilder();
             sb.AppendLine("SELECT");
             sb.AppendLine("\t[Noleggi].[Id]");
+            sb.AppendLine("\t,[Noleggi].[IdVeicolo]");
             sb.AppendLine("\t,[MarcheVeicoli].[Descrizione] as Marca");
             sb.AppendLine("\t,[Modello]");
             sb.AppendLine("\t,[Targa]");
@@ -281,6 +282,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             }
             DataRow row = dataTable.Rows[0];
             dettaglioNoleggio.Id = row.Field<int>("Id");
+            dettaglioNoleggio.IdVeicolo = row.Field<int>("IdVeicolo");
             dettaglioNoleggio.Marca = row.Field<string>("Marca");
             dettaglioNoleggio.Modello = row.Field<string>("Modello");
             dettaglioNoleggio.Targa = row.Field<string>("Targa");

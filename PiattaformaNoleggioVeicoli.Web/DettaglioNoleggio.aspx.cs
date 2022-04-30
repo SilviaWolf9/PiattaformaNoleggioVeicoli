@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Newtonsoft.Json;
 using PiattaformaNoleggioVeicoli.Business.Managers;
 using PiattaformaNoleggioVeicoli.Business.Models;
 using PiattaformaNoleggioVeicoli.Web.Controls;
@@ -45,7 +46,25 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             var noleggio = _noleggiManager.GetNoleggio(id.Value);
             ViewState["DettaglioNoleggioModelView"] = noleggio;            
-            noleggioControl.SetNoleggio(noleggio);            
+            noleggioControl.SetNoleggio(noleggio);
+            if (noleggio.IsInCorso == "si")
+            {
+                btnGestisciNoleggio.Visible = true;
+                var veicoliManager = new VeicoliManager();
+                var veicolo = veicoliManager.GetVeicolo(noleggio.IdVeicolo);
+                ViewState["DettaglioVeicoloModelView"] = veicolo;
+            }
+        }
+        protected void btnGestisciNoleggio_Click(object sender, EventArgs e)
+        {
+            var veicolo = ViewState["DettaglioVeicoloModelView"];
+            if (veicolo == null)
+            {
+                return;
+            }
+            DettaglioVeicoloModelView dettaglioVeicolo = (DettaglioVeicoloModelView)veicolo;
+            var json = JsonConvert.SerializeObject(dettaglioVeicolo);
+            Response.Redirect("GestioneNoleggio.aspx?veicolo=" + Server.UrlEncode(json));
         }
     }
 }

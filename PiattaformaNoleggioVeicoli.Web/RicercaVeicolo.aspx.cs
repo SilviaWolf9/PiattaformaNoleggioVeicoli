@@ -38,7 +38,7 @@ namespace PiattaformaNoleggioVeicoli.Web
         }
         private void PopolaDDLMarche()
         {
-            ddlMarca.DataSource = instance.ListMarche;
+            ddlMarca.DataSource = instance.ListMarchePossedute;
             ddlMarca.DataTextField = "Descrizione";
             ddlMarca.DataValueField = "Id";
             ddlMarca.DataBind();

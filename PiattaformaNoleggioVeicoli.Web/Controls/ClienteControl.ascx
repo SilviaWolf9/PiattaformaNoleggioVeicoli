@@ -75,6 +75,11 @@
 </div>
 
 <div class="form-group col-md-4" >
+    <label for="txtProvincia">* Provincia (sigla)</label>
+    <asp:TextBox runat="server" CssClass="form-control" ID="txtProvincia"></asp:TextBox>
+</div>
+
+<div class="form-group col-md-4" >
     <label for="txtNazione">* Nazione</label>
     <asp:TextBox runat="server" CssClass="form-control" ID="txtNazione"></asp:TextBox>
 </div>

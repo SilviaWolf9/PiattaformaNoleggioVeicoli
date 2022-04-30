@@ -40,13 +40,13 @@
     <asp:TextBox runat="server" CssClass="form-control" ID="txtNote" TextMode="MultiLine" Rows="6" Style="resize: none"></asp:TextBox>
 </div>
 
-<div class="form-group col-md-12">
-    <p>
-        <label for="rbtnStatoVeicolo">Stato veicolo:</label>
-        <asp:RadioButton ID="rbtDisponibile" Text="Disponibile" GroupName="statoVeicolo" runat="server" />
-    </p>
+<div class="form-group col-md-12" id="statoVeicolo">
+    <label for="rbtnStatoVeicolo">Stato veicolo:</label>
+    <asp:RadioButtonList ID="rbtDisponibilita" runat="server" AutoPostBack="true">
+        <asp:ListItem Text="Disponibile" Value="1"></asp:ListItem>
+        <asp:ListItem Text="Noleggiato" Value="0"></asp:ListItem>
+    </asp:RadioButtonList>
 </div>
-
 <div class="form-group col-md-12" align="right">
     <p>
         <label>[ i campi contrassegnati con * sono obbligatori ]</label>

@@ -43,6 +43,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine(",[Cap]");
             sb.AppendLine(",[Citta]");
             sb.AppendLine(",[Comune]");
+            sb.AppendLine(",[Provincia]");
             sb.AppendLine(",[Nazione]");
             sb.AppendLine(",[Note]");
             sb.AppendLine(") VALUES (");
@@ -58,6 +59,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine(",@Cap");
             sb.AppendLine(",@Citta");
             sb.AppendLine(",@Comune");
+            sb.AppendLine(",@Provincia");
             sb.AppendLine(",@Nazione");
             sb.AppendLine(",@Note");
             sb.AppendLine(")");
@@ -80,6 +82,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     sqlCommand.Parameters.AddWithValue("@Cap", cliente.Cap);
                     sqlCommand.Parameters.AddWithValue("@Citta", cliente.Citta);
                     sqlCommand.Parameters.AddWithValue("@Comune", cliente.Comune);
+                    sqlCommand.Parameters.AddWithValue("@Comune", cliente.Provincia);
                     sqlCommand.Parameters.AddWithValue("@Nazione", cliente.Nazione);
                     if (!string.IsNullOrEmpty(cliente.Note))
                     {
@@ -153,6 +156,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("[Cap] = @Cap,");
             sb.AppendLine("[Citta] = @Citta,");
             sb.AppendLine("[Comune] = @Comune,");
+            sb.AppendLine("[Provincia] = @Provincia,");
             sb.AppendLine("[Nazione] = @Nazione,");
             sb.AppendLine("[Note] = @Note");
             sb.AppendLine("WHERE Id = @Id");
@@ -175,6 +179,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     sqlCommand.Parameters.AddWithValue("@Cap", cliente.Cap);
                     sqlCommand.Parameters.AddWithValue("@Citta", cliente.Citta);
                     sqlCommand.Parameters.AddWithValue("@Comune", cliente.Comune);
+                    sqlCommand.Parameters.AddWithValue("@Comune", cliente.Provincia);
                     sqlCommand.Parameters.AddWithValue("@Nazione", cliente.Nazione);
                     if (!string.IsNullOrEmpty(cliente.Note))
                     {
@@ -252,6 +257,10 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             {
                 return false;
             }
+            if (string.IsNullOrWhiteSpace(verificaCliente.Provincia))
+            {
+                return false;
+            }
             if (string.IsNullOrWhiteSpace(verificaCliente.Nazione))
             {
                 return false;
@@ -276,6 +285,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("\t,[Cap]");
             sb.AppendLine("\t,[Citta]");
             sb.AppendLine("\t,[Comune]");
+            sb.AppendLine("\t,[Provincia]");
             sb.AppendLine("\t,[Nazione]");
             sb.AppendLine("\t,[Note]");
             sb.AppendLine("\tFROM [dbo].[Clienti]");
@@ -316,6 +326,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             clientiModel.Cap = row.Field<string>("Cap");
             clientiModel.Citta = row.Field<string>("Citta");
             clientiModel.Comune = row.Field<string>("Comune");
+            clientiModel.Provincia = row.Field<string>("Provincia");
             clientiModel.Nazione = row.Field<string>("Nazione");
             clientiModel.Note = row.Field<string>("Note");
             return clientiModel;

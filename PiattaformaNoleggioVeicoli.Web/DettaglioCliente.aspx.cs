@@ -107,6 +107,11 @@ namespace PiattaformaNoleggioVeicoli.Web
                 infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento del comune");
                 return false;
             }
+            if (string.IsNullOrWhiteSpace(cliente.Provincia))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento della provincia");
+                return false;
+            }
             if (string.IsNullOrWhiteSpace(cliente.Nazione))
             {
                 infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore nell'inserimento della nazione");

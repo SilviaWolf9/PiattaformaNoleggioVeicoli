@@ -281,6 +281,55 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             return MarcheVeicoliList;
         }
 
+        public List<MarcheVeicoliModel> GetMarcheVeicoliPossedutiList()      // Restituisce una lista di marche dei veicoli
+        {
+            var MarcheVeicoliList = new List<MarcheVeicoliModel>();
+            var sb = new StringBuilder();
+            sb.AppendLine("SELECT DISTINCT");
+            sb.AppendLine("\t[MarcheVeicoli].[Id]");
+            sb.AppendLine("\t,[Descrizione]");
+            sb.AppendLine("FROM [dbo].[MarcheVeicoli]");
+            sb.AppendLine("INNER JOIN [dbo].[Veicoli]");
+            sb.AppendLine("ON [MarcheVeicoli].[Id] = [Veicoli].[IdMarca]");
+            sb.AppendLine("ORDER BY [Descrizione]");
+
+
+            var dataSet = new DataSet();
+            using (SqlConnection sqlConnection = new SqlConnection(this.ConnectionString))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand(sb.ToString()))
+                {
+                    using (var sqlDataAdapter = new SqlDataAdapter(sqlCommand))
+                    {
+                        sqlDataAdapter.SelectCommand = sqlCommand;
+                        sqlDataAdapter.SelectCommand.Connection = sqlConnection;
+                        sqlDataAdapter.Fill(dataSet);
+                    }
+                }
+            }
+
+            if (dataSet.Tables.Count < 0)       // controlla che esista almeno una tabella net dataset
+            {
+                return new List<MarcheVeicoliModel>();
+            }
+
+            var dataTable = dataSet.Tables[0];
+
+            if (dataTable == null || dataTable.Rows.Count <= 0)     // controlla che il dataTable sia diverso da null e contenga almeno una riga
+            {
+                return new List<MarcheVeicoliModel>();
+            }
+
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                var MarcheVeicoli = new MarcheVeicoliModel();
+                MarcheVeicoli.Id = dataRow.Field<int>("Id");
+                MarcheVeicoli.Descrizione = dataRow.Field<string>("Descrizione");
+                MarcheVeicoliList.Add(MarcheVeicoli);
+            }
+            return MarcheVeicoliList;
+        }
         public List<TipoAlimentazioneModel> GetTipoAlimentazioneList()      // Restituisce una lista di tipi di alimentazione
         {
             var TipoAlimentazioneList = new List<TipoAlimentazioneModel>();

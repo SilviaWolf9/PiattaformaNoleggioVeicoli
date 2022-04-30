@@ -11,7 +11,6 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
     public class SingletonManager
     {
         private static SingletonManager instance;
-
         private static VeicoliManager veicoliManager;
         private List<MarcheVeicoliModel> listMarche;
         private const int MINUTI_AGGIORNAMENTO_LISTA_MARCHE = 10;
@@ -19,7 +18,9 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         private const int MINUTI_AGGIORNAMENTO_LISTA_TIPI_ALIMENTAZIONE = 1440;
         private DateTime LastAggiornamentoListaTipiAlimentazione = DateTime.MinValue;
         private IMapper mapper;
-
+        private List<MarcheVeicoliModel> listMarchePossedute;
+        private const int MINUTI_AGGIORNAMENTO_LISTA_MARCHE_POSSEDUTE = 10;
+        private DateTime LastAggiornamentoListaMarchePossedute = DateTime.MinValue;
 
         public IMapper Mapper
         {
@@ -41,7 +42,18 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 return listMarche;
             }
         }
-
+        public List<MarcheVeicoliModel> ListMarchePossedute
+        {
+            get
+            {
+                if (DateTime.Now > LastAggiornamentoListaMarchePossedute.AddMinutes(MINUTI_AGGIORNAMENTO_LISTA_MARCHE_POSSEDUTE))      // mi permette di aggiornare la listaMarche ogni 10 minuti
+                {
+                    listMarchePossedute = veicoliManager.GetMarcheVeicoliPossedutiList();
+                    LastAggiornamentoListaMarchePossedute = DateTime.MinValue;
+                }
+                return listMarchePossedute;
+            }
+        }
         private SingletonManager()
         {
             veicoliManager = new VeicoliManager();
@@ -49,6 +61,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             var configurationAutoMapper = AutoMapperConfigurationManager.GetConfiguration();
             mapper = configurationAutoMapper.CreateMapper();
             listTipoAlimentazione = veicoliManager.GetTipoAlimentazioneList();
+            listMarchePossedute = veicoliManager.GetMarcheVeicoliPossedutiList();
         }
 
         private List<TipoAlimentazioneModel> listTipoAlimentazione;
@@ -63,8 +76,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 }
                 return listTipoAlimentazione; 
             }
-        }       
-
+        } 
         public static SingletonManager Instance
         {
             get
@@ -74,6 +86,10 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                 return instance;
             }
         }
-
+        public void AggiornamentoListaMarcheVeicoliPosseduti()
+        {
+            listMarchePossedute = veicoliManager.GetMarcheVeicoliPossedutiList();
+            LastAggiornamentoListaMarchePossedute = DateTime.MinValue;
+        }
     }
 }

@@ -78,13 +78,13 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             }
             if (!veicolo.IsDisponibile)
             {
-                rbtDisponibile.Checked = false;
+                rbtDisponibilita.SelectedValue = "0";
             }
             else
             {
-                rbtDisponibile.Checked = true;
+                rbtDisponibilita.SelectedValue = "1";
             }
-            rbtDisponibile.Enabled = false;
+            rbtDisponibilita.Enabled = false;
         }
 
         public VeicoliModel GetDatiVeicolo(VeicoliModel veicolo)        // restituisce i dati del veicolo attuali al chiamante 
@@ -105,7 +105,8 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             {
                 veicoloAggiornato.IdTipoAlimentazione = int.Parse(ddlTipoAlimentazione.SelectedValue);
             }
-            veicoloAggiornato.IsDisponibile = rbtDisponibile.Checked;
+            var statoVeicolo = rbtDisponibilita.SelectedValue;
+            veicoloAggiornato.IsDisponibile = Convert.ToBoolean(statoVeicolo);
             veicoloAggiornato.IdTipoStato = 1;
             return veicoloAggiornato;
         }

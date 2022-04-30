@@ -22,6 +22,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Models
         public string Cap { get; set; }
         public string Citta { get; set; }
         public string Comune { get; set; }
+        public string Provincia { get; set; }
         public string Nazione { get; set; }
         public string Note { get; set; }
     }

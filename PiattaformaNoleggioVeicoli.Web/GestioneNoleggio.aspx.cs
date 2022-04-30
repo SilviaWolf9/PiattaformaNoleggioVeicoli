@@ -97,13 +97,19 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             else
             {
-                
+                if (Session["IdClienteSelezionato"]==null)
+                {
+                    return;
+                }
                 var idClienteSelezionato = Session["IdClienteSelezionato"].ToString();
                 if (string.IsNullOrEmpty(idClienteSelezionato))
                 {
                     return;
                 }
-                var idCliente = int.Parse(idClienteSelezionato);
+                if (!int.TryParse(idClienteSelezionato,out int idCliente))
+                {
+                    return;
+                }
                 cliente = _clientiManager.GetCliente(idCliente);
             }
             if (cliente == null || cliente.Id <= 0)
@@ -188,6 +194,11 @@ namespace PiattaformaNoleggioVeicoli.Web
             if (string.IsNullOrWhiteSpace(clienteDaInserire.Comune))
             {
                 infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento del comune");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(clienteDaInserire.Provincia))
+            {
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante l'inserimento della provincia");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(clienteDaInserire.Nazione))

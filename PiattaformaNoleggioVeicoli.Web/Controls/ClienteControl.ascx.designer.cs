@@ -141,6 +141,15 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
         protected global::System.Web.UI.WebControls.TextBox txtComune;
 
         /// <summary>
+        /// Controllo txtProvincia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtProvincia;
+
+        /// <summary>
         /// Controllo txtNazione.
         /// </summary>
         /// <remarks>

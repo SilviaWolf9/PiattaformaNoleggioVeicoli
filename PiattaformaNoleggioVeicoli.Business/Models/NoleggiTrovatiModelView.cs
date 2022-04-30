@@ -10,6 +10,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Models
     public class NoleggiTrovatiModelView
     {
         public int Id { get; set; }
+        public int IdVeicolo { get; set; }
         public string Marca { get; set; }
         public string Modello { get; set; }
         public string Targa { get; set; }

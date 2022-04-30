@@ -143,9 +143,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             Response.Redirect("RicercaVeicolo.aspx");       // dopo la modifica ci rimanda alla pagina di ricerca veicolo
         }
 
-
-
-
         protected void btnEliminaVeicolo_Click(object sender, EventArgs e)
         {
             if (ViewState["DettaglioVeicoloModelView"] == null)
