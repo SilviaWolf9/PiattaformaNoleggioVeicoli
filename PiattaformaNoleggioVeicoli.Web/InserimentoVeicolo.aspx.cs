@@ -77,7 +77,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             }            
             return true;
         }
-        protected void veicoloControl_EsistenzaTarga(object sender, TargaUpdatedArgs e)         // all'inserimento della targa va a controllare se è già presente nel db e in caso fosse presente carica i dati del veicolo
+        protected void veicoloControl_EsistenzaTarga(object sender, TargaUpdatedArgs e)         // qui si arriva solo se l'evento in veicoloControl viene generato e quindi carica il veicolo associato 
         {
             if (e == null)
             {

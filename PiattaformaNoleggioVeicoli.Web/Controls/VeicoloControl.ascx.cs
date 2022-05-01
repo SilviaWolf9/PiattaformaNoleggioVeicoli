@@ -35,7 +35,6 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             ddlMarca.DataBind();
             ddlMarca.Items.Insert(0, new ListItem("seleziona", "-1"));
         }
-
         private void PopolaDDLTipoAlimentazione()
         {
             ddlTipoAlimentazione.DataSource = instance.ListTipoAlimentazione;
@@ -44,7 +43,6 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             ddlTipoAlimentazione.DataBind();
             ddlTipoAlimentazione.Items.Insert(0, new ListItem("seleziona", "-1"));
         }
-
         public void SetVeicolo(VeicoliModel veicolo)        // va a riempire i vari componenti del control in base ai dati della proprietà Veicolo
         {
             if (veicolo == null)
@@ -106,7 +104,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             veicoloAggiornato.IdTipoStato = 1;
             return veicoloAggiornato;
         }
-        protected void txtTarga_TextChanged(object sender, EventArgs e)         // all'inserimento della targa va a controllare se è già presente nel db e in caso fosse presente carica i dati del veicolo
+        protected void txtTarga_TextChanged(object sender, EventArgs e)          // verifica l'esistenza della targa e nel caso esista, genera l'evento passando la targa
         {
             var veicoliManager = new VeicoliManager();
             var esistenzaTarga = veicoliManager.EsistenzaTarga(txtTarga.Text);

@@ -336,7 +336,7 @@ namespace PiattaformaNoleggioVeicoli.Web
                 ddlCodiceFiscale.Enabled = false;
             }                
         }
-        protected void clienteControl_EsistenzaCodiceFiscale(object sender, CodiceFiscaleUpdatedArgs e)         // quando scriviamo un codice fiscale, controlla se già esiste nel database e nel caso fosse già esistente carica i dati del cliente
+        protected void clienteControl_EsistenzaCodiceFiscale(object sender, CodiceFiscaleUpdatedArgs e)         // qui si arriva solo se l'evento in clienteControl viene generato e quindi carica il cliente associato
         {
             if (e==null)
             {
@@ -355,7 +355,6 @@ namespace PiattaformaNoleggioVeicoli.Web
             lblCodiceFiscale.Text = cliente.CodiceFiscale;
             btnReset.Visible = false;
             Session["IdClienteSelezionato"] = e.IdCliente;
-
         }
     }
 }

@@ -71,7 +71,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             clienteModificato.Note = txtNote.Text;
             return clienteModificato;
         }
-        protected void txtCodiceFiscale_TextChanged(object sender, EventArgs e)         // quando scriviamo un codice fiscale, controlla se già esiste nel database e nel caso fosse già esistente carica i dati del cliente 
+        protected void txtCodiceFiscale_TextChanged(object sender, EventArgs e)         // verifica l'esistenza del codice fiscale e nel caso esista, genera l'evento passando il codice fiscale
         {
             var clientiManager = new ClientiManager();
             var esistenzaCf = clientiManager.EsistenzaCodiceFiscale(txtCodiceFiscale.Text);
@@ -84,7 +84,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
                 EsistenzaCodiceFiscale(this, codiceFiscaleUpdatedArgs); ;
             }
         }
-        protected void txtDataNascita_TextChanged(object sender, EventArgs e)        // controlla la data di nascita
+        protected void txtDataNascita_TextChanged(object sender, EventArgs e)        // controlla la data di nascita, se non riesce a convertirla viene inserita nel campo della data di nascita una stringa vuota, se si inserisce una data di nascita maggiore della data di oggi, mette la data di oggi nel formato giorno mese anno, altrimenti scrive la data sempre nel formato giorno mese anno
         {
             if (!DateTime.TryParse(txtDataNascita.Text,out DateTime dataNascita))
             {
