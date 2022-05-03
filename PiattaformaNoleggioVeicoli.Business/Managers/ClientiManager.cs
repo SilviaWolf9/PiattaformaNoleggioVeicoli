@@ -179,7 +179,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
                     sqlCommand.Parameters.AddWithValue("@Cap", cliente.Cap);
                     sqlCommand.Parameters.AddWithValue("@Citta", cliente.Citta);
                     sqlCommand.Parameters.AddWithValue("@Comune", cliente.Comune);
-                    sqlCommand.Parameters.AddWithValue("@Comune", cliente.Provincia);
+                    sqlCommand.Parameters.AddWithValue("@Provincia", cliente.Provincia);
                     sqlCommand.Parameters.AddWithValue("@Nazione", cliente.Nazione);
                     if (!string.IsNullOrEmpty(cliente.Note))
                     {
