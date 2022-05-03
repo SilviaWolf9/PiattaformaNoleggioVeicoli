@@ -100,7 +100,8 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
                 veicoloAggiornato.IdTipoAlimentazione = int.Parse(ddlTipoAlimentazione.SelectedValue);
             }
             var statoVeicolo = rbtDisponibilita.SelectedValue;
-            veicoloAggiornato.IsDisponibile = Convert.ToBoolean(statoVeicolo);
+            bool parseOk = int.TryParse(statoVeicolo, out int statoVeicoloInt);            
+            veicoloAggiornato.IsDisponibile = Convert.ToBoolean(statoVeicoloInt);
             veicoloAggiornato.IdTipoStato = 1;
             return veicoloAggiornato;
         }

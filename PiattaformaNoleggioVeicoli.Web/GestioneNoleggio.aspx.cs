@@ -243,6 +243,8 @@ namespace PiattaformaNoleggioVeicoli.Web
                 clienteControl.Visible = true;
                 clienteControl.SetCliente(new ClientiModel());
                 divClienteEsistente.Visible = false;
+                divVeicoloNoleggiato.Visible = false;
+
             }
             else           // in caso il cliente fosse già esistente
             {
