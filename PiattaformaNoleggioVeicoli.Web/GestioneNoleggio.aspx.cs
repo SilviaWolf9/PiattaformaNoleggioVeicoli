@@ -14,23 +14,23 @@ namespace PiattaformaNoleggioVeicoli.Web
 {
     public partial class GestioneNoleggio : System.Web.UI.Page
     {
-        private ClientiManager _clientiManager { get; set; }
-        private NoleggiManager _noleggiManager { get; set; }
+        private ClientiManager _clientiManager { get; set; }         // proprietà istanziata qui per evitare di dichiarare più volte l'oggetto clientiManager
+        private NoleggiManager _noleggiManager { get; set; }         // proprietà istanziata qui per evitare di dichiarare più volte l'oggetto noleggiManager
         protected void Page_Load(object sender, EventArgs e)
         {
-            _clientiManager = new ClientiManager();
-            _noleggiManager = new NoleggiManager();
+            _clientiManager = new ClientiManager();     // assegnamo il valore alla proprietà istanziate sopra che altrimenti sarebbe null
+            _noleggiManager = new NoleggiManager();     // assegnamo il valore alla proprietà istanziate sopra che altrimenti sarebbe null
 
             if (IsPostBack)
             {
-                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");      // settiamo il messaggio vuoto e cancelliamo eventuali messaggi precedenti
                 return;
             }
             DettaglioVeicoloModelView veicolo = null;
-            if (Request.QueryString["veicolo"]!=null)
+            if (Request.QueryString["veicolo"]!=null)       // controlla che il parametro passato dalla pagina di dettaglio non sia null
             {
-                var dettaglioVeicolo = Server.UrlDecode(Request.QueryString["veicolo"]);
-                veicolo = JsonConvert.DeserializeObject<DettaglioVeicoloModelView>(dettaglioVeicolo);
+                var dettaglioVeicolo = Server.UrlDecode(Request.QueryString["veicolo"]);        // decodifica il json passato in input
+                veicolo = JsonConvert.DeserializeObject<DettaglioVeicoloModelView>(dettaglioVeicolo); // deserializza il json in dettaglioVeicolo
             }
             if (veicolo==null || veicolo.Id <= 0)
             {
@@ -62,7 +62,7 @@ namespace PiattaformaNoleggioVeicoli.Web
                 lblCodiceFiscale.Text = veicolo.CodiceFiscale;
             }
         }
-        private void PopolaDDLCognome()
+        private void PopolaDDLCognome()     // popola la ddl dei cognomi
         {
             var ricercaClienteModel = new ClientiManager.RicercaClientiModel();
             ddlCognome.DataSource = _clientiManager.RicercaClienti(ricercaClienteModel);      // richiamo query dei nomi da inserire nella ddl
@@ -256,14 +256,14 @@ namespace PiattaformaNoleggioVeicoli.Web
             btnNoleggiaVeicolo.Visible = true;
             btnReset.Visible = true;
         }
-        protected void ddlCognome_SelectedIndexChanged(object sender, EventArgs e)          // popola la ddl dei cognomi
+        protected void ddlCognome_SelectedIndexChanged(object sender, EventArgs e)     // evento selezione cognome da ddl     
         {
             if (ddlCognome.SelectedIndex == 0)
             {
                 return;
             }
-            ddlCognome.Enabled = false;
-            ddlNome.Enabled = true;
+            ddlCognome.Enabled = false;     // una volta selezionato il cognome disabilita la ddl cognome
+            ddlNome.Enabled = true;     // abilita la ddl nome popolandola solo con i nomi che corrispondono a quel determinato cognome
             var ricercaClienteModel = new ClientiManager.RicercaClientiModel()
             {
                 Cognome = ddlCognome.SelectedItem.ToString()
@@ -275,34 +275,34 @@ namespace PiattaformaNoleggioVeicoli.Web
             ddlNome.Items.Insert(0, new ListItem("seleziona", "-1"));
 
         }
-        protected void ddlNome_SelectedIndexChanged(object sender, EventArgs e)         // popola la ddl dei nomi in base al cognome selezionato
+        protected void ddlNome_SelectedIndexChanged(object sender, EventArgs e)         // evento selezione nome da ddl 
         {
             if (ddlNome.SelectedIndex == 0)
             {
                 return;
             }
-            ddlNome.Enabled = false;
-            ddlCodiceFiscale.Enabled = true;
+            ddlNome.Enabled = false;        // una volta selezionato il nome disabilita la ddl nome
+            ddlCodiceFiscale.Enabled = true;    // abilita la ddl codice fiscale popolandola solo con i codici fiscali che corrispondono a quella determinata coppia di cognome e nome
             var ricercaClienteModel = new ClientiManager.RicercaClientiModel()
             {
                 Cognome = ddlCognome.SelectedItem.ToString(),
                 Nome = ddlNome.SelectedItem.ToString()
             };
-            ddlCodiceFiscale.DataSource = _clientiManager.RicercaClienti(ricercaClienteModel);      // richiamo query dei nomi da inserire nella ddl
+            ddlCodiceFiscale.DataSource = _clientiManager.RicercaClienti(ricercaClienteModel);      // richiamo query dei codici fiscali da inserire nella ddl
             ddlCodiceFiscale.DataValueField = "Id";
             ddlCodiceFiscale.DataTextField = "CodiceFiscale";
             ddlCodiceFiscale.DataBind();
             ddlCodiceFiscale.Items.Insert(0, new ListItem("seleziona", "-1"));
 
         }
-        protected void ddlCodiceFiscale_SelectedIndexChanged(object sender, EventArgs e)        // popola la ddl dei codici fiscali in base al cognome e al nome selezionati
+        protected void ddlCodiceFiscale_SelectedIndexChanged(object sender, EventArgs e)        // evento selezione nome da ddl 
         {
             if (ddlCodiceFiscale.SelectedIndex == 0)
             {
                 return;
             }
-            ddlCodiceFiscale.Enabled = false;
-            Session["IdClienteSelezionato"] = ddlCodiceFiscale.SelectedValue;
+            ddlCodiceFiscale.Enabled = false;       // una volta selezionato il codice fiscale disabilita la ddl codice fiscale
+            Session["IdClienteSelezionato"] = ddlCodiceFiscale.SelectedValue;       // popola la session con l'id preso dalla ddl codice fiscale
         }
         protected void btnReset_Click(object sender, EventArgs e)           // pulisce tutti i campi
         {
@@ -319,7 +319,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             bool nuovoCliente = Convert.ToBoolean(selezionatoInt);
             if (nuovoCliente)
             {
-                clienteControl.SetCliente(new ClientiModel());
+                clienteControl.SetCliente(new ClientiModel());      
             }
             else
             {
@@ -348,15 +348,15 @@ namespace PiattaformaNoleggioVeicoli.Web
             {
                 return;
             }
-            rbtnNuovoCliente.SelectedValue = "0";
-            divVeicoloNoleggiato.Visible = true;
-            clienteControl.Visible = false;
-            var cliente = _clientiManager.GetCliente(e.IdCliente);
-            lblCognome.Text = cliente.Cognome;
+            rbtnNuovoCliente.SelectedValue = "0";       // se inseriamo un codice fiscale già presente il rbtn nuovo cliente si setta su false
+            divVeicoloNoleggiato.Visible = true;        // rende visibile il div del veicolo noleggiato
+            clienteControl.Visible = false;         // nasconde i campi del clientecontrol
+            var cliente = _clientiManager.GetCliente(e.IdCliente);      // recupera i dettagli di un determinato cliente ricercato tramite id
+            lblCognome.Text = cliente.Cognome;      // popola le label con i dati del cliente (cognome, nome e codice fiscale)
             lblNome.Text = cliente.Nome;
             lblCodiceFiscale.Text = cliente.CodiceFiscale;
-            btnReset.Visible = false;
-            Session["IdClienteSelezionato"] = e.IdCliente;
+            btnReset.Visible = false;       // disabilita il tasto reset
+            Session["IdClienteSelezionato"] = e.IdCliente;      // popola la session con l'id del cliente selezionato
         }
     }
 }

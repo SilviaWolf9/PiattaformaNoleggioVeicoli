@@ -10,39 +10,38 @@ namespace PiattaformaNoleggioVeicoli.Web
 {
     public partial class RicercaNoleggio : System.Web.UI.Page
     {
+        private NoleggiManager _noleggiManager { get; set; }        // proprietà istanziata qui per evitare di dichiarare più volte l'oggetto noleggiManager
         protected void Page_Load(object sender, EventArgs e)
         {
-            _noleggiManager = new NoleggiManager();
+            _noleggiManager = new NoleggiManager();         // assegnamo il valore alla proprietà istanziate sopra che altrimenti sarebbe null
 
             if (IsPostBack)
             {
-                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");      // settiamo il messaggio vuoto e cancelliamo eventuali messaggi precedenti
                 return;
             }
             PopolaDDLMarche();
             PopolaDDLIsInCorso();
         }
-        private NoleggiManager _noleggiManager { get; set; }
+        
         private void PopolaGridViewNoleggio(NoleggiManager.RicercaNoleggiModel ricerca)
-        {
-            //gvNoleggiTrovati.DataSource = null;
-            var listaNoleggiTrovati = _noleggiManager.RicercaNoleggi(ricerca);
+        {            
+            var listaNoleggiTrovati = _noleggiManager.RicercaNoleggi(ricerca);      // richiama la funzione di ricerca
             if (listaNoleggiTrovati.Count==0)
             {
                 infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Info, "Nessun risultato trovato");                
             }            
-            gvNoleggiTrovati.Visible = true;
-            gvNoleggiTrovati.DataSource = listaNoleggiTrovati;
-            gvNoleggiTrovati.DataBind();
+            gvNoleggiTrovati.Visible = true;        // rende visibile la gridview
+            gvNoleggiTrovati.DataSource = listaNoleggiTrovati;      // riempie la gridview con la lista dei noleggi trovati
+            gvNoleggiTrovati.DataBind();         // mostra i dati del datasource
         }
         private void PopolaDDLMarche()
         {
             var instance = SingletonManager.Instance;
-            ddlMarca.DataSource = instance.ListMarche;
+            ddlMarca.DataSource = instance.ListMarche;      // usa il singleton per popolare il datasource
             ddlMarca.DataTextField = "Descrizione";
             ddlMarca.DataValueField = "Id";
             ddlMarca.DataBind();
-            //ddlMarca.Items.Insert(0, new ListItem("seleziona", "-1"));
         }
         private void PopolaDDLIsInCorso()
         {
@@ -95,7 +94,7 @@ namespace PiattaformaNoleggioVeicoli.Web
                 noleggiRicerca.CodiceFiscale = txtCodiceFiscale.Text;
             }
             PopolaGridViewNoleggio(noleggiRicerca);
-            Session["RicercaNoleggi"] = noleggiRicerca;
+            Session["RicercaNoleggi"] = noleggiRicerca;     // carica sulla session il modello da ricercare (fa il cast implicito ad object)
         }
         protected void btnReset_Click(object sender, EventArgs e)
         {
@@ -122,15 +121,15 @@ namespace PiattaformaNoleggioVeicoli.Web
             gvNoleggiTrovati.PageIndex = e.NewPageIndex;
             PopolaGridViewNoleggio(ricerca);
         }
-        protected void gvNoleggiTrovati_SelectedIndexChanged(object sender, EventArgs e)
+        protected void gvNoleggiTrovati_SelectedIndexChanged(object sender, EventArgs e)        // quando selezioniamo un noleggio ci rimanda alla pagina di dettaglio del noleggio recuperando l'id dal datakey
         {
-            var idNoleggiString = gvNoleggiTrovati.SelectedDataKey["Id"].ToString();
+            var idNoleggiString = gvNoleggiTrovati.SelectedDataKey["Id"].ToString();        // recupero id dal datakey
             Response.Redirect("DettaglioNoleggio.aspx?Id=" + idNoleggiString);
         }
         protected void txtTarga_TextChanged(object sender, EventArgs e)         // controllo per la ricerca a 3 caratteri della targa
         {
-            var txtTargaDaControllare = (TextBox)sender;
-            if (string.IsNullOrWhiteSpace(txtTargaDaControllare.Text))
+            var txtTargaDaControllare = (TextBox)sender;        // fa il cast a textbox dell'oggetto sender
+            if (string.IsNullOrWhiteSpace(txtTargaDaControllare.Text))      // se la textbox della targa è vuota abilita la ricerca
             {
                 btnRicerca.Enabled = true;
             }
@@ -140,7 +139,7 @@ namespace PiattaformaNoleggioVeicoli.Web
             }
             else
             {
-                btnRicerca.Enabled = false;
+                btnRicerca.Enabled = false;         // se nella textbox inseriamo meno di 3 caratteri (ma almeno uno) disabilita il tasto di ricerca
             }
         }
     }

@@ -11,22 +11,22 @@ namespace PiattaformaNoleggioVeicoli.Web
 {
     public partial class DettaglioCliente : System.Web.UI.Page
     {
+        private ClientiManager _clientiManager { get; set; }        // proprietà istanziata qui per evitare di dichiarare più volte l'oggetto clientiManager
         protected void Page_Load(object sender, EventArgs e)
         {
-            _clientiManager = new ClientiManager();
+            _clientiManager = new ClientiManager();     // assegnamo il valore alla proprietà istanziate sopra che altrimenti sarebbe null
             if (IsPostBack)
             {
-                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");
+                infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.NotSet, "");      // settiamo il messaggio vuoto e cancelliamo eventuali messaggi precedenti
                 return;
             }
             int? id = null;
-            if (!string.IsNullOrWhiteSpace(Request.QueryString["IdCliente"]))
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["IdCliente"]))       // verifica che esista una querystring con key=Id
             {
-                id = int.Parse(Request.QueryString["IdCliente"]);      // serve recuperare l'id del cliente
+                id = int.Parse(Request.QueryString["IdCliente"]);      // recupera l'id del cliente
             }
             PopolaDettaglioCliente(id);
-        }
-        private ClientiManager _clientiManager { get; set; }
+        }        
         private void PopolaDettaglioCliente(int? id)
         {
             if (!id.HasValue)
@@ -34,9 +34,9 @@ namespace PiattaformaNoleggioVeicoli.Web
                 infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Danger, "Errore durante il recupero dei dati del cliente");
                 return;
             }
-            var cliente = _clientiManager.GetCliente(id.Value);
-            ViewState["cliente"] = cliente;
-            clienteControl.SetCliente(cliente);
+            var cliente = _clientiManager.GetCliente(id.Value);     // recupera il cliente dal db tramite l'id ricevuto in input
+            ViewState["cliente"] = cliente;          // mette sulla viewstate i dati del cliente
+            clienteControl.SetCliente(cliente);     // manda al control i dati del cliente da mostrare
         }
         private bool IsFormValido(ClientiModel cliente)         // controlla che il form di inserimento del cliente sia corretto
         {
@@ -123,15 +123,15 @@ namespace PiattaformaNoleggioVeicoli.Web
             {
                 return;
             }
-            var cliente = (ClientiModel)ViewState["cliente"];
-            var clienteAttuale = clienteControl.GetDatiCliente(cliente);
+            var cliente = (ClientiModel)ViewState["cliente"];       // fa il cast da object a clientiModel
+            var clienteAttuale = clienteControl.GetDatiCliente(cliente);        // restituisce i dati aggiornati del veicolo già esistente
             if (!IsFormValido(clienteAttuale))
             {
                 return;
             }
             infoControl.SetMessage(Web.Controls.InfoControl.TipoMessaggio.Success, "Modifiche effettuate con successo");
-            _clientiManager.ModificaCliente(clienteAttuale);
-            Response.Redirect("RicercaCliente.aspx");
+            _clientiManager.ModificaCliente(clienteAttuale);        // richiama la funzione di modifica
+            Response.Redirect("RicercaCliente.aspx");       // dopo la modifica ci rimanda alla pagina di ricerca cliente
         }
     }
 }

@@ -369,7 +369,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
         {
             var dettaglioVeicoloModelView = new DettaglioVeicoloModelView();
             var sb = new StringBuilder();
-            sb.AppendLine("SELECT");
+            sb.AppendLine("SELECT TOP(1)");
             sb.AppendLine("\t[Veicoli].[Id]");
             sb.AppendLine("\t,[IdMarca]");
             sb.AppendLine("\t,[MarcheVeicoli].[Descrizione] as Marca");
@@ -391,6 +391,7 @@ namespace PiattaformaNoleggioVeicoli.Business.Managers
             sb.AppendLine("\tON [dbo].[Veicoli].[IdMarca] = [dbo].[MarcheVeicoli].[Id]");
             sb.AppendLine("\tWHERE [Veicoli].[Id] = @Id");
             sb.AppendLine("\tAND [Veicoli].[IdTipoStato] = @Attivo");
+            sb.AppendLine("\torder by[Clienti].[Id] desc");
 
             DataTable dataTable = new DataTable();
 

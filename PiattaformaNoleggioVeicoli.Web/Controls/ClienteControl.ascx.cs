@@ -11,8 +11,8 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
 {
     public partial class ClienteControl : System.Web.UI.UserControl
     {
-        public event EventHandler<CodiceFiscaleUpdatedArgs> EsistenzaCodiceFiscale;     
-        public class CodiceFiscaleUpdatedArgs : EventArgs
+        public event EventHandler<CodiceFiscaleUpdatedArgs> EsistenzaCodiceFiscale;     // dichiara l'evento da generare
+        public class CodiceFiscaleUpdatedArgs : EventArgs       // classe che estende eventArgs che viene passata nell'evento esistenza codice fiscale
         {
             public int IdCliente { get; set; }
         }
@@ -23,7 +23,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
                 return;
             }
         }
-        public void SetCliente(ClientiModel cliente)        // va a riempire i vari componenti del control in base ai dati della proprietà Cliente
+        public void SetCliente(ClientiModel cliente)        // va a riempire i vari componenti del control in base ai dati del cliente passato in imput
         {
             if (cliente == null)
             {
@@ -50,7 +50,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
         }
         public ClientiModel GetDatiCliente(ClientiModel cliente)        // restituisce i dati del cliente attuali al chiamante 
         {
-            var clienteModificato = cliente;
+            var clienteModificato = cliente;        // usa una variabile di appoggio per non sovrascrivere il clienteModel passato in input
             clienteModificato.Cognome = txtCognome.Text;
             clienteModificato.Nome = txtNome.Text;
             if (!string.IsNullOrWhiteSpace(txtDataNascita.Text))
@@ -71,7 +71,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
             clienteModificato.Note = txtNote.Text;
             return clienteModificato;
         }
-        protected void txtCodiceFiscale_TextChanged(object sender, EventArgs e)         // verifica l'esistenza del codice fiscale e nel caso esista, genera l'evento passando il codice fiscale
+        protected void txtCodiceFiscale_TextChanged(object sender, EventArgs e)         // verifica l'esistenza del codice fiscale e nel caso esista, genera l'evento passando l'id del cliente con quel codice fiscale
         {
             var clientiManager = new ClientiManager();
             var esistenzaCf = clientiManager.EsistenzaCodiceFiscale(txtCodiceFiscale.Text);
@@ -81,7 +81,7 @@ namespace PiattaformaNoleggioVeicoli.Web.Controls
                 {
                     IdCliente = esistenzaCf.Value
                 };
-                EsistenzaCodiceFiscale(this, codiceFiscaleUpdatedArgs); ;
+                EsistenzaCodiceFiscale(this, codiceFiscaleUpdatedArgs);         // scatena l'evento mandando come object this (ovvero txtCodiceFiscale) e come argomento eventArgs l'id del cliente relativo a quel codice fiscale
             }
         }
         protected void txtDataNascita_TextChanged(object sender, EventArgs e)        // controlla la data di nascita, se non riesce a convertirla viene inserita nel campo della data di nascita una stringa vuota, se si inserisce una data di nascita maggiore della data di oggi, mette la data di oggi nel formato giorno mese anno, altrimenti scrive la data sempre nel formato giorno mese anno

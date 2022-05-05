@@ -14,7 +14,7 @@
                     <h3 class="panel-title">Dettaglio Veicolo</h3>
                 </div>
                 <div class="panel-body">
-                    <vc:Veicolo runat="server" ID="veicoloControl" />
+                    <vc:Veicolo runat="server" ID="veicoloControl" OnEsistenzaTarga="veicoloControl_EsistenzaTarga" />
                     <div class="form-group col-md-10" runat="server" id="divCliente" visible="true">
                         <label for="divCliente">Cliente</label><br />
                         <div class="form-group col-md-3">
